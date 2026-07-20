@@ -1,0 +1,31 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: Bearer_Token
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: 'Provide the access token in the format: `Bearer {access-token}`. You
+    can obtain the access token from the [Authentication endpoint](#tag/Authentication).'
+  sources:
+  - openapi/delivery-hero-on-demand-rider-openapi.json
+- name: OAuth2
+  type: oauth2
+  flow: clientCredentials
+  tokenUrl: https://sts.deliveryhero.io/oauth2/token
+  client_assertion_type: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+  description: 'Machine-to-machine: register an RSA-2048 public key with ODR, sign
+    a JWT assertion (kid, iss, sub, jti, exp, aud=https://sts.deliveryhero.io), exchange
+    via client_credentials for a Bearer access token.'
+  sources:
+  - https://on-demand-rider-docs.deliveryhero.io/
+docs: https://on-demand-rider-docs.deliveryhero.io/
