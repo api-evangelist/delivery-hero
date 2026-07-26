@@ -1,0 +1,64 @@
+generated: '2026-07-18'
+method: derived
+status: candidate
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+server:
+  name: delivery-hero-on-demand-rider
+  transport: stdio
+  note: No official Delivery Hero MCP server found; candidate tool list derived from
+    On Demand Rider OpenAPI operations
+tools:
+- name: getAccessToken
+  description: Request OAuth Token
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /oauth2/token
+- name: put_outlets_client_vendor_id
+  description: Create or Update an Outlet
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#PUT /outlets/{client_vendor_id}
+- name: get_outlets_client_vendor_id
+  description: Get an Outlet
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /outlets/{client_vendor_id}
+- name: patch_outlets_client_vendor_id
+  description: Partially Update an Outlet
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#PATCH /outlets/{client_vendor_id}
+- name: get_outletList
+  description: Get All Outlets
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /outletList
+- name: post_orders_fee
+  description: Estimate Fee for an Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /orders/fee
+- name: post_orders_time
+  description: Estimate Time for an Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /orders/time
+- name: post_orders
+  description: Create a New Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /orders
+- name: get_orders_order_id
+  description: Get Specific Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /orders/{order_id}
+- name: delete_orders_order_id
+  description: Cancel Specific Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#DELETE /orders/{order_id}
+- name: put_orders_order_id
+  description: Update Specific Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#PUT /orders/{order_id}
+- name: get_orders_order_id_coordinates
+  description: Get Rider Position for Specific Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /orders/{order_id}/coordinates
+- name: get_orders_proof_of_pickup_order_id
+  description: Get Proof of Pickup for Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /orders/proof_of_pickup/{order_id}
+- name: get_orders_proof_of_delivery_order_id
+  description: Get Proof of Delivery for Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /orders/proof_of_delivery/{order_id}
+- name: get_orders_proof_of_return_order_id
+  description: Get Proof of Return for Order
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#GET /orders/proof_of_return/{order_id}
+- name: post_callback
+  description: Order Status callback
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /callback
+- name: post_callback-location
+  description: Courier location update
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /callback-location
+- name: post_callback-refund
+  description: Refund callback
+  source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /callback-refund

@@ -1,0 +1,32 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+format: custom-json
+note: Errors return a JSON body with an "errors" array (ErrorResponse / ErrorMessagesModel
+  schemas). Not RFC 9457 application/problem+json.
+envelope:
+  schema: ErrorResponse
+  fields:
+  - errors[]
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad Request - Invalid or missing parameters.
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+- status: 404
+  title: Not Found
+  description: Not found
+- status: 405
+  title: Method Not Allowed
+  description: Method not allowed
+- status: 409
+  title: Conflict
+  description: Conflict
+- status: 422
+  title: Unprocessable Entity
+  description: Unable to process request
+- status: 500
+  title: Internal Server Error
+  description: Server error

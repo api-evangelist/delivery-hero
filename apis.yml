@@ -1,8 +1,15 @@
 aid: delivery-hero
 name: Delivery Hero
-description: 'Delivery Hero is a company surfaced as a portfolio company of hongshan, hv-capital, insight-partners,
-  point-nine and added to the API Evangelist network as a stub for enrichment. Sector: technology. This
-  profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Delivery Hero SE is a Berlin-based multinational online food-delivery and quick-commerce
+  company operating in 70+ markets through local brands including foodpanda, Talabat, Glovo,
+  PedidosYa, Yemeksepeti, Hungerstation and Pandamart. Its public developer surface exposes
+  logistics and partner-integration APIs. The flagship On Demand Rider (ODR) API lets merchants
+  request on-demand courier delivery across brands such as Glovo and pandago — registering
+  outlets, estimating delivery fees and times, creating and tracking orders, retrieving proof
+  of pickup/delivery/return, and receiving order-status, courier-location and refund webhooks.
+  Additional Q-Commerce and Restaurant (POS) integration APIs handle order transmission and
+  grocery assortment/promotion sync for restaurant and quick-commerce partners.
 url: https://raw.githubusercontent.com/api-evangelist/delivery-hero/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -13,13 +20,169 @@ x-backed-by:
 - point-nine
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: images/delivery-hero-on-demand-rider-logo.svg
 tags:
 - Company
 - Technology
-apis: []
+- Food Delivery
+- Logistics
+- Quick Commerce
+- Last Mile Delivery
+- On Demand
+- Orders
+apis:
+- aid: delivery-hero:delivery-hero-authentication-api
+  name: Delivery Hero Authentication API
+  description: >-
+    Once you followed above steps from [Getting started](#section/Getting-Started) and that you have your
+    signed JWT token, you can request the access token.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-authentication-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-callback-api
+  name: Delivery Hero Callback API
+  description: >-
+    **▶️ READ THIS FIRST ◀️**
+
+
+    * Those are NOT actual endpoints. They are callback from ODR to your endpoint
+
+    * This is used to represent the payload ODR will sent
+
+    * This is an optional feature and it requires your callback URL to be registered with your ClientID
+
+    ---
+
+
+    **Description**
+
+    * The Callback URL will need to be HTTPS with a valid SSL certificate.
+
+    * Body posted by this feature is stripped of any Personally Identifiable Information (PII).
+
+    * Full Order body can be fetched using the Get Specific Order feature.
+
+    * If there is an error, we retry sending the request three times. If the response status code is 2xx,
+    it means that there was no error and the callback was successful in sending order status.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - Callback
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-callback-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-ordersestimation-api
+  name: Delivery Hero OrdersEstimation API
+  description: The OrdersEstimation API from Delivery Hero — 2 operation(s) for ordersestimation.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - OrdersEstimation
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-ordersestimation-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-ordersmanagement-api
+  name: Delivery Hero OrdersManagement API
+  description: >-
+    The following sections provide a complete summary of all available endpoints and features connected
+    with the Orders API.
+
+
+    Please review the documentation carefully. When selecting an endpoint, note the information on the
+    right-hand side of the screen, which details the following critical elements:
+
+
+    - **Request Attributes: Mandatory formatting** for specific attributes (e.g., phone numbers, coordinates,
+    addresses) is outlined here. **Pay close attention to these requirements.**
+
+    - **Request Examples:** Illustrative examples of successful requests.
+
+    - **Request Responses:** Examples of successful and failed responses, including common error codes
+    and messages.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - OrdersManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-ordersmanagement-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-outlets-api
+  name: Delivery Hero Outlets API
+  description: The Outlets API from Delivery Hero — 2 operation(s) for outlets.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - Outlets
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-outlets-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-proofs-api
+  name: Delivery Hero Proofs API
+  description: The Proofs API from Delivery Hero — 3 operation(s) for proofs.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - Proofs
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-proofs-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
+- aid: delivery-hero:delivery-hero-riderposition-api
+  name: Delivery Hero RiderPosition API
+  description: The RiderPosition API from Delivery Hero — 1 operation(s) for riderposition.
+  humanURL: https://on-demand-rider-docs.deliveryhero.io/
+  baseURL: https://ondemand-api-glovoapp.deliveryhero.io/
+  tags:
+  - RiderPosition
+  properties:
+  - type: OpenAPI
+    url: openapi/delivery-hero-riderposition-api-openapi.yml
+  - type: APIReference
+    url: https://on-demand-rider-docs.deliveryhero.io/
+  - type: Documentation
+    url: https://on-demand-rider-docs.deliveryhero.io/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -28,3 +191,50 @@ maintainers:
 common:
 - type: Website
   url: https://deliveryhero.com
+- type: DeveloperPortal
+  url: https://developers.deliveryhero.com/
+- type: Documentation
+  url: https://on-demand-rider-docs.deliveryhero.io/
+- type: APIReference
+  url: https://on-demand-rider-docs.deliveryhero.io/
+- type: GettingStarted
+  url: https://on-demand-rider-docs.deliveryhero.io/
+- type: GitHubOrganization
+  url: https://github.com/deliveryhero
+- type: Blog
+  url: https://www.deliveryhero.com/newsroom/
+- type: Support
+  url: https://developers.deliveryhero.com/
+- type: Authentication
+  url: authentication/delivery-hero-authentication.yml
+- type: OAuthScopes
+  url: scopes/delivery-hero-scopes.yml
+- type: Conventions
+  url: conventions/delivery-hero-conventions.yml
+- type: ErrorCatalog
+  url: errors/delivery-hero-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/delivery-hero-lifecycle.yml
+- type: Conformance
+  url: conformance/delivery-hero-conformance.yml
+- type: DataModel
+  url: data-model/delivery-hero-data-model.yml
+- type: Sandbox
+  url: sandbox/delivery-hero-sandbox.yml
+- type: MCPServer
+  url: mcp/delivery-hero-mcp.yml
+- type: Webhooks
+  url: asyncapi/delivery-hero-on-demand-rider-webhooks.yml
+- type: DomainSecurity
+  url: security/delivery-hero-domain-security.yml
+- type: LLMsTxt
+  url: llms/delivery-hero-llms.txt
+- type: AgentSkill
+  url: skills/delivery-hero-create-and-track-order.md
+- type: AgentSkill
+  url: skills/delivery-hero-cancel-and-proof.md
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

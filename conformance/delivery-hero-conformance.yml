@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OAuth 2.0 client_credentials token endpoint at https://sts.deliveryhero.io/oauth2/token
+    (documented); Bearer token apiKey scheme in spec
+- id: rfc7523-jwt-bearer
+  conforms: true
+  evidence: Token request uses urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+    with an RSA-signed JWT assertion (documented)
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect discovery document found; client_credentials machine-to-machine
+    only
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a custom {errors:[...]} envelope, not application/problem+json
+- id: webhooks
+  conforms: true
+  evidence: 'Server-to-client callbacks: order status, courier location, refund (POST
+    /callback, /callback-location, /callback-refund) with X-Signature-SHA256 verification'

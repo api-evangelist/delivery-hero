@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://on-demand-rider-docs.deliveryhero.io/
+type: Webhooks
+delivery: HTTP POST callback to a partner-registered URL
+security:
+  signature_header: X-Signature-SHA256
+  algorithm: HMAC-SHA256
+events:
+- name: order.status
+  operation: POST /callback
+  schema: CallbackRequest
+  description: Order status changes across the delivery lifecycle
+- name: courier.location
+  operation: POST /callback-location
+  schema: CallbackDriverLocation
+  description: Courier position updates (~every 15 seconds during active delivery)
+- name: order.refund
+  operation: POST /callback-refund
+  schema: RefundCallbackRequest
+  description: Full or partial refunds with product-level detail

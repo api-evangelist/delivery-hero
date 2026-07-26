@@ -1,0 +1,18 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+docs: https://on-demand-rider-docs.deliveryhero.io/
+note: ODR OpenAPI declares only an apiKey Bearer scheme; OAuth2 client_credentials
+  + scopes are documented in the auth guide, not the spec. Scopes are provisioned
+  per client by ODR representatives.
+schemes:
+- name: OAuth2
+  flow: clientCredentials
+  tokenUrl: https://sts.deliveryhero.io/oauth2/token
+  assertion: urn:ietf:params:oauth:client-assertion-type:jwt-bearer
+scope_pattern: '{brand}.api.{country_code}.*'
+scopes:
+- scope: pandago.api.sg.*
+  description: 'Documented example: full ODR API access for the Pandago brand in Singapore'
+  flows:
+  - clientCredentials

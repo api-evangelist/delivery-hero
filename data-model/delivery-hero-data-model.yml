@@ -1,0 +1,122 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/delivery-hero-on-demand-rider-openapi.json
+entities:
+- name: Outlet
+  fields:
+  - vendor_id
+  - client_vendor_id
+  - name
+  - address
+  - street
+  - street_number
+  - building
+  - district
+  - postal_code
+  - rider_instructions
+  - latitude
+  - longitude
+  - city
+  - phone_number
+  - currency
+  - description
+  - locale
+  - halal
+  - users
+- name: CreateOrder
+  fields:
+  - order_id
+  - client_order_id
+  - sender
+  - recipient
+  - distance
+  - payment_method
+  - coldbag_needed
+  - amount
+  - description
+  - status
+  - delivery_fee
+  - timeline
+  - driver
+  - created_at
+  - updated_at
+  - delivery_tasks
+  - pickup_tasks
+  - packaging
+- name: OrderResponse
+  fields:
+  - order_id
+  - client_order_id
+  - sender
+  - is_dynamic_pickup
+  - recipient
+  - distance
+  - payment_method
+  - coldbag_needed
+  - amount
+  - collect_from_customer
+  - description
+  - preordered_for
+  - status
+  - delivery_fee
+  - timeline
+  - driver
+  - created_at
+  - updated_at
+  - tracking_link
+  - vat_number
+- name: Driver
+  fields:
+  - id
+  - name
+  - phone_number
+- name: Address
+  fields: []
+- name: Contact
+  fields:
+  - name
+  - phone_number
+  - email
+  - location
+  - notes
+- name: ProofOfDelivery
+  fields: []
+- name: ProofOfPickup
+  fields: []
+- name: ProofOfReturn
+  fields: []
+- name: RefundCallbackRequest
+  fields:
+  - order_id
+  - refund_id
+  - type
+  - total_amount
+  - delivery_fee_details
+  - reason
+  - owner
+  - products
+relationships:
+- from: Order
+  to: Outlet
+  type: belongs_to
+  via: client_vendor_id
+- from: Order
+  to: Driver
+  type: has_one
+  via: driver
+- from: Order
+  to: Address
+  type: has_one
+  via: recipient/sender location
+- from: Order
+  to: ProofOfDelivery
+  type: has_one
+  via: order_id
+- from: Order
+  to: ProofOfPickup
+  type: has_one
+  via: order_id
+- from: Outlet
+  to: Order
+  type: has_many
+  via: client_vendor_id

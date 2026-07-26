@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: generated
+skills:
+  - file: delivery-hero-create-and-track-order.md
+    name: Create and track an On Demand Rider delivery
+    api: openapi/delivery-hero-on-demand-rider-openapi.json
+    operations:
+      - 'POST /oauth2/token'
+      - 'PUT /outlets/{client_vendor_id}'
+      - 'POST /orders/fee'
+      - 'POST /orders/time'
+      - 'POST /orders'
+      - 'GET /orders/{order_id}'
+      - 'GET /orders/{order_id}/coordinates'
+  - file: delivery-hero-cancel-and-proof.md
+    name: Cancel an order and retrieve delivery proofs
+    api: openapi/delivery-hero-on-demand-rider-openapi.json
+    operations:
+      - 'DELETE /orders/{order_id}'
+      - 'PUT /orders/{order_id}'
+      - 'GET /orders/proof_of_delivery/{order_id}'
+      - 'GET /orders/proof_of_pickup/{order_id}'
+      - 'GET /orders/proof_of_return/{order_id}'

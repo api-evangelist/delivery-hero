@@ -1,0 +1,11 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Delivery Hero On Demand Rider API
+  version: 1.0.0
+extends: openapi/delivery-hero-on-demand-rider-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-18'
+    x-apievangelist-webhooks: asyncapi/delivery-hero-on-demand-rider-webhooks.yml
+    x-apievangelist-conventions: conventions/delivery-hero-conventions.yml

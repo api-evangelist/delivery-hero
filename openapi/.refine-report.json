@@ -1,0 +1,26 @@
+{
+  "provider": "delivery-hero",
+  "sources": [
+    "delivery-hero-authentication-api-openapi.yml",
+    "delivery-hero-callback-api-openapi.yml",
+    "delivery-hero-ordersestimation-api-openapi.yml",
+    "delivery-hero-ordersmanagement-api-openapi.yml",
+    "delivery-hero-outlets-api-openapi.yml",
+    "delivery-hero-proofs-api-openapi.yml",
+    "delivery-hero-riderposition-api-openapi.yml"
+  ],
+  "outputs": [
+    "delivery-hero-authentication-api-openapi.yml",
+    "delivery-hero-callback-api-openapi.yml",
+    "delivery-hero-ordersestimation-api-openapi.yml",
+    "delivery-hero-ordersmanagement-api-openapi.yml",
+    "delivery-hero-outlets-api-openapi.yml",
+    "delivery-hero-proofs-api-openapi.yml",
+    "delivery-hero-riderposition-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

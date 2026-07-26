@@ -1,0 +1,3764 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.1.1",
+    "title": "On Demand Rider API",
+    "x-logo": {
+      "url": "data:image/svg+xml,%3Csvg width='173' height='28' xmlns='http://www.w3.org/2000/svg'%3E%3Cg transform='translate(-64 -15)' fill='none' fill-rule='evenodd'%3E%3Cpath d='M0 0h1350v60H0z'%3E%3C/path%3E%3Cpath d='M0 0h1350v60H0z'%3E%3C/path%3E%3Cg transform='translate(64 15)' fill='%23D61F26'%3E%3Cpath d='M32.18 13.383l-.021.012-3.754 1.531-.115.053-.915 4.18c-.061.143-.244.177-.367.058l-2.735-3.234-.013-.01-15.423 6.618a.103.103 0 01-.104-.176l13.333-9.98-1.687-3.852c-.084-.175.071-.362.277-.31h.002l4.086 1.006 3.172-2.823c.137-.107.323-.03.358.14l.31 4.241 3.658 2.141c.157.1.134.332-.062.405zM30.316 1.258C25.582-.6 20.376.795 17.164 4.365L4.63 17.793c-.169.181-.09.408.115.438l3.34.205c.267.017.3.247.166.404L.086 27.646c-.142.152.03.392.224.332l11.656-3.683c.246-.085.436.135.332.328l-1.56 2.756c-.08.157.071.372.267.358l16.804-3.743c4.015-.636 7.6-3.316 9.193-7.374 2.4-6.09-.598-12.967-6.686-15.362z'%3E%3C/path%3E%3Cpath d='M75.362 21.69h-3.829L74.53 7.658l4.176-1.535-3.343 15.565'%3E%3C/path%3E%3Cpath d='M67.138 13.653c-.917 0-1.444.759-1.658 1.638 1.813 0 2.362-.566 2.362-1.036 0-.33-.295-.602-.704-.602m-2.087 4.096c-.02.096-.04.274-.04.37 0 .625.428.84 1.562.84 1.013 0 2.456-.255 3.297-.546v2.868c-1.073.39-2.753.603-4.1.603-3.16 0-4.682-.859-4.682-3.725 0-2.814 1.307-7.201 6.344-7.201 3.198 0 4.153 1.445 4.153 2.968 0 1.97-1.696 3.647-6.534 3.823'%3E%3C/path%3E%3Cpath d='M82.316 10.455c-1.305 0-2.145-.839-2.145-1.99 0-1.503 1.054-2.341 2.359-2.341 1.328 0 2.148.838 2.148 1.97 0 1.522-1.034 2.361-2.362 2.361'%3E%3C/path%3E%3Cpath d='M79.63 11.31h3.94l-1.992 10.224h-3.98L79 14.354'%3E%3C/path%3E%3Cpath d='M94.925 11.31c-1.367 3.435-2.87 6.79-4.78 10.224h-4.88c-.623-3.24-.898-6.654-.818-10.224h3.981a47.373 47.373 0 00.036 4.994c.021.43.061.838.099 1.251h.022c.174-.413.368-.82.545-1.251.682-1.68 1.306-3.51 1.777-4.994h4.018'%3E%3C/path%3E%3Cpath d='M100.252 13.653c-.915 0-1.445.759-1.661 1.638 1.817 0 2.363-.566 2.363-1.036 0-.33-.29-.602-.702-.602m-2.086 4.096a2.33 2.33 0 00-.042.37c0 .625.431.84 1.561.84 1.016 0 2.46-.255 3.299-.546v2.868c-1.074.39-2.752.603-4.097.603-3.163 0-4.684-.859-4.684-3.725 0-2.814 1.306-7.201 6.341-7.201 3.2 0 4.155 1.445 4.155 2.968 0 1.97-1.694 3.647-6.533 3.823'%3E%3C/path%3E%3Cpath d='M112.351 14.92a4.396 4.396 0 00-.957-.12c-.879 0-1.581.88-1.895 2.5l-.816 4.235H104.7l1.993-10.224h2.987l.096 1.363c.916-1.13 1.64-1.716 2.752-1.716.506 0 .78.039.915.078l-1.091 3.883'%3E%3C/path%3E%3Cpath d='M124.799 11.31c-1.758 4.567-3.318 7.902-4.88 10.207-2.262 3.376-4.254 4.157-6.304 4.157-.605 0-1.247-.16-1.561-.314l.626-2.947h1.366c.683 0 .974-.275 1.424-.879-.761-2.75-1.133-6.594-1.094-10.224h4.002a44.95 44.95 0 00.039 4.936c.02.448.056.878.095 1.309h.02c.177-.413.37-.82.547-1.27a50.015 50.015 0 001.736-4.975h3.984'%3E%3C/path%3E%3Cpath d='M140.1 21.534h-4.2l.997-5.153h-3.553l-.997 5.153h-4.192l2.652-13.62h4.197l-.955 4.86h3.551l.957-4.86h4.193l-2.651 13.62'%3E%3C/path%3E%3Cpath d='M148.37 13.653c-.918 0-1.442.759-1.658 1.638 1.815 0 2.364-.566 2.364-1.036 0-.33-.296-.602-.706-.602m-2.088 4.096a2.32 2.32 0 00-.037.37c0 .625.43.84 1.559.84 1.016 0 2.46-.255 3.299-.546v2.868c-1.073.39-2.752.603-4.1.603-3.16 0-4.682-.859-4.682-3.725 0-2.814 1.307-7.201 6.342-7.201 3.2 0 4.158 1.445 4.158 2.968 0 1.97-1.7 3.647-6.539 3.823'%3E%3C/path%3E%3Cpath d='M160.467 14.92a4.333 4.333 0 00-.954-.12c-.877 0-1.581.88-1.893 2.5l-.82 4.235h-3.979l1.988-10.224h2.985l.1 1.363c.916-1.13 1.637-1.716 2.748-1.716.51 0 .782.039.92.078l-1.095 3.883'%3E%3C/path%3E%3Cpath d='M167.006 14.1c-1.6 0-2.03 2.44-2.03 3.533 0 .877.37 1.13 1.095 1.13 1.577 0 1.988-2.44 1.988-3.55 0-.858-.35-1.113-1.053-1.113m-1.485 7.784c-3.102 0-4.622-1.327-4.622-3.98 0-2.947 1.462-6.946 6.615-6.946 3.084 0 4.624 1.366 4.624 3.982 0 3.005-1.464 6.944-6.617 6.944'%3E%3C/path%3E%3Cpath d='M52.543 18.294h-.781l1.404-7.182h1.095c1.657 0 2.262.98 2.262 2.323 0 2.715-1.504 4.86-3.98 4.86m3.719-6.928l2.652-2.545c-1.035-.623-2.455-.908-4.227-.908h-5.073l-2.651 13.621h5.289c6.144 0 8.601-4.293 8.601-8.76 0-1.161-.25-2.09-.732-2.81l-3.86 1.402'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E",
+      "altText": "Delivery Hero",
+      "backgroundColor": "#FFFFFF"
+    },
+    "description": "# About\nThe On Demand Rider (ODR) API provides system-to-system integration to facilitate on-demand courier delivery service requests.\nEach integration is scoped as a specific Brand using a ClientID.\nEach delivery request will be called an Order.\nThe ODR API is supporting the following products:\n\n<div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;\">\n  <img src=\"https://ondemand-am.glovoapp.com/static/media/glovo.17586205.svg\" alt=\"Glovo On-Demand\" title=\"Glovo On-Demand\" width=\"69\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://gostation-hs.com/static/media/hunger_station.f449899a.svg\" alt=\"Gostation\" title=\"Gostation\" width=\"53\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://bh.talabatodr.com/static/media/talabat.f5d13720.svg\" alt=\"Talabat Express\" title=\"Talabat Express\" width=\"253\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://foodylastmile.com.cy/static/media/foody.7248ff46.png\" alt=\"Foody\" title=\"Foody\" width=\"71\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://efoodlastmile.gr/static/media/efood.133fbc82.png\" alt=\"efood\" title=\"efood\" width=\"100\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://pandago-bd.com/static/media/pandago_logo_pink.b4f1964c.svg\" alt=\"pandago\" title=\"pandago\" width=\"131\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://go.foodora.cz/static/media/foodorago.6c1c557d.png\" alt=\"foodora GO\" title=\"foodora GO\" width=\"60\" height=\"32\" style=\"display:block;\"/>\n</div>\n\n\n## On Demand Concepts\n\n### Client\nA Client represents a **single integration for a specific Brand** and acts as the **\"parent vendor\"**. It contains high-level information such as:\n* Customer's known name of the Brand/Branch\n* General Address of the Brand/Branch that includes Latitude and Longitude.\n\n### Outlets\nOutlets are **the individual branches or vendor locations tied to the Client**. Each outlet represents the specific pickup location for deliveries. In ODR, if a client has **multiple locations**, they **can all be configured under the same parent vendor**.\nOutlet details include:\n* Branch vendor name\n* Address of outlet with latitude and longitude.\n&nbsp;\n\n**Note**: In ODR, **all orders should be sent from an Outlet**. Even if the client has only one location, the order should still originate from the Outlet and not the parent vendor.\n\n## Ordering Steps\n1. The Sender address must be specified when submitting an Order.\n2. The Sender latitude and longitude will be used to find the matching Branch/Outlet.\n\n### Supported Payment Methods\n| Payment Method | Description |\n| - | - |\n| PAID | Order has been fully paid already and courier will not collect any amount from the end customer |\n| CASH_ON_DELIVERY | Courier will collect payment (order amount) from the end customer upon delivery |\n| CARD_ON_DELIVERY | Payment by credit card upon receipt of the order |\n\n## API Endpoints and URLs\n\nBelow are the API endpoints for each brand and country:\n\n- Production URLs use DH-friendly domains when available.\n- Staging URLs always use raw infra domains.\n\n### Talabat\n| Country | Prod API | Stage API |\n| - | - | - |\n| United Arab Emirates | https://talabat-api-euw2.deliveryhero.io/ae | https://api-infra-eu-west-2.stg.ondemandrider.net/ae |\n| Bahrain | https://talabat-api-euw2.deliveryhero.io/bh | https://api-infra-eu-west-2.stg.ondemandrider.net/bh |\n| Egypt | https://talabat-api-euw2.deliveryhero.io/eg | https://api-infra-eu-west-2.stg.ondemandrider.net/eg |\n| Jordan | https://talabat-api-euw2.deliveryhero.io/jo | https://api-infra-eu-west-2.stg.ondemandrider.net/jo |\n| Kuwait | https://talabat-api-euw2.deliveryhero.io/kw | https://api-infra-eu-west-2.stg.ondemandrider.net/kw |\n| Oman | https://talabat-api-euw2.deliveryhero.io/om | https://api-infra-eu-west-2.stg.ondemandrider.net/om |\n| Qatar | https://talabat-api-euw2.deliveryhero.io/qa | https://api-infra-eu-west-2.stg.ondemandrider.net/qa |\n\n---\n\n### Hungerstation\n| Country | Prod API | Stage API |\n| - | - | - |\n| Saudi Arabia | https://talabat-api-euw2.deliveryhero.io/sa | https://api-infra-eu-west-2.stg.ondemandrider.net/sa |\n\n---\n\n### Pandago\n| Country | Prod API | Stage API |\n| - | - | - |\n| Bangladesh | https://pandago-api-apse.deliveryhero.io/bd | https://api-infra-ap-southeast-1.stg.ondemandrider.net/bd |\n| Hong Kong | https://pandago-api-apse.deliveryhero.io/hk | https://api-infra-ap-southeast-1.stg.ondemandrider.net/hk |\n| Cambodia | https://pandago-api-apse.deliveryhero.io/kh | https://api-infra-ap-southeast-1.stg.ondemandrider.net/kh |\n| Laos | https://pandago-api-apse.deliveryhero.io/la | https://api-infra-ap-southeast-1.stg.ondemandrider.net/la |\n| Myanmar | https://pandago-api-apse.deliveryhero.io/mm | https://api-infra-ap-southeast-1.stg.ondemandrider.net/mm |\n| Malaysia | https://pandago-api-apse.deliveryhero.io/my | https://api-infra-ap-southeast-1.stg.ondemandrider.net/my |\n| Philippines | https://pandago-api-apse.deliveryhero.io/ph | https://api-infra-ap-southeast-1.stg.ondemandrider.net/ph |\n| Pakistan (APSO) | https://pandago-api-apso.deliveryhero.io/pk | https://api-infra-ap-south-1.stg.ondemandrider.net/pk |\n| Singapore | https://pandago-api-apse.deliveryhero.io/sg | https://api-infra-ap-southeast-1.stg.ondemandrider.net/sg |\n| Thailand | https://pandago-api-apse.deliveryhero.io/th | https://api-infra-ap-southeast-1.stg.ondemandrider.net/th |\n| Taiwan | https://pandago-api-apse.deliveryhero.io/tw | https://api-infra-ap-southeast-1.stg.ondemandrider.net/tw |\n\n---\n\n### Foodora Go\n| Country | Prod API | Stage API |\n| - | - | - |\n| Czech Republic | https://talabat-api-euw2.deliveryhero.io/cz | https://api-infra-eu-west-2.stg.ondemandrider.net/cz |\n| Finland | https://foodorago-api-eun1.deliveryhero.io/fi | https://api-infra-eu-north-1.stg.ondemandrider.net/fi |\n| Hungary | https://talabat-api-euw2.deliveryhero.io/hu | https://api-infra-eu-west-2.stg.ondemandrider.net/hu |\n| Norway | https://foodorago-api-eun1.deliveryhero.io/no | https://api-infra-eu-north-1.stg.ondemandrider.net/no |\n| Sweden | https://foodorago-api-eun1.deliveryhero.io/se | https://api-infra-eu-north-1.stg.ondemandrider.net/se |\n| Austria | https://api-infra-eu-west-2.ondemandrider.net/at | https://api-infra-eu-west-2.stg.ondemandrider.net/at |\n\n---\n\n### Efood\n| Country | Prod API | Stage API |\n| - | - | - |\n| Greece | https://api-infra-eu-west-2.ondemandrider.net/gr | https://api-infra-eu-west-2.stg.ondemandrider.net/gr |\n\n---\n\n### Foody\n| Country | Prod API | Stage API |\n| - | - | - |\n| Cyprus | https://api-infra-eu-west-2.ondemandrider.net/cy | https://api-infra-eu-west-2.stg.ondemandrider.net/cy |\n\n---\n\n### Glovo\n| Country | Prod API | Stage API |\n| - | - | - |\n| Armenia | https://ondemand-api-glovoapp.deliveryhero.io/am | https://api-infra-eu-central-1.stg.ondemandrider.net/am |\n| Bosnia & Herzegovina | https://ondemand-api-glovoapp.deliveryhero.io/ba | https://api-infra-eu-central-1.stg.ondemandrider.net/ba |\n| Bulgaria | https://ondemand-api-glovoapp.deliveryhero.io/bg | https://api-infra-eu-central-1.stg.ondemandrider.net/bg |\n| Ivory Coast | https://ondemand-api-glovoapp.deliveryhero.io/ci | https://api-infra-eu-central-1.stg.ondemandrider.net/ci |\n| Spain | https://ondemand-api-glovoapp.deliveryhero.io/es | https://api-infra-eu-central-1.stg.ondemandrider.net/es |\n| Georgia | https://ondemand-api-glovoapp.deliveryhero.io/ge | https://api-infra-eu-central-1.stg.ondemandrider.net/ge |\n| Croatia | https://ondemand-api-glovoapp.deliveryhero.io/hr | https://api-infra-eu-central-1.stg.ondemandrider.net/hr |\n| Italy | https://ondemand-api-glovoapp.deliveryhero.io/it | https://api-infra-eu-central-1.stg.ondemandrider.net/it |\n| Kenya | https://ondemand-api-glovoapp.deliveryhero.io/ke | https://api-infra-eu-central-1.stg.ondemandrider.net/ke |\n| Kyrgyzstan | https://ondemand-api-glovoapp.deliveryhero.io/kg | https://api-infra-eu-central-1.stg.ondemandrider.net/kg |\n| Kazakhstan | https://ondemand-api-glovoapp.deliveryhero.io/kz | https://api-infra-eu-central-1.stg.ondemandrider.net/kz |\n| Morocco | https://ondemand-api-glovoapp.deliveryhero.io/ma | https://api-infra-eu-central-1.stg.ondemandrider.net/ma |\n| Moldova | https://ondemand-api-glovoapp.deliveryhero.io/md | https://api-infra-eu-central-1.stg.ondemandrider.net/md |\n| Montenegro | https://ondemand-api-glovoapp.deliveryhero.io/me | https://api-infra-eu-central-1.stg.ondemandrider.net/me |\n| Nigeria | https://ondemand-api-glovoapp.deliveryhero.io/ng | https://api-infra-eu-central-1.stg.ondemandrider.net/ng |\n| Poland | https://ondemand-api-glovoapp.deliveryhero.io/pl | https://api-infra-eu-central-1.stg.ondemandrider.net/pl |\n| Portugal | https://ondemand-api-glovoapp.deliveryhero.io/pt | https://api-infra-eu-central-1.stg.ondemandrider.net/pt |\n| Romania | https://ondemand-api-glovoapp.deliveryhero.io/ro | https://api-infra-eu-central-1.stg.ondemandrider.net/ro |\n| Serbia | https://ondemand-api-glovoapp.deliveryhero.io/rs | https://api-infra-eu-central-1.stg.ondemandrider.net/rs |\n| Tunisia | https://ondemand-api-glovoapp.deliveryhero.io/tn | https://api-infra-eu-central-1.stg.ondemandrider.net/tn |\n| Ukraine | https://ondemand-api-glovoapp.deliveryhero.io/ua | https://api-infra-eu-central-1.stg.ondemandrider.net/ua |\n| Uganda | https://ondemand-api-glovoapp.deliveryhero.io/ug | https://api-infra-eu-central-1.stg.ondemandrider.net/ug |\n\n---\n\n# Getting Started\n\n## 1. Provide a public key\nThese are the steps to start using the ODR API:\n1. Generate Key Pair (Private Key and Public Key) to support secure communication with the ODR API.\n\n   Follow these commands on a terminal:\n   ```bash\n   # Generate private key\n   # output: client.pem file\n   openssl genrsa -out client.pem 2048\n\n   # Generate public key from the generated private one\n   # input: client.pem file\n   # output: client.pub file\n   openssl rsa -in client.pem -pubout > client.pub\n   ```\n   Or, follow these steps:\n   1. Open a browser and access [this Online RSA Generator](https://emn178.github.io/online-tools/rsa/key-generator/)\n   2. Select key length to 2048 bit, and click the Generate Key Pair button.\n   3. Copy and save the Private Key to a file with .pem extension (e.g. client.pem).\n   4. Copy and save the Public Key to a file with .pub extension (e.g. client.pub).\n2. The ODR representative will provide you with `ClientID`, `KeyID` and `Scope` that your service will need to generate an Access Token for the ODR API.\n   | Attribute | Description | Example |\n   | - | - | - |\n   | ClientID | Your service identifier| pandago:sg:00000000-0000-0000-0000-000000000000 |\n   | KeyID | Your public key identifier| 00000000-0000-0000-0000-000000000001 |\n   | Scope | Access scope of your service| `pandago.api.{country code}.*` (ex: `pandago.api.pt.*`) |\n\n\n## 2. Generate signed JWT\nGenerate assertion as a signed token in Javascript Web Token (JWT) format.\n\nThis is the payload structure of the token:\n```\n{\n  \"alg\":\"RS256\",\n  \"typ\":\"JWT\",\n  \"kid\": \"{{KeyID}}\"\n}\n.\n{\n  \"iss\":\"{{ClientID}}\",\n  \"sub\":\"{{ClientID}}\",\n  \"jti\":\"{{random uuid (e.g. caa56777-4e88-4c59-be70-3ae513fd2e00)}}\",\n  \"exp\":{{unix timestamp in the future (e.g. 1894712882)}},\n  \"aud\":\"https://sts.deliveryhero.io\"\n}\n```\nAnd use your Private Key to sign the token.\n\n\ud83d\udca1 **Tips** \ud83d\udca1\n* Always use `https://sts.deliveryhero.io` for `aud` key, in both testing and prod environments\n* For the `exp` key, just get a future timestamp (ex in 1 year) with [unixtimestamp.com](https://www.unixtimestamp.com/index.php)\n\n## 3. Get a JWT access token\n\nFollow the instructions to call [the auth endpont](#tag/Authentication)\n"
+  },
+  "servers": [
+    {
+      "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1",
+      "description": "<b>Sandbox</b> environment"
+    },
+    {
+      "url": "https://api-infra-eu-central-1.stg.ondemandrider.net/{country code}/api/v1",
+      "description": "<b>Stage</b> Glovo generic \ud83d\udca1 Find your country URL [here](#section/About/API-Endpoints-and-URLs) \ud83d\udca1"
+    },
+    {
+      "url": "https://ondemand-api-glovoapp.deliveryhero.io/{country code}/api/v1",
+      "description": "<b>Production</b> Glovo generic \ud83d\udca1 Find your country URL [here](#section/About/API-Endpoints-and-URLs) \ud83d\udca1"
+    },
+    {
+      "url": "https://ondemand-api-glovoapp.deliveryhero.io/pt/api/v1",
+      "description": "<b>Example in production</b> for Glovo Portugal"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Once you followed above steps from [Getting started](#section/Getting-Started) and that you have your signed JWT token, you can request the access token.\n"
+    },
+    {
+      "name": "OrdersEstimation",
+      "x-displayName": "Estimations"
+    },
+    {
+      "name": "OrdersManagement",
+      "x-displayName": "Orders Management",
+      "description": "The following sections provide a complete summary of all available endpoints and features connected with the Orders API.\n\nPlease review the documentation carefully. When selecting an endpoint, note the information on the right-hand side of the screen, which details the following critical elements:\n\n- **Request Attributes: Mandatory formatting** for specific attributes (e.g., phone numbers, coordinates, addresses) is outlined here. **Pay close attention to these requirements.**\n- **Request Examples:** Illustrative examples of successful requests.\n- **Request Responses:** Examples of successful and failed responses, including common error codes and messages.\n"
+    },
+    {
+      "name": "Proofs"
+    },
+    {
+      "name": "RiderPosition",
+      "x-displayName": "Rider Position"
+    },
+    {
+      "name": "Outlets"
+    },
+    {
+      "name": "Callback",
+      "description": "**\u25b6\ufe0f READ THIS FIRST \u25c0\ufe0f**\n\n* Those are NOT actual endpoints. They are callback from ODR to your endpoint\n* This is used to represent the payload ODR will sent\n* This is an optional feature and it requires your callback URL to be registered with your ClientID\n---\n\n**Description**\n* The Callback URL will need to be HTTPS with a valid SSL certificate.\n* Body posted by this feature is stripped of any Personally Identifiable Information (PII).\n* Full Order body can be fetched using the Get Specific Order feature.\n* If there is an error, we retry sending the request three times. If the response status code is 2xx, it means that there was no error and the callback was successful in sending order status.\n"
+    }
+  ],
+  "x-tagGroups": [
+    {
+      "name": "Authentication",
+      "tags": [
+        "Authentication"
+      ]
+    },
+    {
+      "name": "Orders",
+      "tags": [
+        "OrdersManagement",
+        "OrdersEstimation",
+        "RiderPosition",
+        "Proofs"
+      ]
+    },
+    {
+      "name": "Outlets",
+      "tags": [
+        "Outlets"
+      ]
+    },
+    {
+      "name": "Callback",
+      "tags": [
+        "Callback"
+      ]
+    }
+  ],
+  "security": [
+    {
+      "Bearer_Token": []
+    }
+  ],
+  "paths": {
+    "/oauth2/token": {
+      "post": {
+        "summary": "Request OAuth Token",
+        "description": "Authentication",
+        "operationId": "getAccessToken",
+        "tags": [
+          "Authentication"
+        ],
+        "security": [],
+        "servers": [
+          {
+            "url": "https://sts-st.deliveryhero.io",
+            "description": "Stage / Sandbox STS"
+          },
+          {
+            "url": "https://sts.deliveryhero.io",
+            "description": "Production STS"
+          }
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "cURL",
+            "label": "cURL (Stage)",
+            "source": "curl --location --request POST 'https://sts-st.deliveryhero.io/oauth2/token' \\\n--header 'Content-Type: application/x-www-form-urlencoded' \\\n--data-urlencode 'grant_type=client_credentials' \\\n--data-urlencode 'client_id={{ClientID}}' \\\n--data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer' \\\n--data-urlencode 'client_assertion={{SignedJWT}}' \\\n--data-urlencode 'scope={{pandago.api.sg.*}}'\n"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "x-www-form-urlencoded": {
+              "example": {
+                "grant_type": "client_credentials",
+                "client_id": "{{ClientID}}",
+                "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+                "client_assertion": "{{SignedJWT}}",
+                "scope": "{{pandago.api.sg.*}}"
+              },
+              "schema": {
+                "type": "object",
+                "required": [
+                  "grant_type",
+                  "client_id",
+                  "client_assertion_type",
+                  "client_assertion",
+                  "scope"
+                ],
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "description": "The grant type being requested, use `client_credentials`",
+                    "x-example": "client_credentials"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "description": "Your client identifier, provided to you in [step 1](#section/Getting-Started/1.-Provide-a-public-key)",
+                    "example": "{{ClientID}}"
+                  },
+                  "client_assertion_type": {
+                    "type": "string",
+                    "description": "The type of assertion being used, use `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`",
+                    "x-example": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+                  },
+                  "client_assertion": {
+                    "type": "string",
+                    "description": "Your signed JSON Web Token (JWT), you generate in [step 2](#section/Getting-Started/2.-Generate-signed-JWT)",
+                    "example": "{{SignedJWT}}"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "description": "The requested scope, provided to you in [step 1](#section/Getting-Started/1.-Provide-a-public-key)",
+                    "example": "{{Scope}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Token Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenStsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid or missing parameters.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorStsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/outlets/{client_vendor_id}": {
+      "put": {
+        "summary": "Create or Update an Outlet",
+        "tags": [
+          "Outlets"
+        ],
+        "description": "*NOTE for vendors in Finland, Norway, and Sweden:*\n\nVendors in the the named countries have the option to work with coordinates (by providing **`latitude`** and  **`longitude`**) or with addresses by providing **`address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`latitude`** and  **`longitude`**) or with postal codes (by providing **`postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n\n*NOTE on removing users:*\n\n* Users can only be removed while updating an outlet.\n* Adding and removing users in the same request is not recommended.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "client_vendor_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the outlet to update or to create.\n\ud83d\udca1 When creating an outlet, this will be the `client_vendor_id` of the outlet needed to fetch or update the outlet\n",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateOutletRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Outlet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Invalid request payload\\n - recipient.phone_number is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get an Outlet",
+        "tags": [
+          "Outlets"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "client_vendor_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the outlet to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VendorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Outlet not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Partially Update an Outlet",
+        "tags": [
+          "Outlets"
+        ],
+        "description": "Use this endpoint to partially update an existing outlet. Only the fields provided in the request body will be updated; all other fields will remain unchanged.\n\nThis is useful when you need to update specific outlet attributes without having to provide all required fields as in the PUT endpoint.\n\n*NOTE:*\n* At least one field must be provided for the update.\n* If both `latitude` and `longitude` are provided, they must be provided together.\n* The outlet must already exist and be active.\n* The parent vendor must be active.\n",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "client_vendor_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the outlet to partially update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchOutletRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Outlet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "at least one field must be provided for update"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Outlet not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "vendor is not a proper parent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Operations"
+    },
+    "/outletList": {
+      "get": {
+        "summary": "Get All Outlets",
+        "description": "Kindly use this endpoint to get all outlets created under a single parent vendor. This end point will work only with Brand Vendors. When any Outlet vendor sends this request, they will see an error message saying \"This vendor is not a parent\".\n",
+        "tags": [
+          "Outlets"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutletListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "This vendor is not a parent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Bulk Operations"
+    },
+    "/orders/fee": {
+      "post": {
+        "summary": "Estimate Fee for an Order",
+        "description": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n",
+        "tags": [
+          "OrdersEstimation"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/EstimateOrderRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateOrderFeeResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "client_order_id": "client-ref-000001",
+                      "estimated_delivery_fee": 8.17,
+                      "sender": {
+                        "client_vendor_id": "outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f",
+                        "location": {
+                          "address": "1 2nd Street #08-01",
+                          "latitude": 1.2923742,
+                          "longitude": 103.8486029,
+                          "notes": "use the left side door"
+                        },
+                        "notes": "use the left side door"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Invalid request payload\\n - recipient.phone_number is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unable to process request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "No Branch found that is close enough to the given sender coordinates"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Fee Estimation"
+    },
+    "/orders/time": {
+      "post": {
+        "summary": "Estimate Time for an Order",
+        "description": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*Time is estimated based on historical data and it does not consider live condition (e.g. traffic, weather, etc.)*\n",
+        "tags": [
+          "OrdersEstimation"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          }
+        ],
+        "requestBody": {
+          "$ref": "#/components/requestBodies/EstimateOrderRequest"
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstimateOrderTimeResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "client_order_id": "client-ref-000001",
+                      "estimated_pickup_time": "2018-09-13T01:30:52.123Z",
+                      "estimated_delivery_time": "2018-09-13T01:45:52.123Z",
+                      "delivery_duration": "PT20M",
+                      "lower_bound": "PT15M",
+                      "upper_bound": "PT25M"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Invalid request payload\\n - recipient.phone_number is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unable to process request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "No Branch found that is close enough to the given sender coordinates"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Time Estimation"
+    },
+    "/orders": {
+      "post": {
+        "summary": "Create a New Order",
+        "description": "Use this endpoint to create a new order. It takes a JSON object containing an order.",
+        "tags": [
+          "OrdersManagement"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrderResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "order_id": "y0ud-000001",
+                      "client_order_id": "client-ref-000001",
+                      "sender": {
+                        "client_vendor_id": "outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f",
+                        "phone_number": "+6500000000",
+                        "location": {
+                          "address": "22 Esplanade Drive",
+                          "latitude": 1.2813226,
+                          "longitude": 103.8485402,
+                          "notes": "use the left side door"
+                        },
+                        "notes": "use the left side door"
+                      },
+                      "recipient": {
+                        "name": "Merlion",
+                        "phone_number": "+6500000000",
+                        "location": {
+                          "address": "20 Esplanade Drive",
+                          "latitude": 1.2857488,
+                          "longitude": 103.8548608
+                        },
+                        "notes": "2nd floor - door 3, use lift A and leave at the front door"
+                      },
+                      "distance": 906.13,
+                      "payment_method": "PAID",
+                      "coldbag_needed": false,
+                      "amount": 23.5,
+                      "status": "NEW",
+                      "delivery_fee": 8.17,
+                      "timeline": {
+                        "estimated_pickup_time": "",
+                        "estimated_delivery_time": ""
+                      },
+                      "driver": {
+                        "id": "",
+                        "name": "",
+                        "phone_number": ""
+                      },
+                      "created_at": 1536802000,
+                      "updated_at": 1536802000,
+                      "delivery_tasks": {
+                        "age_validation_required": false,
+                        "handover_confirmation": {
+                          "drop_off": "PIN"
+                        }
+                      },
+                      "pickup_tasks": {
+                        "pickup_code": "Order-4672"
+                      },
+                      "packaging": {
+                        "size": "small",
+                        "weight": 1.2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. The request payload is invalid or contains unsupported field values.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrder400ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Invalid createRequest payload\n - recipient is required\n - payment_method is required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. The request is missing or contains an invalid Authorization header.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrder401ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "The authorizer should provide its name in the context"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found. The outlet or vendor referenced in the request does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrder404ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Outlet not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity. The request is well-formed but cannot be fulfilled due to business rule violations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrder422ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error. An unexpected server-side failure occurred.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateOrder500ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "summary": "Get Specific Order",
+        "description": "Use this endpoint to get an existing order. It takes a JSON object containing an order.\n__NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.",
+        "tags": [
+          "OrdersManagement"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "order_id": "y0ud-000001",
+                      "client_order_id": "client-ref-000001",
+                      "sender": {
+                        "name": "ODR",
+                        "phone_number": "+6500000000",
+                        "location": {
+                          "address": "1 2nd Street #08-01",
+                          "latitude": 1.2923742,
+                          "longitude": 103.8486029
+                        },
+                        "notes": "use the left side door"
+                      },
+                      "recipient": {
+                        "name": "Merlion",
+                        "phone_number": "+6500000000",
+                        "location": {
+                          "address": "20 Esplanade Drive",
+                          "latitude": 1.2857488,
+                          "longitude": 103.8548608
+                        },
+                        "notes": "2nd floor - door 3, use lift A and leave at the front door"
+                      },
+                      "distance": 906.13,
+                      "payment_method": "PAID",
+                      "coldbag_needed": false,
+                      "description": "Refreshing drink",
+                      "amount": 23.5,
+                      "status": "NEW",
+                      "delivery_fee": 8.17,
+                      "timeline": {
+                        "estimated_pickup_time": "",
+                        "estimated_delivery_time": ""
+                      },
+                      "driver": {
+                        "id": "",
+                        "name": "",
+                        "phone_number": ""
+                      },
+                      "created_at": 1536802000,
+                      "updated_at": 1536802000,
+                      "tracking_link": "https://example.com/test_tracking_path",
+                      "proof_of_delivery_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_delivery/x-1234",
+                      "proof_of_pickup_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_pickup/x-1234",
+                      "proof_of_return_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_return/x-1234",
+                      "cancellation": {
+                        "reason": "MISTAKE_ERROR",
+                        "source": "CLIENT"
+                      },
+                      "delivery_tasks": {
+                        "age_validation_required": false,
+                        "handover_confirmation": {
+                          "drop_off": {
+                            "type": "PIN",
+                            "code": "1234"
+                          }
+                        }
+                      },
+                      "pickup_tasks": {
+                        "pickup_code": "Order-4672"
+                      },
+                      "packaging": {
+                        "weight": 1.2,
+                        "volume": 1.05
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Order not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Cancel Specific Order",
+        "description": "Use this endpoint to cancel an existing order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*An order is only cancellable when it has not been accepted by a courier*\n",
+        "tags": [
+          "OrdersManagement"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "203": {
+            "description": "Deprecated Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "reason has been modified to REASON_UNKNOWN"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Order not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Uncancellable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Order is not cancellable"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Specific Order",
+        "description": "Use this endpoint to update an existing order.\nIt takes a JSON object containing an order.\n\n1. An order can only be modified when it has not been picked up by a courier.\n2. Changing payment type:\n   1. CASH_ON_DELIVERY to PAID: Set amount to \"0\" if the payment type is changed to \"PAID\".\n   2. PAID to CASH_ON_DELIVERY: Changing the payment type from PAID to CASH_ON_DELIVERY is not supported.\n",
+        "tags": [
+          "OrdersManagement"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to update",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateOrderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "invalid update request payload"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Order not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Method not allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "order update is not allowed for this country"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "order can not be updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}/coordinates": {
+      "get": {
+        "summary": "Get Rider Position for Specific Order",
+        "description": "Use this endpoint to get current rider position. It takes a JSON object containing an order.",
+        "tags": [
+          "RiderPosition"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOrderCoordinateResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "client_order_id": "client-ref-000001",
+                      "latitude": 1.2857488,
+                      "longitude": 103.8548608,
+                      "updated_at": 1536802252
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Order not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/proof_of_pickup/{order_id}": {
+      "get": {
+        "summary": "Get Proof of Pickup for Order",
+        "description": "Use this endpoint to get proof of pickup for existing and picked up orders.\n\n__NOTE:__ Proof of pickup will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n\n*NOTE: Not yet rolled out.*\n",
+        "tags": [
+          "Proofs"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get its proof of pickup",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProofOfPickupResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": "base64EncodedFileResponse as file"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseForProofOfPickup"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Proof of pickup for this order was not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/proof_of_delivery/{order_id}": {
+      "get": {
+        "summary": "Get Proof of Delivery for Order",
+        "description": "Use this endpoint to get proof of delivery for existing and delivered orders.\n\n__NOTE:__ Proof of delivery will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n",
+        "tags": [
+          "Proofs"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get its proof of delivery",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProofOfDeliveryResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": "base64EncodedFileResponse as file"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseForProofOfDelivery"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Proof of delivery for this order was not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/proof_of_return/{order_id}": {
+      "get": {
+        "summary": "Get Proof of Return for Order",
+        "description": "Use this endpoint to get proof of return for existing and returned orders.\n\n__NOTE:__ Proof of return will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n",
+        "tags": [
+          "Proofs"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "Bearer {access-token}"
+            }
+          },
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the order to get its proof of return",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetProofOfReturnResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": "base64EncodedFileResponse as file"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponseForProofOfReturn"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Proof of return for this order was not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "examples": {
+                  "response": {
+                    "value": {
+                      "message": "Unable to proceed, something went wrong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/callback": {
+      "post": {
+        "summary": "Order Status callback",
+        "description": "**Order Cancellation Callback**\n* When you cancel an order, if you provided a callback url, ODR will send request to that url.\n* In the payload, there will be Cancellation object which contains reason and source of cancellation\n* __NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.\n\n\n---\n**Verification of Callback**\n  Signature-based verification can be used to secure callback messages to the API vendors.\n  To enable signature verification, please contact with regional/local ops team and provide your secret key.\n\n  * The payload will be signed by the platform, and the `hex-encoded` signature will be added to the header as `X-Signature-SHA256`.\n  * Verification can be done using the provided secret on the client side.\n\n  Example verification codes:\n\n  Golang:\n\n  ```golang\n  const (\n    SignatureHeader string = \"X-Signature-SHA256\"\n    Secret string = \"supersecret\"\n  )\n\n  func handler(w http.ResponseWriter, r *http.Request) {\n    body, err := io.ReadAll(r.Body)\n    if err != nil {\n      // can't read body\n    }\n    defer r.Body.Close()\n\n    ok, err := verify(body, r.Header.Get(SignatureHeader))\n    if err != nil {\n      // can't verify signature\n    } else if !ok {\n      // signature does not match\n    }\n\n    // signature is verified\n  }\n\n  func verify(body []byte, signature string) (bool, error) {\n    sig, err := hex.DecodeString(signature)\n    if err != nil {\n      return false, err\n    }\n\n    mac := hmac.New(sha256.New, []byte(Secret))\n    mac.Write(body)\n\n    return hmac.Equal(sig, mac.Sum(nil)), nil\n  }\n  ```\n",
+        "tags": [
+          "Callback"
+        ],
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackRequest"
+              }
+            }
+          },
+          "description": "__NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Order Status callback"
+    },
+    "/callback-location": {
+      "post": {
+        "summary": "Courier location update",
+        "description": "If you provide us a `location_update_callback` then we will call the callback URL *every 15s* for any ongoing orders with the live location of the courier.\n\nIt works exactly like above callback endpint and the body is the same, signature is also supported.\nYou can chose to use the same callback URL or have a different one.\n",
+        "tags": [
+          "Callback"
+        ],
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CallbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Courier location update"
+    },
+    "/callback-refund": {
+      "post": {
+        "summary": "Refund callback",
+        "description": "Whenever a refund or compensation is issued for one of your orders, ODR will POST a refund event to your registered refund callback URL. To enable this callback, please contact your local ops team and provide the URL.\n\nThe payload describes the refund amount, the reason and owner of the refund, and \u2014 when the refund targets specific items \u2014 the list of affected products with the percentage of each product being refunded.\n\n---\n\n**Refund types**\n\n| Type | Description |\n| - | - |\n| `FULL_REFUND` | The whole order is being refunded. |\n| `PARTIAL_REFUND` | Only part of the order is being refunded (e.g. specific products or the delivery fee). |\n| `COMPENSATION` | A compensation for which the value is independent of the product amount of the order. |\n\n**Refund owners**\n\n| Owner | Description |\n| - | - |\n| `RESTAURANT` | The vendor (restaurant) bears the refund cost. |\n| `DELIVERY_PLATFORM` | The delivery platform bears the refund cost. |\n\n**Refund reasons**\n\n| Reason | Description |\n| - | - |\n| `ORDER_MISSING_ITEMS` | The order was delivered but some items were missing. |\n| `ORDER_ITEM_ERROR` | One or more items were incorrect. |\n| `ORDER_DAMAGE_ITEMS` | One or more items were damaged on delivery. |\n| `ORDER_LATE_DELIVERY` | The order was delivered after the promised time. |\n| `ORDER_NEVER_DELIVERED` | The order was never delivered to the customer. |\n| `WRONG_ORDER_DELIVERED_DELIVERY_PLATFORM` | A wrong order was delivered (platform fault). |\n| `WRONG_ORDER_DELIVERED_PARTNER` | A wrong order was delivered (vendor fault). |\n| `BAD_QUALITY` | Items had quality issues. |\n| `AUTOMATIC_CANCELLATION` | Refund issued automatically following an order cancellation. |\n| `OTHER` | Other reason not covered above. |\n\n---\n\n**Notes**\n\n* Monetary fields (`total_amount.value`, `delivery_fee_details.amount`, `products[].amount`) are integers expressed in the smallest unit of the order's currency (e.g. cents for `EUR`/`USD`).\n* `delivery_fee_details` is only present when the refund includes a delivery fee component.\n* `products` is only present for refunds that target specific products. The `external_id` matches the `external_id` you supplied for the product when creating the order.\n* Signature verification (`X-Signature-SHA256`) works the same way as for the order status callback \u2014 see the [Order Status callback](#operation/Order-Status-callback) section.\n* If the response status code is 2xx, the callback is considered delivered. Otherwise ODR retries the request up to three times.\n",
+        "tags": [
+          "Callback"
+        ],
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundCallbackRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "summary": "Refund callback"
+    }
+  },
+  "components": {
+    "requestBodies": {
+      "EstimateOrderRequest": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/EstimateOrderRequest"
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "Bearer_Token": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Provide the access token in the format: `Bearer {access-token}`. You can obtain the access token from the [Authentication endpoint](#tag/Authentication).\n"
+      }
+    },
+    "schemas": {
+      "Address": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "Boolean": {
+        "title": "Boolean",
+        "type": "boolean",
+        "default": false
+      },
+      "Building": {
+        "type": "string",
+        "maxLength": 120
+      },
+      "Cancellation": {
+        "title": "Cancellation",
+        "type": "object",
+        "properties": {
+          "source": {
+            "$ref": "#/components/schemas/Source"
+          },
+          "reason": {
+            "$ref": "#/components/schemas/Reason"
+          }
+        }
+      },
+      "DeliveryTasks": {
+        "title": "Delivery Tasks",
+        "description": "The tasks that you expect the rider to perform at the Delivery Point are located under this heading.",
+        "type": "object",
+        "properties": {
+          "age_validation_required": {
+            "$ref": "#/components/schemas/AgeValidationRequired"
+          },
+          "handover_confirmation": {
+            "type": "object",
+            "properties": {
+              "drop_off": {
+                "description": "<mark>Beta:</mark> Only available in some countries. Please contact your local ops team for more details.\ndrop_off types:\n* `PIN` - a PIN will be asked by the rider to the customer to confirm order's delivery\n* `NONE` - no PIN will be required\n",
+                "type": "string",
+                "enum": [
+                  "PIN",
+                  "NONE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "DeliveryTasksResponse": {
+        "title": "Delivery Tasks response",
+        "description": "The tasks that you expect the rider to perform at the Delivery Point are located under this heading.",
+        "type": "object",
+        "properties": {
+          "age_validation_required": {
+            "$ref": "#/components/schemas/AgeValidationRequired"
+          },
+          "handover_confirmation": {
+            "$ref": "#/components/schemas/HandoverConfirmationResponse"
+          }
+        }
+      },
+      "HandoverConfirmationResponse": {
+        "title": "Handover Confirmation response",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "code": {
+            "description": "the code that the rider will ask the customer to confirm the delivery.",
+            "type": "string"
+          }
+        }
+      },
+      "PickupTasks": {
+        "title": "Pickup Tasks",
+        "description": "The tasks that you expect the rider to perform at the Pickup Point are located under this heading.",
+        "type": "object",
+        "properties": {
+          "pickup_code": {
+            "type": "string",
+            "maxLength": 30,
+            "description": "The code that you expect the rider to mention in order to validate before giving them the order"
+          }
+        }
+      },
+      "Packaging": {
+        "title": "Packaging",
+        "description": "Package size and weight information used to assign a rider with the appropriate equipment. See the size categories below for a quick rule of thumb to assign vehicles/equipment.",
+        "type": "object",
+        "properties": {
+          "size": {
+            "type": "string",
+            "enum": [
+              {
+                "small": "fits into a shoe box"
+              },
+              {
+                "medium": "fits into a backpack"
+              },
+              {
+                "large": "fits in a car"
+              }
+            ]
+          },
+          "weight": {
+            "type": "number",
+            "description": "The weight of the package in kilograms, for example `1.5`.\n"
+          }
+        }
+      },
+      "Product": {
+        "title": "Product",
+        "description": "A product included in the order. Products can be nested via the `attributes` field to represent modifiers, toppings, or other customizations attached to a parent product.",
+        "type": "object",
+        "required": [
+          "name",
+          "external_id",
+          "price_amount"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the product as displayed to the customer.",
+            "example": "Burger"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "Identifier of the product in the vendor's external system. Used to reconcile products between ODR and the vendor's catalog (e.g. when processing refunds against specific products).",
+            "example": "324"
+          },
+          "price_amount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Price of the product expressed in the smallest unit of the order's currency (e.g. cents for EUR/USD). For example `1000` represents `10.00 EUR` when `currency_code` is `EUR`.",
+            "example": 1000
+          },
+          "attributes": {
+            "type": "array",
+            "description": "Nested products attached to this product (e.g. toppings, modifiers, add-ons). Each attribute follows the same `Product` schema and can itself contain further attributes.",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "example": {
+          "name": "Burger",
+          "external_id": "324",
+          "price_amount": 1000,
+          "attributes": [
+            {
+              "name": "ketchup",
+              "external_id": "234234",
+              "price_amount": 200
+            }
+          ]
+        }
+      },
+      "ExternalDetails": {
+        "title": "External Details",
+        "description": "References and identifiers from the vendor's own systems. These fields are passed through by ODR and are useful for fraud related computation.",
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string",
+            "description": "Identifier of the device on which the order was placed in the vendor system.",
+            "example": "a-demo-test-id"
+          },
+          "customer_id": {
+            "type": "string",
+            "description": "Identifier of the customer in the vendor system.",
+            "example": "330099"
+          },
+          "customer_delivery_fee": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Delivery fee charged by the vendor to the customer, expressed in the smallest unit of the order's currency (e.g. cents for EUR/USD).",
+            "example": 3500
+          }
+        }
+      },
+      "City": {
+        "title": "City",
+        "type": "string",
+        "maxLength": 300,
+        "example": "Singapore"
+      },
+      "ClientVendorID": {
+        "title": "Client Outlet ID",
+        "type": "string",
+        "maxLength": 255
+      },
+      "Contact": {
+        "title": "Contact",
+        "type": "object",
+        "description": "Please provide:\n* **`name`**: Recipient's name.\n* **`phone_number`**: **Must** include the full country extension code (e.g., +3519XXXXXX for Portugal, +349XXXXXX for Spain).\n* **`location`**: Contains address, latitude, longitude, and notes.\n\n&nbsp;\n\n**Addresses**:\nAddresses must be specified in accordance with the format used by the country's national postal service, as this is the format our riders are trained to recognize.\n* Do not include additional, non-address elements (e.g., business names, floor numbers). Delimit address elements by spaces.\n* CORRECT Example: Calle de Serrano 120 28006 Madrid Espa\u00f1a\n* INCORRECT Example: Calle de Serrano 120 2-2 28006 Madrid Espa\u00f1a\n\n&nbsp;\n\n**Coordinates (latitude and longitude)**:\nThis field is MANDATORY.\n* Note: The ideal method for maximum accuracy is to obtain these directly from the customer using a \"pin function\" on a map. An alternative method is using a reliable geolocation API (e.g., Google Geolocation API) to convert the customer's address.\n\n&nbsp;\n\n**Notes**:\nInclude additional, crucial information for the delivery process here.\n* IMPORTANT: For apartment or multi-unit buildings, the Floor and Door/Unit number (e.g., 2nd Floor - Door 3, 3\u00baB, 4 - A) must be included in the Notes section. This is the courier's primary means of accessing this information.\n* Include other delivery instructions (e.g., \"Meet at the Door,\" \"Use lift A\").\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, and Sweden:*\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n\n&nbsp;\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).\nTIP:\nYou can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app."
+          }
+        },
+        "required": [
+          "name",
+          "phone_number",
+          "location"
+        ]
+      },
+      "ContactWithOptionalFields": {
+        "title": "Contact",
+        "type": "object",
+        "description": "Please provide **`location`** attribute\nThe **`name`** and **`phone_number`** attributes are optional.\n*NOTE for vendors in Finland, Norway, and Sweden:*\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n\n\n&nbsp;\n\n*NOTE for vendors in Singapore:*\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location. Postal code should be specified as a 6 digit number. For example: 752340.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).\nTIP:\nYou can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app."
+          }
+        },
+        "required": [
+          "location"
+        ]
+      },
+      "Currency": {
+        "title": "Currency",
+        "type": "string",
+        "format": "ISO4217",
+        "example": "SGD"
+      },
+      "Description": {
+        "title": "Description",
+        "type": "string",
+        "maxLength": 1000
+      },
+      "District": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "CallbackDriverLocation": {
+        "title": "Location",
+        "type": "object",
+        "description": "Location information is added only to the statuses where the order has an active driver.",
+        "properties": {
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          }
+        }
+      },
+      "CallbackDriver": {
+        "title": "Driver",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "number"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "location": {
+            "$ref": "#/components/schemas/CallbackDriverLocation"
+          }
+        }
+      },
+      "Driver": {
+        "title": "Driver",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          }
+        }
+      },
+      "Halal": {
+        "title": "Halal",
+        "type": "boolean",
+        "description": "Boolean flag to determine that the Outlet has a valid Halal certification"
+      },
+      "Latitude": {
+        "title": "Latitude",
+        "type": "number",
+        "format": "double",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "Longitude": {
+        "title": "Longitude",
+        "type": "number",
+        "format": "double",
+        "minimum": -180,
+        "maximum": 180
+      },
+      "Locale": {
+        "title": "Locale",
+        "type": "string",
+        "format": "ISO639-1",
+        "example": "en-SG"
+      },
+      "Location": {
+        "title": "Location",
+        "type": "object",
+        "properties": {
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/PostalCode"
+          }
+        },
+        "required": [
+          "address",
+          "latitude",
+          "longitude"
+        ]
+      },
+      "Name": {
+        "title": "Name",
+        "type": "string",
+        "maxLength": 300
+      },
+      "CreateOrder": {
+        "title": "Order",
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string"
+          },
+          "client_order_id": {
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/Sender"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "distance": {
+            "type": "number",
+            "description": "Distance of the trip in meters, calculated using the Haversine formula."
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "coldbag_needed": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "delivery_fee": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "timeline": {
+            "$ref": "#/components/schemas/Timeline"
+          },
+          "driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "delivery_tasks": {
+            "$ref": "#/components/schemas/DeliveryTasks"
+          },
+          "pickup_tasks": {
+            "$ref": "#/components/schemas/PickupTasks"
+          },
+          "packaging": {
+            "$ref": "#/components/schemas/Packaging"
+          }
+        }
+      },
+      "OrderResponse": {
+        "title": "Order",
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string"
+          },
+          "client_order_id": {
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/Sender"
+          },
+          "is_dynamic_pickup": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "distance": {
+            "type": "number",
+            "description": "Distance of the trip in meters, calculated using the Haversine formula."
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "coldbag_needed": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "collect_from_customer": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "preordered_for": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "delivery_fee": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "timeline": {
+            "$ref": "#/components/schemas/Timeline"
+          },
+          "driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "tracking_link": {
+            "type": "string"
+          },
+          "vat_number": {
+            "type": "string"
+          },
+          "proof_of_delivery_url": {
+            "type": "string"
+          },
+          "proof_of_pickup_url": {
+            "type": "string"
+          },
+          "proof_of_return_url": {
+            "type": "string"
+          },
+          "cancellation": {
+            "$ref": "#/components/schemas/Cancellation"
+          },
+          "pickup_tasks": {
+            "$ref": "#/components/schemas/PickupTasks"
+          },
+          "delivery_tasks": {
+            "$ref": "#/components/schemas/DeliveryTasksResponse"
+          },
+          "status_history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderStatusHistory"
+            }
+          },
+          "packaging": {
+            "$ref": "#/components/schemas/PackagingResponse"
+          },
+          "integrator": {
+            "type": "string",
+            "description": "Identifies the integration platform or system used to submit the order. This field is optional and helps the operations team track which integrator a partner is using."
+          }
+        },
+        "required": [
+          "order_id",
+          "recipient",
+          "payment_method",
+          "amount",
+          "description",
+          "status",
+          "delivery_fee",
+          "timeline",
+          "driver",
+          "created_at",
+          "updated_at"
+        ]
+      },
+      "OrderStatusHistory": {
+        "title": "Order Status History",
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          }
+        }
+      },
+      "PackagingResponse": {
+        "title": "Packaging Response",
+        "type": "object",
+        "properties": {
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "volume": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "UpdateOrder": {
+        "title": "Order",
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "number"
+          },
+          "status": {
+            "type": "string"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "delivery_fee": {
+            "$ref": "#/components/schemas/Price"
+          }
+        }
+      },
+      "ProofOfDelivery": {
+        "title": "ProofOfDelivery",
+        "type": "string",
+        "format": "binary"
+      },
+      "ProofOfPickup": {
+        "title": "ProofOfPickup",
+        "type": "string",
+        "format": "binary"
+      },
+      "ProofOfReturn": {
+        "title": "ProofOfReturn",
+        "type": "string",
+        "format": "binary"
+      },
+      "Outlet": {
+        "title": "Outlet",
+        "type": "object",
+        "properties": {
+          "vendor_id": {
+            "type": "string"
+          },
+          "client_vendor_id": {
+            "$ref": "#/components/schemas/ClientVendorID"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "street": {
+            "$ref": "#/components/schemas/Street"
+          },
+          "street_number": {
+            "$ref": "#/components/schemas/StreetNumber"
+          },
+          "building": {
+            "$ref": "#/components/schemas/Building"
+          },
+          "district": {
+            "$ref": "#/components/schemas/District"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/PostalCode"
+          },
+          "rider_instructions": {
+            "$ref": "#/components/schemas/RiderInstructions"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "description": {
+            "type": "string"
+          },
+          "locale": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "halal": {
+            "$ref": "#/components/schemas/Halal"
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        },
+        "example": {
+          "client_vendor_id": "outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f",
+          "name": "Order Anytime Delivery Anywhere",
+          "address": "1 2nd Street #08-01",
+          "latitude": 1.2923742,
+          "longitude": 103.8486029,
+          "city": "Singapore",
+          "phone_number": "+6587654321",
+          "currency": "SGD",
+          "locale": "en-SG",
+          "description": "any items are for sale",
+          "vendor_id": "a-bcde",
+          "users": [
+            "example@email.com",
+            "example2@email.com"
+          ]
+        },
+        "required": [
+          "name",
+          "address",
+          "latitude",
+          "city",
+          "currency",
+          "description",
+          "locale",
+          "phone_number"
+        ]
+      },
+      "VendorResponse": {
+        "title": "VendorResponse",
+        "type": "object",
+        "properties": {
+          "client_vendor_id": {
+            "$ref": "#/components/schemas/ClientVendorID"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "street": {
+            "$ref": "#/components/schemas/Street"
+          },
+          "street_number": {
+            "$ref": "#/components/schemas/StreetNumber"
+          },
+          "building": {
+            "$ref": "#/components/schemas/Building"
+          },
+          "district": {
+            "$ref": "#/components/schemas/District"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/PostalCode"
+          },
+          "rider_instructions": {
+            "$ref": "#/components/schemas/RiderInstructions"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "description": {
+            "type": "string"
+          },
+          "locale": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "halal": {
+            "$ref": "#/components/schemas/Halal"
+          }
+        },
+        "example": {
+          "client_vendor_id": "outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f",
+          "name": "Order Anytime Delivery Anywhere",
+          "address": "1 2nd Street #08-01",
+          "latitude": 1.2923742,
+          "longitude": 103.8486029,
+          "city": "Singapore",
+          "phone_number": "+6587654321",
+          "currency": "SGD",
+          "locale": "en-SG",
+          "description": "any items are for sale"
+        },
+        "required": [
+          "name",
+          "address",
+          "latitude",
+          "city",
+          "currency",
+          "description",
+          "locale",
+          "phone_number"
+        ]
+      },
+      "OutletListResponse": {
+        "title": "OutletListResponse",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/OutletList"
+        },
+        "example": [
+          {
+            "client_vendor_id": "outlet-8c3179cc-630b-4aba-83f1-8450f7954ed3",
+            "name": "Order Anytime Delivery Anywhere",
+            "address": "Central #08-02",
+            "latitude": 1.2923742,
+            "longitude": 103.83231003,
+            "phone_number": "+6587654321",
+            "description": "Some Outlet details",
+            "created_at": 1636802000
+          },
+          {
+            "client_vendor_id": "outlet-7a6202b5-8dc8-4b93-88ef-a7dd895dbe7f",
+            "name": "Order Anytime Delivery Anywhere",
+            "address": "2nd Street #08-03",
+            "latitude": 1.86631006,
+            "longitude": 103.5486025,
+            "phone_number": "+6587654321",
+            "description": "Some Outlet details",
+            "created_at": 1636803000
+          },
+          {
+            "client_vendor_id": "outlet-4b1dd7a8-90e2-4b00-a7ee-6cca61dc70f0",
+            "name": "Order Anytime Delivery Anywhere",
+            "address": "1st Street #08-04",
+            "latitude": 1.3823567,
+            "longitude": 103.6686023,
+            "phone_number": "+6587654321",
+            "description": "Some Outlet details",
+            "created_at": 1636804000
+          }
+        ]
+      },
+      "OutletList": {
+        "title": "OutletList",
+        "type": "object",
+        "properties": {
+          "client_vendor_id": {
+            "$ref": "#/components/schemas/ClientVendorID"
+          },
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "latitude",
+          "longitude",
+          "phone_number"
+        ]
+      },
+      "PaymentMethod": {
+        "type": "string",
+        "enum": [
+          "PAID",
+          "CASH_ON_DELIVERY",
+          "CARD_ON_DELIVERY"
+        ],
+        "description": "Supported Payment Methods:\n * `PAID` - Order has been fully paid already and courier will not collect any amount from the end customer\n * `CASH_ON_DELIVERY` - Courier will collect payment (order amount) from the end customer upon delivery\n * `CARD_ON_DELIVERY` - Payment by credit card upon receipt of the order"
+      },
+      "PhoneNumber": {
+        "type": "string",
+        "format": "e164",
+        "description": "* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)\n* libphonenumber is used for phone number validation\n",
+        "example": "+6588888888"
+      },
+      "Email": {
+        "type": "string",
+        "format": "email",
+        "description": "Recipient email address (optional)",
+        "example": "john.doe@example.com"
+      },
+      "PostalCode": {
+        "title": "PostalCode **(can be used only for Singapore)**",
+        "type": "string",
+        "maxLength": 120,
+        "description": "Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.",
+        "example": "752340, 750313, 757046"
+      },
+      "Price": {
+        "title": "Price",
+        "type": "number",
+        "default": 0,
+        "minimum": 0,
+        "example": 123.45
+      },
+      "Reason": {
+        "type": "string",
+        "enum": [
+          "ADDRESS_INCOMPLETE_MISSTATED",
+          "BAD_WEATHER",
+          "CLOSED",
+          "COURIER_ACCIDENT",
+          "COURIER_UNREACHABLE",
+          "DELIVERY_ETA_TOO_LONG",
+          "DUPLICATE_ORDER",
+          "FOOD_QUALITY_SPILLAGE",
+          "ITEM_UNAVAILABLE",
+          "LATE_DELIVERY",
+          "MISTAKE_ERROR",
+          "NO_COURIER",
+          "OUTSIDE_DELIVERY_AREA",
+          "OUTSIDE_SERVICE_HOURS",
+          "REASON_UNKNOWN",
+          "TECHNICAL_PROBLEM",
+          "TOO_BUSY",
+          "UNABLE_TO_FIND",
+          "UNABLE_TO_PAY",
+          "UNREACHABLE",
+          "WRONG_ORDER_ITEMS_DELIVERED"
+        ],
+        "description": "Acceptable Reasons:\n  * `ADDRESS_INCOMPLETE_MISSTATED` - Customer's address is incomplete OR customer enters incorrect address on purpose in order to be able to proceed with the order with the vendor, with the actual customer address outside the vendor's delivery area.\n  * `BAD_WEATHER` - Vendor/Logistics cannot deliver because of weather conditions.\n  * `CLOSED` - Vendor is closed.\n  * `COURIER_ACCIDENT` - Courier has been involved in an accident and cannot fulfill the order.\n  * `COURIER_UNREACHABLE` - Courier is unreachable/unresponsive and/or uncontactable.\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `DUPLICATE_ORDER` - Duplicate order.\n  * `FOOD_QUALITY_SPILLAGE` - Customer has an issue with the food quality (cold, inedible, etc.) OR order spillage occurred during transport (VD/OD).\n  * `ITEM_UNAVAILABLE` - The product is not available or another rider has already picked up the order.\n  * `LATE_DELIVERY` - Customer has received delivery but (excessively) passed promised delivery time.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `NO_COURIER` - Vendor: Vendor has no courier (drivers/riders/walkers/etc.) available to fulfill the order. Logistics: Order is pending in Logistics/Hurrier without assigned courier and customer no longer wishes to wait.\n  * `OUTSIDE_DELIVERY_AREA` - Vendor: Vendor does not deliver to the customer's address/area. Logistics: Logistics does not deliver to the customer's address/area.\n  * `OUTSIDE_SERVICE_HOURS` - Order has been placed outside of our Logistic service hours.\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated.\n  * `TECHNICAL_PROBLEM` - Vendor: Vendor cannot fulfill an order due to technical issues, e.g. order can not be printed, etc. Where a vendor cannot be contacted and order could not be delivered to their transmission/reception device or order was delivered to the device and it timed-out/expired, reasons UNREACHABLE and NO_RESPONSE should be used respectively rather than TECHNICAL_PROBLEM. Logistics: Logistics is having general technical issues (i.e. Hurrier is down, etc.). Platform: Platform is experiencing some technical issue whereby orders cannot be placed with the Logistics/Vendor and/or have been pending too long. As a result, orders have been failed by the platform.\n  * `TOO_BUSY` - Vendor is too busy to fulfill the order.\n  * `UNABLE_TO_FIND` - Customer cannot be located to complete pick-up/delivery or order items.\n  * `UNABLE_TO_PAY` - Customer cannot pay for the order, e.g. insufficient cash (COD) or card doesn't work for card on delivery, etc.\n  * `UNREACHABLE` - Technical issues on the partner's side.\n  * `WRONG_ORDER_ITEMS_DELIVERED` - Customer has received wrong order items or is missing significant item(s)."
+      },
+      "RiderInstructions": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "Sender": {
+        "title": "Sender",
+        "type": "object",
+        "description": "There are two type of payloads accepted:\n  * **[PREFERRED]** Outlet reference\n\n    * Please provide **`client_vendor_id`** attribute\n\n    * Unique ID for the Outlet, retrieved from the Outlets API. This is the preferred way to identify the order's origin.\n\n  * Sender details\n\n    * Please provide **`name`**, **`phone_number`** and **`location`** attributes\n\n  *In the case where all attributes are provided, Outlet reference will be used and Sender details will be ignored.*\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, Sweden, Tawian and Kuwait:*\n\n&nbsp;\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n * 5 Lane 80 Taiyuen Road, Datong District, Taipei City 10349\n * Al-Sabbahiya, B.P. 48001, 54551 KUWAIT\n\n&nbsp;\n\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n",
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 2048,
+            "description": "Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).\n\nTIP:\n\nYou can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app."
+          },
+          "client_vendor_id": {
+            "$ref": "#/components/schemas/ClientVendorID"
+          }
+        }
+      },
+      "Source": {
+        "type": "string",
+        "enum": [
+          "AUTO_CANCEL",
+          "CLIENT",
+          "HELPCENTER",
+          "INTERNAL_UNKNOWN",
+          "LOGISTICS",
+          "ONEVIEW"
+        ],
+        "description": "Acceptable Sources:\n * `AUTO_CANCEL` - Cancellation was triggered automatically.\n * `CLIENT` - Cancellation was requested by the client (vendor).\n * `HELPCENTER` - Cancellation was triggered by the Help Center.\n * `INTERNAL_UNKNOWN` - Cancellation source is unknown or unrecognized.\n * `LOGISTICS` - Cancellation was requested by Logistics.\n * `ONEVIEW` - Cancellation was triggered by OneView."
+      },
+      "AgeValidationRequired": {
+        "type": "boolean",
+        "default": false,
+        "description": "Setting this attribute to `true` requests age verification of the customer by the rider at the point of delivery.\n\nBefore enabling this feature, please confirm with your account manager that age verification has been activated for your account.\n\nThis feature is currently available in the following countries:\n- **pandago**: Philippines\n- **foodora GO**: Sweden, Norway and Czech Republic\n- **Glovo On-Demand**: All countries"
+      },
+      "Status": {
+        "type": "string",
+        "enum": [
+          "NEW",
+          "RECEIVED",
+          "WAITING_FOR_TRANSPORT",
+          "ASSIGNED_TO_TRANSPORT",
+          "COURIER_ACCEPTED_DELIVERY",
+          "NEAR_VENDOR",
+          "PICKED_UP",
+          "COURIER_LEFT_VENDOR",
+          "NEAR_CUSTOMER",
+          "DELIVERED",
+          "DELAYED",
+          "CANCELLED",
+          "RETURNED_TO_VENDOR"
+        ],
+        "description": "Available Statuses:\n * `NEW` - Order has been created\n * `RECEIVED` - We've accepted the order and will be assigning it to a courier\n * `WAITING_FOR_TRANSPORT` - Assigning order to a courier\n * `ASSIGNED_TO_TRANSPORT` - Courier has been dispatched to pick up and deliver the order\n * `COURIER_ACCEPTED_DELIVERY` - Courier accepted to pick up and deliver the order\n * `NEAR_VENDOR` - Courier is near the pick-up point\n * `PICKED_UP` - Courier has picked up the order\n * `COURIER_LEFT_VENDOR` - Courier has left from pick-up point\n * `NEAR_CUSTOMER` - Courier is near the drop-off point\n * `DELIVERED` - Courier has delivered the order\n * `DELAYED` - Order delivery has been delayed and estimated delivery time has been updated\n * `CANCELLED` - Order has been cancelled\n * `RETURNED_TO_VENDOR` - Courier has returned the order to the vendor"
+      },
+      "Street": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "StreetNumber": {
+        "type": "string",
+        "maxLength": 120
+      },
+      "Timeline": {
+        "title": "Timeline",
+        "type": "object",
+        "properties": {
+          "estimated_pickup_time": {
+            "type": "string"
+          },
+          "estimated_delivery_time": {
+            "type": "string"
+          }
+        }
+      },
+      "Timestamp": {
+        "title": "Timestamp",
+        "type": "integer"
+      },
+      "CallbackRequest": {
+        "title": "Callback Request",
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string"
+          },
+          "client_order_id": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "timeline": {
+            "$ref": "#/components/schemas/Timeline"
+          },
+          "driver": {
+            "$ref": "#/components/schemas/CallbackDriver"
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "tracking_link": {
+            "type": "string"
+          },
+          "proof_of_delivery_url": {
+            "type": "string"
+          },
+          "proof_of_pickup_url": {
+            "type": "string"
+          },
+          "proof_of_return_url": {
+            "type": "string"
+          },
+          "distance": {
+            "type": "number",
+            "description": "Distance of the trip in meters, calculated using the Haversine formula."
+          },
+          "cancellation": {
+            "$ref": "#/components/schemas/Cancellation"
+          },
+          "delivery_tasks": {
+            "title": "Delivery Tasks",
+            "type": "object",
+            "properties": {
+              "age_validation_required": {
+                "$ref": "#/components/schemas/AgeValidationRequired"
+              }
+            }
+          },
+          "pickup_tasks": {
+            "$ref": "#/components/schemas/PickupTasks"
+          }
+        },
+        "required": [
+          "order_id",
+          "status",
+          "timeline",
+          "driver",
+          "created_at",
+          "updated_at"
+        ],
+        "example": {
+          "order_id": "y0ud-000001",
+          "client_order_id": "client-ref-0000001",
+          "status": "PICKED_UP",
+          "timeline": {
+            "extimated_pickup_time": "2018-09-13T01:30:52.123Z",
+            "estimated_delivery_time": "2018-09-13T01:45:52.123Z"
+          },
+          "driver": {
+            "id": "12324",
+            "name": "Panda Go",
+            "phone_number": "+6500000000",
+            "location": {
+              "latitude": 1.2923742,
+              "longitude": 103.8486029
+            }
+          },
+          "created_at": 1536802000,
+          "updated_at": 1536802252,
+          "tracking_link": "https://example.com/test_tracking_path",
+          "proof_of_delivery_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_delivery/x-1234",
+          "proof_of_pickup_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_pickup/x-1234",
+          "proof_of_return_url": "https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_return/x-1234",
+          "cancellation": {
+            "reason": "MISTAKE_ERROR",
+            "source": "CLIENT"
+          },
+          "delivery_tasks": {
+            "age_validation_required": false
+          },
+          "pickup_tasks": {
+            "pickup_code": "Order-4672"
+          },
+          "packaging": {
+            "size": "small",
+            "weight": 1.2
+          }
+        }
+      },
+      "RefundCallbackRequest": {
+        "title": "Refund Callback Request",
+        "description": "Payload sent to the registered refund callback URL when a refund or compensation is issued for an order.",
+        "type": "object",
+        "required": [
+          "order_id",
+          "refund_id",
+          "type",
+          "total_amount",
+          "reason",
+          "owner"
+        ],
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "Identifier of the ODR order this refund relates to.",
+            "example": "y0ud-000001"
+          },
+          "refund_id": {
+            "type": "string",
+            "description": "Unique identifier of the refund event.",
+            "example": "rfd-000001"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of refund being issued.",
+            "enum": [
+              "FULL_REFUND",
+              "PARTIAL_REFUND",
+              "COMPENSATION"
+            ]
+          },
+          "total_amount": {
+            "title": "Refund Total Amount",
+            "type": "object",
+            "required": [
+              "value",
+              "currency_code"
+            ],
+            "description": "Total amount of the refund.",
+            "properties": {
+              "value": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Total refund amount in the smallest unit of `currency_code` (e.g. cents for `EUR`/`USD`).",
+                "example": 1500
+              },
+              "currency_code": {
+                "type": "string",
+                "description": "ISO 4217 three-letter currency code.",
+                "example": "EUR"
+              }
+            }
+          },
+          "delivery_fee_details": {
+            "title": "Delivery Fee Details",
+            "type": "object",
+            "description": "Present only when the refund includes a delivery fee component. Describes how much of `total_amount` corresponds to the delivery fee.",
+            "required": [
+              "amount",
+              "currency_code"
+            ],
+            "properties": {
+              "amount": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Delivery fee portion of the refund, in the smallest unit of `currency_code`.",
+                "example": 250
+              },
+              "currency_code": {
+                "type": "string",
+                "description": "ISO 4217 three-letter currency code.",
+                "example": "EUR"
+              }
+            }
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reason for the refund.",
+            "enum": [
+              "ORDER_MISSING_ITEMS",
+              "ORDER_ITEM_ERROR",
+              "ORDER_DAMAGE_ITEMS",
+              "ORDER_LATE_DELIVERY",
+              "ORDER_NEVER_DELIVERED",
+              "WRONG_ORDER_DELIVERED_DELIVERY_PLATFORM",
+              "WRONG_ORDER_DELIVERED_PARTNER",
+              "BAD_QUALITY",
+              "AUTOMATIC_CANCELLATION",
+              "OTHER"
+            ]
+          },
+          "owner": {
+            "type": "string",
+            "description": "Party that bears the cost of the refund.",
+            "enum": [
+              "RESTAURANT",
+              "DELIVERY_PLATFORM"
+            ]
+          },
+          "products": {
+            "type": "array",
+            "description": "Products affected by the refund. Only present when the refund targets specific products. The `external_id` matches the `external_id` provided when the order was created.",
+            "items": {
+              "$ref": "#/components/schemas/RefundCallbackProduct"
+            }
+          }
+        },
+        "example": {
+          "order_id": "y0ud-000001",
+          "refund_id": "rfd-000001",
+          "type": "PARTIAL_REFUND",
+          "total_amount": {
+            "value": 1500,
+            "currency_code": "EUR"
+          },
+          "delivery_fee_details": {
+            "amount": 250,
+            "currency_code": "EUR"
+          },
+          "reason": "ORDER_MISSING_ITEMS",
+          "owner": "RESTAURANT",
+          "products": [
+            {
+              "id": "prod-1",
+              "external_id": "324",
+              "name": "Burger",
+              "percentage": 100,
+              "amount": 1000
+            },
+            {
+              "id": "prod-2",
+              "external_id": "2311",
+              "name": "Coca-Cola",
+              "percentage": 50,
+              "amount": 250
+            }
+          ]
+        }
+      },
+      "RefundCallbackProduct": {
+        "title": "Refund Callback Product",
+        "description": "A product affected by a refund.",
+        "type": "object",
+        "required": [
+          "id",
+          "external_id",
+          "name",
+          "percentage",
+          "amount"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "ODR-side identifier of the product within the order.",
+            "example": "prod-1"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "Identifier of the product in the vendor's external system, as provided when creating the order.",
+            "example": "324"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the product.",
+            "example": "Burger"
+          },
+          "percentage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Percentage of this product being refunded (1-100).",
+            "example": 100
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Refund amount attributed to this product, in the smallest unit of the parent `total_amount.currency_code`.",
+            "example": 1000
+          }
+        }
+      },
+      "CreateOrderRequest": {
+        "title": "Create Order Request",
+        "type": "object",
+        "properties": {
+          "client_order_id": {
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/Sender"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "coldbag_needed": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "collect_from_customer": {
+            "title": "Collect from customer",
+            "type": "number",
+            "default": 0,
+            "minimum": 0,
+            "example": 123.45,
+            "description": "This feature provides the ability to vendors collect amounts that is different than the amount paid to the vendors. The feature can be activated if Pay at Pickup is enabled in the respective country and for a particular vendor and if the payment type is selected as CASH_ON_DELIVERY.\n\n&nbsp;\n\nValidation rules:\n- Minimum: Equal to the order's `amount`.\n- Maximum: The order's `amount` plus 10 (in the currency's main unit).\n- Example: If the `amount` is 10, `collect_from_customer` must be a value between 10 and 20. If the `amount` is 50, `collect_from_customer` must be a value between 50 and 60.\n\n&nbsp;\n\nNOTE:\n- _Only enabled in Jordan._"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          },
+          "preordered_for": {
+            "type": "number",
+            "description": "Using this attribute allows you to schedule orders for a later point in time. Leave this empty (do not use 0, use null) if you want to dispatch an order instantly. You can schedule deliveries from 45 minutes to 7 days in the future while considering our operating hours. Use unix timestamps to represent the scheduled delivery time.\n\n&nbsp;\n\nPlease note that, the preordered_for parameter represents the scheduled delivery time and not the pick-up time. This means that the timestamp indicates the expected time at which the ordered items will be delivered to the specified destination, rather than the time at which the items should be delivered.\n\n&nbsp;\n\nExample: _January 25, 2022 03:01:25 UTC is represented as 1643079685 in unix timestamp_"
+          },
+          "delivery_tasks": {
+            "$ref": "#/components/schemas/DeliveryTasks"
+          },
+          "pickup_tasks": {
+            "$ref": "#/components/schemas/PickupTasks"
+          },
+          "packaging": {
+            "$ref": "#/components/schemas/Packaging"
+          },
+          "currency_code": {
+            "type": "string",
+            "description": "ISO 4217 three-letter currency code for the monetary amounts in the order (notably `products[].price_amount` and `external_details.customer_delivery_fee`, which are expressed in the smallest unit of this currency).",
+            "example": "EUR"
+          },
+          "products": {
+            "type": "array",
+            "description": "List of products included in the order. Providing this list enables features that operate at the product level, such as partial refunds targeting specific products.",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "external_details": {
+            "$ref": "#/components/schemas/ExternalDetails"
+          },
+          "integrator": {
+            "type": "string",
+            "maxLength": 255,
+            "description": "Identifies the integration platform or system used to submit the order. This field is optional and helps the operations team track which integrator a partner is using."
+          }
+        },
+        "required": [
+          "recipient",
+          "payment_method",
+          "description"
+        ],
+        "example": {
+          "sender": {
+            "name": "ODR",
+            "phone_number": "+6500000000",
+            "location": {
+              "address": "1 2nd Street #08-01",
+              "latitude": 1.2923742,
+              "longitude": 103.8486029
+            },
+            "notes": "use the left side door"
+          },
+          "recipient": {
+            "name": "Merlion",
+            "phone_number": "+6500000000",
+            "location": {
+              "address": "20 Esplanade Drive",
+              "latitude": 1.2857488,
+              "longitude": 103.8548608
+            },
+            "notes": "2nd floor - door 3, use lift A and leave at the front door"
+          },
+          "amount": 23.5,
+          "payment_method": "PAID",
+          "description": "Refreshing drink",
+          "currency_code": "EUR",
+          "integrator": "acme-integration-platform",
+          "delivery_tasks": {
+            "age_validation_required": false,
+            "handover_confirmation": {
+              "drop_off": "PIN"
+            }
+          },
+          "pickup_tasks": {
+            "pickup_code": "Order-4672"
+          },
+          "packaging": {
+            "size": "small",
+            "weight": 1.2
+          },
+          "products": [
+            {
+              "name": "Burger",
+              "external_id": "324",
+              "price_amount": 1000,
+              "attributes": [
+                {
+                  "name": "ketchup",
+                  "external_id": "234234",
+                  "price_amount": 200
+                }
+              ]
+            },
+            {
+              "name": "Coca-Cola",
+              "external_id": "2311",
+              "price_amount": 500
+            }
+          ],
+          "external_details": {
+            "device_id": "a-demo-test-id",
+            "customer_id": "330099",
+            "customer_delivery_fee": 3500
+          }
+        }
+      },
+      "CreateOrderResponse": {
+        "$ref": "#/components/schemas/CreateOrder"
+      },
+      "GetOrderResponse": {
+        "$ref": "#/components/schemas/OrderResponse"
+      },
+      "GetProofOfDeliveryResponse": {
+        "$ref": "#/components/schemas/ProofOfDelivery"
+      },
+      "GetProofOfPickupResponse": {
+        "$ref": "#/components/schemas/ProofOfPickup"
+      },
+      "GetProofOfReturnResponse": {
+        "$ref": "#/components/schemas/ProofOfReturn"
+      },
+      "GetOrderCoordinateResponse": {
+        "title": "Get Order Coordinate Response",
+        "type": "object",
+        "properties": {
+          "client_order_id": {
+            "type": "string"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/Timestamp"
+          }
+        },
+        "required": [
+          "latitude",
+          "longitude"
+        ]
+      },
+      "CancelOrderRequest": {
+        "title": "Cancel Order Request",
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "enum": [
+              "DELIVERY_ETA_TOO_LONG",
+              "MISTAKE_ERROR",
+              "REASON_UNKNOWN"
+            ],
+            "description": "Acceptable Reasons:\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated."
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "example": {
+          "reason": "MISTAKE_ERROR"
+        }
+      },
+      "UpdateOrderRequest": {
+        "title": "Update Order Request",
+        "type": "object",
+        "properties": {
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "amount": {
+            "title": "Amount",
+            "description": "In case a driver (of the vendor or of an external logistics provider) delivers the order to the customer, this is the amount of money to get from the customer.",
+            "type": "number",
+            "default": 0,
+            "minimum": 0,
+            "example": 123.45
+          },
+          "location": {
+            "title": "Location",
+            "type": "object",
+            "properties": {
+              "address": {
+                "$ref": "#/components/schemas/Street"
+              },
+              "latitude": {
+                "$ref": "#/components/schemas/Latitude"
+              },
+              "longitude": {
+                "$ref": "#/components/schemas/Longitude"
+              },
+              "notes": {
+                "type": "string",
+                "maxLength": 2048
+              }
+            },
+            "required": [
+              "latitude",
+              "longitude"
+            ]
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          }
+        },
+        "example": {
+          "payment_method": "PAID",
+          "amount": 0,
+          "location": {
+            "address": "1 2nd Street #08-01",
+            "latitude": 1.2923742,
+            "longitude": 103.8486029,
+            "notes": "right at the street crossing"
+          },
+          "description": "drinks and meals"
+        }
+      },
+      "UpdateOrderResponse": {
+        "$ref": "#/components/schemas/UpdateOrder"
+      },
+      "CreateOrder400ErrorResponse": {
+        "title": "4xx Client Errors",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "| Error Message | Reason |\n|---|---|\n| `Invalid createRequest payload\\n{error details}` | Request body malformed (JSON parsing fails) or validation fails |\n| `Invalid createRequest payload\\n- {field validation error}` | Required fields missing or invalid (e.g., missing `recipient`, `payment_method`, `description`) |\n| `Invalid createRequest payload\\n- sender is required to locate a Branch` | Vendor has branches but no sender location provided |\n| `Invalid createRequest payload\\n- sender.location.postal_code does not have a coordinate` | Sender postal code cannot be geolocated |\n| `Invalid createRequest payload\\n- recipient.location's latitude & longitude or postal_code are/is missing` | Recipient location incomplete |\n| `Invalid createRequest payload\\n- recipient.location.postal_code does not have a coordinate` | Recipient postal code cannot be geolocated |\n| `The vendor is disabled!` | Vendor/outlet is inactive or disabled |\n| `Age Validation is not supported on this country yet.` | Age validation requested but not enabled in country |\n| `Age Validation is not enabled, Please contact with support team to enable it` | Age validation not enabled for this vendor |\n| `collect_from_customer feature is not enabled for this country yet` | Collect from customer feature not enabled |\n| `Invalid createRequest payload\\ncollect_from_customer can't be lower than the amount` | Collect amount is less than order amount |\n| `Invalid createRequest payload\\ncollect_from_customer cannot exceed {amount} more than the original amount` | Collect amount exceeds maximum allowed surplus |\n"
+          }
+        }
+      },
+      "CreateOrder401ErrorResponse": {
+        "title": "Error Response",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Possible error messages:\n- `The authorizer should provide its name in the context` \u2014 the JWT token is missing, expired, or malformed."
+          }
+        }
+      },
+      "CreateOrder404ErrorResponse": {
+        "title": "Error Response",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Possible error messages:\n- `Outlet not found` \u2014 ClientVendorID does not exist or the outlet could not be resolved from the provided sender coordinates."
+          }
+        }
+      },
+      "CreateOrder422ErrorResponse": {
+        "title": "422 Unprocessable Entity Errors",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "| Error Message | Reason |\n|---|---|\n| `Unable to process order\\n- No outlet found within {MAX_RADIUS}m of the pickup location. Please update the pickup location coordinates to make it more accurate.` | No branch found near sender coordinates within max radius tolerance |\n| `Unable to process order\\n- Multiple Branches found that are close enough to the given sender coordinates` | Ambiguous: multiple branches found at same distance |\n| `Unable to process order\\n- More than 1 outlet found close to the pickup location \u2014 {OUTLETS_DETAILS}. Please update the pickup location coordinates to make it more accurate.` | Multiple outlets found, user must clarify which one |\n| `Unable to process order\\n- order is outside deliverable range` | Order location outside delivery zone |\n| `Unable to process order\\n- unable to accept order outside operating hours` | Order created outside vendor's operating hours |\n"
+          }
+        },
+        "example": {
+          "message": "Unable to process order\n- No outlet found within 500m of the pickup location. Please update the pickup location coordinates to make it more accurate."
+        }
+      },
+      "CreateOrder500ErrorResponse": {
+        "title": "5xx Server Errors",
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "| Error Message | Reason |\n|---|---|\n| `Unable to parse Vendor from Client ID` | VendorID missing or empty in authorizer context |\n| `Unable to translate Postal Code` | Geolocator service failed to process postal code |\n| `Unable to translate Address` | Geolocator service failed to process address |\n| `Unable to proceed, something went wrong` | Generic server error (order validation, database save, pricing calculation, etc.) |\n| `A temporary error occurred, please try again.` | OrderID generation failed (rare edge case) |\n"
+          }
+        },
+        "example": {
+          "message": "Unable to proceed, something went wrong"
+        }
+      },
+      "ErrorResponse": {
+        "title": "Error Response",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "ErrorMessagesModel": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Error500ResponseArray": {
+        "title": "Error Response",
+        "type": "object",
+        "items": {
+          "$ref": "#/components/schemas/ErrorMessagesModel"
+        },
+        "example": [
+          {
+            "message": "Unable to proceed, something went wrong"
+          },
+          {
+            "message": "Unable to parse Vendor from Client ID"
+          },
+          {
+            "message": "Unable to translate Postal Code"
+          }
+        ]
+      },
+      "Error422ResponseArray": {
+        "title": "Error Response",
+        "type": "object",
+        "items": {
+          "$ref": "#/components/schemas/ErrorMessagesModel"
+        },
+        "example": [
+          {
+            "message": "No Branch found that is close enough to the given sender coordinates"
+          },
+          {
+            "message": "Unable to process order"
+          },
+          {
+            "message": "Multiple Branches found that are close enough to the given sender coordinates"
+          },
+          {
+            "message": "unable to accept order outside operating hours"
+          }
+        ]
+      },
+      "ErrorResponseForProofOfDelivery": {
+        "title": "Error Response",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "ErrorResponseForProofOfPickup": {
+        "title": "Error Response",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "ErrorResponseForProofOfReturn": {
+        "title": "Error Response",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "EstimateOrderRequest": {
+        "title": "Estimate Order Request",
+        "type": "object",
+        "properties": {
+          "client_order_id": {
+            "type": "string"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/Sender"
+          },
+          "recipient": {
+            "$ref": "#/components/schemas/ContactWithOptionalFields"
+          },
+          "payment_method": {
+            "$ref": "#/components/schemas/PaymentMethod"
+          },
+          "coldbag_needed": {
+            "$ref": "#/components/schemas/Boolean"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Price"
+          },
+          "description": {
+            "$ref": "#/components/schemas/Description"
+          }
+        },
+        "required": [
+          "recipient",
+          "amount",
+          "description"
+        ],
+        "example": {
+          "sender": {
+            "name": "ODR",
+            "phone_number": "+6500000000",
+            "location": {
+              "address": "1 2nd Street #08-01",
+              "latitude": 1.2923742,
+              "longitude": 103.8486029
+            },
+            "notes": "use the left side door"
+          },
+          "recipient": {
+            "name": "Merlion",
+            "location": {
+              "address": "20 Esplanade Drive",
+              "latitude": 1.2857488,
+              "longitude": 103.8548608
+            },
+            "notes": "2nd floor - door 3,  use lift A and leave at the front door",
+            "phone_number": "+6500000000"
+          },
+          "amount": 23.5,
+          "payment_method": "PAID",
+          "description": "Refreshing drink"
+        }
+      },
+      "EstimateOrderFeeResponse": {
+        "title": "Estimate Order Fee Response",
+        "type": "object",
+        "properties": {
+          "client_order_id": {
+            "type": "string"
+          },
+          "sender": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Sender"
+              }
+            ],
+            "description": "The resolved pickup details. The `location` (and `phone_number`, when available) are populated from the pickup outlet's information. When the request was submitted using `sender.client_vendor_id`, that value is echoed back here as well."
+          },
+          "estimated_delivery_fee": {
+            "$ref": "#/components/schemas/Price"
+          }
+        }
+      },
+      "EstimateOrderTimeResponse": {
+        "title": "Estimate Order Time Response",
+        "type": "object",
+        "properties": {
+          "client_order_id": {
+            "type": "string"
+          },
+          "estimated_pickup_time": {
+            "type": "string",
+            "description": "Estimated pickup time in RFC 3339 format."
+          },
+          "estimated_delivery_time": {
+            "type": "string",
+            "description": "Estimated delivery time in RFC 3339 format."
+          },
+          "delivery_duration": {
+            "type": "string",
+            "description": "Estimated delivery duration as an ISO 8601 duration (e.g. `PT20M`).\n"
+          },
+          "lower_bound": {
+            "type": "string",
+            "description": "Lower bound of the customer-facing delivery time window as an ISO 8601\nduration (e.g. `PT15M`).\n"
+          },
+          "upper_bound": {
+            "type": "string",
+            "description": "Upper bound of the customer-facing delivery time window as an ISO 8601\nduration (e.g. `PT25M`).\n"
+          }
+        }
+      },
+      "CreateOrUpdateOutletRequest": {
+        "title": "Create or Update an Outlet Response",
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "street": {
+            "$ref": "#/components/schemas/Street"
+          },
+          "street_number": {
+            "$ref": "#/components/schemas/StreetNumber"
+          },
+          "building": {
+            "$ref": "#/components/schemas/Building"
+          },
+          "district": {
+            "$ref": "#/components/schemas/District"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/PostalCode"
+          },
+          "rider_instructions": {
+            "$ref": "#/components/schemas/RiderInstructions"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/Currency"
+          },
+          "locale": {
+            "$ref": "#/components/schemas/Locale"
+          },
+          "description": {
+            "type": "string"
+          },
+          "halal": {
+            "$ref": "#/components/schemas/Halal"
+          },
+          "add_user": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "delete_user": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "address",
+          "latitude",
+          "longitude",
+          "city",
+          "phone_number",
+          "currency",
+          "locale"
+        ],
+        "example": {
+          "name": "Order Anytime Delivery Anywhere",
+          "address": "1 2nd Street #08-01",
+          "latitude": 1.2923742,
+          "longitude": 103.8486029,
+          "city": "Singapore",
+          "phone_number": "+6587654321",
+          "currency": "SGD",
+          "locale": "en-SG",
+          "description": "any items are for sale",
+          "add_user": [
+            "example@email.com",
+            "example2@email.com"
+          ]
+        }
+      },
+      "PatchOutletRequest": {
+        "title": "Partial Update Outlet Request",
+        "description": "Request body for partially updating an outlet. All fields are optional - only the fields provided will be updated.\nIf updating coordinates, both latitude and longitude must be provided together.\n",
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/Name"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "street": {
+            "$ref": "#/components/schemas/Street"
+          },
+          "street_number": {
+            "$ref": "#/components/schemas/StreetNumber"
+          },
+          "building": {
+            "$ref": "#/components/schemas/Building"
+          },
+          "district": {
+            "$ref": "#/components/schemas/District"
+          },
+          "postal_code": {
+            "$ref": "#/components/schemas/PostalCode"
+          },
+          "rider_instructions": {
+            "$ref": "#/components/schemas/RiderInstructions"
+          },
+          "latitude": {
+            "$ref": "#/components/schemas/Latitude"
+          },
+          "longitude": {
+            "$ref": "#/components/schemas/Longitude"
+          },
+          "city": {
+            "$ref": "#/components/schemas/City"
+          },
+          "phone_number": {
+            "$ref": "#/components/schemas/PhoneNumber"
+          },
+          "description": {
+            "type": "string"
+          },
+          "halal": {
+            "$ref": "#/components/schemas/Halal"
+          }
+        },
+        "example": {
+          "name": "Updated Outlet Name",
+          "address": "123 New Street",
+          "phone_number": "+6512345678"
+        }
+      },
+      "TokenStsResponse": {
+        "type": "object",
+        "required": [
+          "access_token",
+          "expires_in"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "description": "Access token to be used as an authorization header in subsequent requests.",
+            "example": "{{AccessToken}}"
+          },
+          "expires_in": {
+            "type": "string",
+            "description": "Length of token validity in seconds.",
+            "example": "3600"
+          }
+        }
+      },
+      "ErrorStsResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "The error code.",
+            "example": "invalid_request"
+          },
+          "error_description": {
+            "type": "string",
+            "description": "A human-readable text providing additional information.",
+            "example": "The request is missing a required parameter, includes an invalid parameter value."
+          },
+          "error_hint": {
+            "type": "string",
+            "description": "A hint explaining the specific cause of the error."
+          },
+          "status_code": {
+            "type": "integer",
+            "description": "The HTTP status code.",
+            "example": 400
+          }
+        }
+      }
+    }
+  }
+}

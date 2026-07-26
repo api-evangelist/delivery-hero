@@ -1,0 +1,39 @@
+# Delivery Hero — On Demand Rider API
+
+> Delivery Hero SE is a Berlin-based multinational online food-delivery and quick-commerce
+> company operating in 70+ markets through brands including foodpanda, Talabat, Glovo,
+> PedidosYa, Yemeksepeti and Hungerstation. Its public developer surface exposes logistics
+> and partner-integration APIs. The On Demand Rider (ODR) API lets merchants request
+> on-demand courier delivery (create outlets, estimate fees/times, create and track orders,
+> retrieve proof of pickup/delivery/return) across brands such as Glovo and pandago.
+
+## APIs
+- [On Demand Rider API](https://on-demand-rider-docs.deliveryhero.io/): OpenAPI 3.0.0, v1.1.1. Create/track on-demand delivery orders and manage outlets.
+- [Q-Commerce Order Transmission & Assortment API](https://developers.deliveryhero.com/documentation/qc-API-integration.html): receive orders into POS and sync grocery assortment/promotions.
+- [Restaurant Integration (POS) API](https://developers.deliveryhero.com/documentation/pos.html): order transmission for restaurant partners.
+
+## Specs
+- [On Demand Rider OpenAPI (raw)](https://on-demand-rider-docs.deliveryhero.io/openapi.json)
+- openapi/delivery-hero-on-demand-rider-openapi.json (captured)
+
+## Auth
+- OAuth 2.0 client_credentials with JWT-bearer assertion. Token endpoint: https://sts.deliveryhero.io/oauth2/token
+- Scopes follow the pattern `{brand}.api.{country_code}.*` (e.g. `pandago.api.sg.*`).
+- Requests carry `Authorization: Bearer {access-token}`.
+
+## Docs
+- [Developer Portal](https://developers.deliveryhero.com/)
+- [On Demand Rider Docs](https://on-demand-rider-docs.deliveryhero.io/)
+- [GitHub Organization](https://github.com/deliveryhero)
+- [Company / Newsroom](https://www.deliveryhero.com/newsroom/)
+
+## Webhooks
+- order.status, courier.location, order.refund — HTTP POST callbacks verified with `X-Signature-SHA256`.
+
+## Artifacts
+- conventions/delivery-hero-conventions.yml
+- errors/delivery-hero-problem-types.yml
+- authentication/delivery-hero-authentication.yml
+- scopes/delivery-hero-scopes.yml
+- sandbox/delivery-hero-sandbox.yml
+- asyncapi/delivery-hero-on-demand-rider-webhooks.yml

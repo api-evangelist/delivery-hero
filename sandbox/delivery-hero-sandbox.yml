@@ -1,0 +1,15 @@
+generated: '2026-07-18'
+method: searched
+source: https://on-demand-rider-docs.deliveryhero.io/
+sandbox:
+  base_url: https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/
+  brand: pandago
+  country: sg
+token_endpoint_staging: https://sts-st.deliveryhero.io/oauth2/token
+auth: Same OAuth2 client_credentials + JWT bearer flow as production; separate sandbox
+  client credentials issued by ODR
+webhook_testing:
+  signature_header: X-Signature-SHA256
+  pii: sandbox callback payloads are stripped of PII
+note: Sandbox credentials (ClientID/KeyID/Scope) are provisioned by ODR representatives
+  after public-key registration; no self-serve test keys published

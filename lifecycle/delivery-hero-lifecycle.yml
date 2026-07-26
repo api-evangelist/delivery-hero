@@ -1,0 +1,17 @@
+generated: '2026-07-18'
+method: searched
+source: https://on-demand-rider-docs.deliveryhero.io/
+versioning:
+  scheme: uri-path
+  current: v1
+  api_version: 1.1.1
+  docs: https://on-demand-rider-docs.deliveryhero.io/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation/Sunset policy found
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+deprecated_operations: []

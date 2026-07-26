@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: searched
+source: https://on-demand-rider-docs.deliveryhero.io/
+authentication:
+  style: oauth2-client-credentials + bearer token
+  token_endpoint: https://sts.deliveryhero.io/oauth2/token
+  header: 'Authorization: Bearer {access-token}'
+  ref: authentication/delivery-hero-authentication.yml
+idempotency:
+  supported: false
+  note: No idempotency-key header documented in ODR API
+pagination:
+  supported: false
+  note: Outlet/order list endpoints return full collections; no cursor/offset params
+    documented
+versioning:
+  scheme: uri-path
+  current: v1
+webhook_security:
+  signature_header: X-Signature-SHA256
+  algorithm: HMAC-SHA256
+  pii: callback payloads are stripped of PII
+error_envelope:
+  shape: '{ "errors": [ { ... } ] }'
+  ref: errors/delivery-hero-problem-types.yml
+rate_limits:
+  documented: false
+regional_endpoints:
+  note: 'Base URL is brand- and country-specific: https://{brand}-api-{region}.deliveryhero.io/{country_code}/api/v1/'
