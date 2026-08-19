@@ -5,8 +5,8 @@ source: openapi/delivery-hero-on-demand-rider-openapi.json
 server:
   name: delivery-hero-on-demand-rider
   transport: stdio
-  note: No official Delivery Hero MCP server found; candidate tool list derived from
-    On Demand Rider OpenAPI operations
+  note: No official Delivery Hero MCP server found; candidate tool list derived from On Demand Rider OpenAPI
+    operations
 tools:
 - name: getAccessToken
   description: Request OAuth Token
@@ -62,3 +62,9 @@ tools:
 - name: post_callback-refund
   description: Refund callback
   source_operation: openapi/delivery-hero-on-demand-rider-openapi.json#POST /callback-refund
+deployment:
+  mode: none
+  verified: derived
+  tools: 18
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,547 @@
+{
+  "item": [
+    {
+      "id": "bde2b516-dda9-4c79-89a6-517e4252c48e",
+      "name": "OrdersEstimation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ef3742eb-60c6-4f0c-ae12-fd6acd9923b5",
+          "name": "Estimate Fee for an Order",
+          "request": {
+            "name": "Estimate Fee for an Order",
+            "description": {
+              "content": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "fee"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": {\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"notes\": \"<string>\"\n  },\n  \"amount\": 0,\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"coldbag_needed\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72152ffc-eda6-4b2e-8935-cfc84ab3078c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "fee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_order_id\": \"client-ref-000001\",\n  \"estimated_delivery_fee\": 8.17,\n  \"sender\": {\n    \"client_vendor_id\": \"outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f\",\n    \"location\": {\n      \"address\": \"1 2nd Street #08-01\",\n      \"latitude\": 1.2923742,\n      \"longitude\": 103.8486029,\n      \"notes\": \"use the left side door\"\n    },\n    \"notes\": \"use the left side door\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c70e0f6-3468-433a-9e20-ab011cdbe79d",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "fee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid request payload\\\\n - recipient.phone_number is required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79dd71d1-eb26-4715-afec-9b6127ebc24e",
+              "name": "Unable to process request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "fee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No Branch found that is close enough to the given sender coordinates\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e544320e-31ce-4d89-828f-941c8385fd17",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "fee"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85d106d8-dfa8-496b-990d-4c1af3c82f93",
+          "name": "Estimate Time for an Order",
+          "request": {
+            "name": "Estimate Time for an Order",
+            "description": {
+              "content": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*Time is estimated based on historical data and it does not consider live condition (e.g. traffic, weather, etc.)*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": {\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"notes\": \"<string>\"\n  },\n  \"amount\": 0,\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"coldbag_needed\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1484c02b-a467-41fa-b44b-2dac633b7fa5",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"client_order_id\": \"client-ref-000001\",\n  \"estimated_pickup_time\": \"2018-09-13T01:30:52.123Z\",\n  \"estimated_delivery_time\": \"2018-09-13T01:45:52.123Z\",\n  \"delivery_duration\": \"PT20M\",\n  \"lower_bound\": \"PT15M\",\n  \"upper_bound\": \"PT25M\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3ac0fe7-66d3-4042-9196-29964e0886ff",
+              "name": "Invalid request body",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid request payload\\\\n - recipient.phone_number is required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ee6ea99-c952-400d-b5b1-34e6b5f48c66",
+              "name": "Unable to process request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"No Branch found that is close enough to the given sender coordinates\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c112a273-53c8-49cf-98e5-3d766bfff223",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8403d94f-b647-4cd9-bbda-4fed3367400d",
+    "name": "On Demand Rider Authentication OrdersEstimation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# About\nThe On Demand Rider (ODR) API provides system-to-system integration to facilitate on-demand courier delivery service requests.\nEach integration is scoped as a specific Brand using a ClientID.\nEach delivery request will be called an Order.\nThe ODR API is supporting the following products:\n\n<div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;\">\n  <img src=\"https://ondemand-am.glovoapp.com/static/media/glovo.17586205.svg\" alt=\"Glovo On-Demand\" title=\"Glovo On-Demand\" width=\"69\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://gostation-hs.com/static/media/hunger_station.f449899a.svg\" alt=\"Gostation\" title=\"Gostation\" width=\"53\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://bh.talabatodr.com/static/media/talabat.f5d13720.svg\" alt=\"Talabat Express\" title=\"Talabat Express\" width=\"253\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://foodylastmile.com.cy/static/media/foody.7248ff46.png\" alt=\"Foody\" title=\"Foody\" width=\"71\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://efoodlastmile.gr/static/media/efood.133fbc82.png\" alt=\"efood\" title=\"efood\" width=\"100\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://pandago-bd.com/static/media/pandago_logo_pink.b4f1964c.svg\" alt=\"pandago\" title=\"pandago\" width=\"131\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://go.foodora.cz/static/media/foodorago.6c1c557d.png\" alt=\"foodora GO\" title=\"foodora GO\" width=\"60\" height=\"32\" style=\"display:block;\"/>\n</div>\n\n\n## On Demand Concepts\n\n### Client\nA Client represents a **single integration for a specific Brand** and acts as the **\"parent vendor\"**. It contains high-level information such as:\n* Customer's known name of the Brand/Branch\n* General Address of the Brand/Branch that includes Latitude and Longitude.\n\n### Outlets\nOutlets are **the individual branches or vendor locations tied to the Client**. Each outlet represents the specific pickup location for deliveries. In ODR, if a client has **multiple locations**, they **can all be configured under the same parent vendor**.\nOutlet details include:\n* Branch vendor name\n* Address of outlet with latitude and longitude.\n&nbsp;\n\n**Note**: In ODR, **all orders should be sent from an Outlet**. Even if the client has only one location, the order should still originate from the Outlet and not the parent vendor.\n\n## Ordering Steps\n1. The Sender address must be specified when submitting an Order.\n2. The Sender latitude and longitude will be used to find the matching Branch/Outlet.\n\n### Supported Payment Methods\n| Payment Method | Description |\n| - | - |\n| PAID | Order has been fully paid already and courier will not collect any amount from the end customer |\n| CASH_ON_DELIVERY | Courier will collect payment (order amount) from the end customer upon delivery |\n| CARD_ON_DELIVERY | Payment by credit card upon receipt of the order |\n\n## API Endpoints and URLs\n\nBelow are the API endpoints for each brand and country:\n\n- Production URLs use DH-friendly domains when available.\n- Staging URLs always use raw infra domains.\n\n### Talabat\n| Country | Prod API | Stage API |\n| - | - | - |\n| United Arab Emirates | https://talabat-api-euw2.deliveryhero.io/ae | https://api-infra-eu-west-2.stg.ondemandrider.net/ae |\n| Bahrain | https://talabat-api-euw2.deliveryhero.io/bh | https://api-infra-eu-west-2.stg.ondemandrider.net/bh |\n| Egypt | https://talabat-api-euw2.deliveryhero.io/eg | https://api-infra-eu-west-2.stg.ondemandrider.net/eg |\n| Jordan | https://talabat-api-euw2.deliveryhero.io/jo | https://api-infra-eu-west-2.stg.ondemandrider.net/jo |\n| Kuwait | https://talabat-api-euw2.deliveryhero.io/kw | https://api-infra-eu-west-2.stg.ondemandrider.net/kw |\n| Oman | https://talabat-api-euw2.deliveryhero.io/om | https://api-infra-eu-west-2.stg.ondemandrider.net/om |\n| Qatar | https://talabat-api-euw2.deliveryhero.io/qa | https://api-infra-eu-west-2.stg.ondemandrider.net/qa |\n\n---\n\n### Hungerstation\n| Country | Prod API | Stage API |\n| - | - | - |\n| Saudi Arabia | https://talabat-api-euw2.deliveryhero.io/sa | https://api-infra-eu-west-2.stg.ondemandrider.net/sa |\n\n---\n\n### Pandago\n| Country | Prod API | Stage API |\n| - | - | - |\n| Bangladesh | https://pandago-api-apse.deliveryhero.io/bd | https://api-infra-ap-southeast-1.stg.ondemandrider.net/bd |\n| Hong Kong | https://pandago-api-apse.deliveryhero.io/hk | https://api-infra-ap-southeast-1.stg.ondemandrider.net/hk |\n| Cambodia | https://pandago-api-apse.deliveryhero.io/kh | https://api-infra-ap-southeast-1.stg.ondemandrider.net/kh |\n| Laos | https://pandago-api-apse.deliveryhero.io/la | https://api-infra-ap-southeast-1.stg.ondemandrider.net/la |\n| Myanmar | https://pandago-api-apse.deliveryhero.io/mm | https://api-infra-ap-southeast-1.stg.ondemandrider.net/mm |\n| Malaysia | https://pandago-api-apse.deliveryhero.io/my | https://api-infra-ap-southeast-1.stg.ondemandrider.net/my |\n| Philippines | https://pandago-api-apse.deliveryhero.io/ph | https://api-infra-ap-southeast-1.stg.ondemandrider.net/ph |\n| Pakistan (APSO) | https://pandago-api-apso.deliveryhero.io/pk | https://api-infra-ap-south-1.stg.ondemandrider.net/pk |\n| Singapore | https://pandago-api-apse.deliveryhero.io/sg | https://api-infra-ap-southeast-1.stg.ondemandrider.net/sg |\n| Thailand | https://pandago-api-apse.deliveryhero.io/th | https://api-infra-ap-southeast-1.stg.ondemandrider.net/th |\n| Taiwan | https://pandago-api-apse.deliveryhero.io/tw | https://api-infra-ap-southeast-1.stg.ondemandrider.net/tw |\n\n---\n\n### Foodora Go\n| Country | Prod API | Stage API |\n| - | - | - |\n| Czech Republic | https://talabat-api-euw2.deliveryhero.io/cz | https://api-infra-eu-west-2.stg.ondemandrider.net/cz |\n| Finland | https://foodorago-api-eun1.deliveryhero.io/fi | https://api-infra-eu-north-1.stg.ondemandrider.net/fi |\n| Hungary | https://talabat-api-euw2.deliveryhero.io/hu | https://api-infra-eu-west-2.stg.ondemandrider.net/hu |\n| Norway | https://foodorago-api-eun1.deliveryhero.io/no | https://api-infra-eu-north-1.stg.ondemandrider.net/no |\n| Sweden | https://foodorago-api-eun1.deliveryhero.io/se | https://api-infra-eu-north-1.stg.ondemandrider.net/se |\n| Austria | https://api-infra-eu-west-2.ondemandrider.net/at | https://api-infra-eu-west-2.stg.ondemandrider.net/at |\n\n---\n\n### Efood\n| Country | Prod API | Stage API |\n| - | - | - |\n| Greece | https://api-infra-eu-west-2.ondemandrider.net/gr | https://api-infra-eu-west-2.stg.ondemandrider.net/gr |\n\n---\n\n### Foody\n| Country | Prod API | Stage API |\n| - | - | - |\n| Cyprus | https://api-infra-eu-west-2.ondemandrider.net/cy | https://api-infra-eu-west-2.stg.ondemandrider.net/cy |\n\n---\n\n### Glovo\n| Country | Prod API | Stage API |\n| - | - | - |\n| Armenia | https://ondemand-api-glovoapp.deliveryhero.io/am | https://api-infra-eu-central-1.stg.ondemandrider.net/am |\n| Bosnia & Herzegovina | https://ondemand-api-glovoapp.deliveryhero.io/ba | https://api-infra-eu-central-1.stg.ondemandrider.net/ba |\n| Bulgaria | https://ondemand-api-glovoapp.deliveryhero.io/bg | https://api-infra-eu-central-1.stg.ondemandrider.net/bg |\n| Ivory Coast | https://ondemand-api-glovoapp.deliveryhero.io/ci | https://api-infra-eu-central-1.stg.ondemandrider.net/ci |\n| Spain | https://ondemand-api-glovoapp.deliveryhero.io/es | https://api-infra-eu-central-1.stg.ondemandrider.net/es |\n| Georgia | https://ondemand-api-glovoapp.deliveryhero.io/ge | https://api-infra-eu-central-1.stg.ondemandrider.net/ge |\n| Croatia | https://ondemand-api-glovoapp.deliveryhero.io/hr | https://api-infra-eu-central-1.stg.ondemandrider.net/hr |\n| Italy | https://ondemand-api-glovoapp.deliveryhero.io/it | https://api-infra-eu-central-1.stg.ondemandrider.net/it |\n| Kenya | https://ondemand-api-glovoapp.deliveryhero.io/ke | https://api-infra-eu-central-1.stg.ondemandrider.net/ke |\n| Kyrgyzstan | https://ondemand-api-glovoapp.deliveryhero.io/kg | https://api-infra-eu-central-1.stg.ondemandrider.net/kg |\n| Kazakhstan | https://ondemand-api-glovoapp.deliveryhero.io/kz | https://api-infra-eu-central-1.stg.ondemandrider.net/kz |\n| Morocco | https://ondemand-api-glovoapp.deliveryhero.io/ma | https://api-infra-eu-central-1.stg.ondemandrider.net/ma |\n| Moldova | https://ondemand-api-glovoapp.deliveryhero.io/md | https://api-infra-eu-central-1.stg.ondemandrider.net/md |\n| Montenegro | https://ondemand-api-glovoapp.deliveryhero.io/me | https://api-infra-eu-central-1.stg.ondemandrider.net/me |\n| Nigeria | https://ondemand-api-glovoapp.deliveryhero.io/ng | https://api-infra-eu-central-1.stg.ondemandrider.net/ng |\n| Poland | https://ondemand-api-glovoapp.deliveryhero.io/pl | https://api-infra-eu-central-1.stg.ondemandrider.net/pl |\n| Portugal | https://ondemand-api-glovoapp.deliveryhero.io/pt | https://api-infra-eu-central-1.stg.ondemandrider.net/pt |\n| Romania | https://ondemand-api-glovoapp.deliveryhero.io/ro | https://api-infra-eu-central-1.stg.ondemandrider.net/ro |\n| Serbia | https://ondemand-api-glovoapp.deliveryhero.io/rs | https://api-infra-eu-central-1.stg.ondemandrider.net/rs |\n| Tunisia | https://ondemand-api-glovoapp.deliveryhero.io/tn | https://api-infra-eu-central-1.stg.ondemandrider.net/tn |\n| Ukraine | https://ondemand-api-glovoapp.deliveryhero.io/ua | https://api-infra-eu-central-1.stg.ondemandrider.net/ua |\n| Uganda | https://ondemand-api-glovoapp.deliveryhero.io/ug | https://api-infra-eu-central-1.stg.ondemandrider.net/ug |\n\n---\n\n# Getting Started\n\n## 1. Provide a public key\nThese are the steps to start using the ODR API:\n1. Generate Key Pair (Private Key and Public Key) to support secure communication with the ODR API.\n\n   Follow these commands on a terminal:\n   ```bash\n   # Generate private key\n   # output: client.pem file\n   openssl genrsa -out client.pem 2048\n\n   # Generate public key from the generated private one\n   # input: client.pem file\n   # output: client.pub file\n   openssl rsa -in client.pem -pubout > client.pub\n   ```\n   Or, follow these steps:\n   1. Open a browser and access [this Online RSA Generator](https://emn178.github.io/online-tools/rsa/key-generator/)\n   2. Select key length to 2048 bit, and click the Generate Key Pair button.\n   3. Copy and save the Private Key to a file with .pem extension (e.g. client.pem).\n   4. Copy and save the Public Key to a file with .pub extension (e.g. client.pub).\n2. The ODR representative will provide you with `ClientID`, `KeyID` and `Scope` that your service will need to generate an Access Token for the ODR API.\n   | Attribute | Description | Example |\n   | - | - | - |\n   | ClientID | Your service identifier| pandago:sg:00000000-0000-0000-0000-000000000000 |\n   | KeyID | Your public key identifier| 00000000-0000-0000-0000-000000000001 |\n   | Scope | Access scope of your service| `pandago.api.{country code}.*` (ex: `pandago.api.pt.*`) |\n\n\n## 2. Generate signed JWT\nGenerate assertion as a signed token in Javascript Web Token (JWT) format.\n\nThis is the payload structure of the token:\n```\n{\n  \"alg\":\"RS256\",\n  \"typ\":\"JWT\",\n  \"kid\": \"{{KeyID}}\"\n}\n.\n{\n  \"iss\":\"{{ClientID}}\",\n  \"sub\":\"{{ClientID}}\",\n  \"jti\":\"{{random uuid (e.g. caa56777-4e88-4c59-be70-3ae513fd2e00)}}\",\n  \"exp\":{{unix timestamp in the future (e.g. 1894712882)}},\n  \"aud\":\"https://sts.deliveryhero.io\"\n}\n```\nAnd use your Private Key to sign the token.\n\n💡 **Tips** 💡\n* Always use `https://sts.deliveryhero.io` for `aud` key, in both testing and prod environments\n* For the `exp` key, just get a future timestamp (ex in 1 year) with [unixtimestamp.com](https://www.unixtimestamp.com/index.php)\n\n## 3. Get a JWT access token\n\nFollow the instructions to call [the auth endpont](#tag/Authentication)\n",
+      "type": "text/plain"
+    }
+  }
+}

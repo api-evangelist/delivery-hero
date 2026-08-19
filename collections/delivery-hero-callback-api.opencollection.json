@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "On Demand Rider Authentication Callback API",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Callback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Order Status callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/callback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Order Cancellation Callback**\n* When you cancel an order, if you provided a callback url, ODR will send request to that url.\n* In the payload, there will be Cancellation object which contains reason and source of cancellation\n* __NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.\n\n\n---\n**Verification of Callback**\n  Signature-based verification can be used to secure ca"
+        },
+        {
+          "info": {
+            "name": "Courier location update",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/callback-location",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If you provide us a `location_update_callback` then we will call the callback URL *every 15s* for any ongoing orders with the live location of the courier.\n\nIt works exactly like above callback endpint and the body is the same, signature is also supported.\nYou can chose to use the same callback URL or have a different one.\n"
+        },
+        {
+          "info": {
+            "name": "Refund callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/callback-refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Whenever a refund or compensation is issued for one of your orders, ODR will POST a refund event to your registered refund callback URL. To enable this callback, please contact your local ops team and provide the URL.\n\nThe payload describes the refund amount, the reason and owner of the refund, and — when the refund targets specific items — the list of affected products with the percentage of each product being refunded.\n\n---\n\n**Refund types**\n\n| Type | Description |\n| - | - |\n| `FULL_REFUND` | "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "On Demand Rider Authentication Proofs API",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proofs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Proof of Pickup for Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/proof_of_pickup/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to get its proof of pickup"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to get proof of pickup for existing and picked up orders.\n\n__NOTE:__ Proof of pickup will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n\n*NOTE: Not yet rolled out.*\n"
+        },
+        {
+          "info": {
+            "name": "Get Proof of Delivery for Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/proof_of_delivery/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to get its proof of delivery"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to get proof of delivery for existing and delivered orders.\n\n__NOTE:__ Proof of delivery will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n"
+        },
+        {
+          "info": {
+            "name": "Get Proof of Return for Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/proof_of_return/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to get its proof of return"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to get proof of return for existing and returned orders.\n\n__NOTE:__ Proof of return will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1493 @@
+{
+  "item": [
+    {
+      "id": "570979e1-3b4d-414c-a006-fd9055b8eeb0",
+      "name": "OrdersManagement",
+      "description": {
+        "content": "The following sections provide a complete summary of all available endpoints and features connected with the Orders API.\n\nPlease review the documentation carefully. When selecting an endpoint, note the information on the right-hand side of the screen, which details the following critical elements:\n\n- **Request Attributes: Mandatory formatting** for specific attributes (e.g., phone numbers, coordinates, addresses) is outlined here. **Pay close attention to these requirements.**\n- **Request Examples:** Illustrative examples of successful requests.\n- **Request Responses:** Examples of successful and failed responses, including common error codes and messages.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42501e92-7f31-4330-a108-84f54ec874d2",
+          "name": "Create a New Order",
+          "request": {
+            "name": "Create a New Order",
+            "description": {
+              "content": "Use this endpoint to create a new order. It takes a JSON object containing an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"email\": \"<email>\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"<string>\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 0,\n  \"collect_from_customer\": 0,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"<string>\",\n  \"products\": [\n    {\n      \"name\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"price_amount\": \"<long>\",\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"price_amount\": \"<long>\",\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"customer_delivery_fee\": \"<long>\"\n  },\n  \"integrator\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52c9298a-5691-4ece-8535-aa47d4f486f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_id\": \"y0ud-000001\",\n  \"client_order_id\": \"client-ref-000001\",\n  \"sender\": {\n    \"client_vendor_id\": \"outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f\",\n    \"phone_number\": \"+6500000000\",\n    \"location\": {\n      \"address\": \"22 Esplanade Drive\",\n      \"latitude\": 1.2813226,\n      \"longitude\": 103.8485402,\n      \"notes\": \"use the left side door\"\n    },\n    \"notes\": \"use the left side door\"\n  },\n  \"recipient\": {\n    \"name\": \"Merlion\",\n    \"phone_number\": \"+6500000000\",\n    \"location\": {\n      \"address\": \"20 Esplanade Drive\",\n      \"latitude\": 1.2857488,\n      \"longitude\": 103.8548608\n    },\n    \"notes\": \"2nd floor - door 3, use lift A and leave at the front door\"\n  },\n  \"distance\": 906.13,\n  \"payment_method\": \"PAID\",\n  \"coldbag_needed\": false,\n  \"amount\": 23.5,\n  \"status\": \"NEW\",\n  \"delivery_fee\": 8.17,\n  \"timeline\": {\n    \"estimated_pickup_time\": \"\",\n    \"estimated_delivery_time\": \"\"\n  },\n  \"driver\": {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"phone_number\": \"\"\n  },\n  \"created_at\": 1536802000,\n  \"updated_at\": 1536802000,\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"PIN\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"Order-4672\"\n  },\n  \"packaging\": {\n    \"size\": \"small\",\n    \"weight\": 1.2\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fd6993d-6f71-4620-a5dd-9cd27c64c46b",
+              "name": "Bad Request. The request payload is invalid or contains unsupported field values.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Invalid createRequest payload\\n - recipient is required\\n - payment_method is required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5562074-4ff7-4f62-9bba-381cdfd34742",
+              "name": "Unauthorized. The request is missing or contains an invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"The authorizer should provide its name in the context\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99054f2c-1919-4b23-813b-b0419b5e4a85",
+              "name": "Not Found. The outlet or vendor referenced in the request does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Outlet not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c6c1951-e7cd-4e1a-8335-31b6eed9c570",
+              "name": "Unprocessable Entity. The request is well-formed but cannot be fulfilled due to business rule violations.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to process order\\n- No outlet found within 500m of the pickup location. Please update the pickup location coordinates to make it more accurate.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fd6a2c1-7b08-45e0-b24f-ad4ae73d3d51",
+              "name": "Internal Server Error. An unexpected server-side failure occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipient\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"email\": \"john.doe@example.com\",\n    \"notes\": \"<string>\"\n  },\n  \"payment_method\": \"<string>\",\n  \"description\": \"<string>\",\n  \"client_order_id\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"address\": \"<string>\",\n      \"latitude\": \"<double>\",\n      \"longitude\": \"<double>\",\n      \"postal_code\": \"752340, 750313, 757046\"\n    },\n    \"notes\": \"<string>\",\n    \"client_vendor_id\": \"<string>\"\n  },\n  \"coldbag_needed\": false,\n  \"amount\": 123.45,\n  \"collect_from_customer\": 123.45,\n  \"preordered_for\": \"<number>\",\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": \"<string>\"\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  },\n  \"packaging\": {\n    \"size\": \"<string>\",\n    \"weight\": \"<number>\"\n  },\n  \"currency_code\": \"EUR\",\n  \"products\": [\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"Burger\",\n      \"external_id\": \"324\",\n      \"price_amount\": 1000,\n      \"attributes\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Product detected>\"\n        }\n      ]\n    }\n  ],\n  \"external_details\": {\n    \"device_id\": \"a-demo-test-id\",\n    \"customer_id\": \"330099\",\n    \"customer_delivery_fee\": 3500\n  },\n  \"integrator\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2fb5512-bd90-40a9-a27b-eae9e16207ca",
+          "name": "Get Specific Order",
+          "request": {
+            "name": "Get Specific Order",
+            "description": {
+              "content": "Use this endpoint to get an existing order. It takes a JSON object containing an order.\n__NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb8121ad-53c6-4b17-a468-9306e7220333",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_id\": \"y0ud-000001\",\n  \"client_order_id\": \"client-ref-000001\",\n  \"sender\": {\n    \"name\": \"ODR\",\n    \"phone_number\": \"+6500000000\",\n    \"location\": {\n      \"address\": \"1 2nd Street #08-01\",\n      \"latitude\": 1.2923742,\n      \"longitude\": 103.8486029\n    },\n    \"notes\": \"use the left side door\"\n  },\n  \"recipient\": {\n    \"name\": \"Merlion\",\n    \"phone_number\": \"+6500000000\",\n    \"location\": {\n      \"address\": \"20 Esplanade Drive\",\n      \"latitude\": 1.2857488,\n      \"longitude\": 103.8548608\n    },\n    \"notes\": \"2nd floor - door 3, use lift A and leave at the front door\"\n  },\n  \"distance\": 906.13,\n  \"payment_method\": \"PAID\",\n  \"coldbag_needed\": false,\n  \"description\": \"Refreshing drink\",\n  \"amount\": 23.5,\n  \"status\": \"NEW\",\n  \"delivery_fee\": 8.17,\n  \"timeline\": {\n    \"estimated_pickup_time\": \"\",\n    \"estimated_delivery_time\": \"\"\n  },\n  \"driver\": {\n    \"id\": \"\",\n    \"name\": \"\",\n    \"phone_number\": \"\"\n  },\n  \"created_at\": 1536802000,\n  \"updated_at\": 1536802000,\n  \"tracking_link\": \"https://example.com/test_tracking_path\",\n  \"proof_of_delivery_url\": \"https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_delivery/x-1234\",\n  \"proof_of_pickup_url\": \"https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_pickup/x-1234\",\n  \"proof_of_return_url\": \"https://pandago-api-sandbox.deliveryhero.io/api/v1/orders/proof_of_return/x-1234\",\n  \"cancellation\": {\n    \"reason\": \"MISTAKE_ERROR\",\n    \"source\": \"CLIENT\"\n  },\n  \"delivery_tasks\": {\n    \"age_validation_required\": false,\n    \"handover_confirmation\": {\n      \"drop_off\": {\n        \"type\": \"PIN\",\n        \"code\": \"1234\"\n      }\n    }\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"Order-4672\"\n  },\n  \"packaging\": {\n    \"weight\": 1.2,\n    \"volume\": 1.05\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7326cfe8-4047-499b-b532-4449dba952d4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "631269b3-ed8a-4672-8d67-cc778108a088",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "092e8dff-775a-48ae-a54c-04527864d3b2",
+          "name": "Cancel Specific Order",
+          "request": {
+            "name": "Cancel Specific Order",
+            "description": {
+              "content": "Use this endpoint to cancel an existing order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*An order is only cancellable when it has not been accepted by a courier*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to get"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fff71d65-4a55-4625-a693-2a6a54599104",
+              "name": "Deprecated Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"MISTAKE_ERROR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Non-Authoritative Information (since HTTP/1.1)",
+              "code": 203,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"reason has been modified to REASON_UNKNOWN\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04100262-0a48-4bbc-beb2-8efc164835ef",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"MISTAKE_ERROR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f79c3c4b-e855-4631-ba2c-0121c241f49a",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"MISTAKE_ERROR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82366050-9bf7-450a-9c9e-b47b05bcaf4e",
+              "name": "Uncancellable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"MISTAKE_ERROR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order is not cancellable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "172b49f9-e378-4ddf-bfe3-41abad987787",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reason\": \"MISTAKE_ERROR\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5e2b8c9-6e91-42d5-9fcf-b6661c8a9e1c",
+          "name": "Update Specific Order",
+          "request": {
+            "name": "Update Specific Order",
+            "description": {
+              "content": "Use this endpoint to update an existing order.\nIt takes a JSON object containing an order.\n\n1. An order can only be modified when it has not been picked up by a courier.\n2. Changing payment type:\n   1. CASH_ON_DELIVERY to PAID: Set amount to \"0\" if the payment type is changed to \"PAID\".\n   2. PAID to CASH_ON_DELIVERY: Changing the payment type from PAID to CASH_ON_DELIVERY is not supported.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payment_method\": \"<string>\",\n  \"amount\": 0,\n  \"location\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\",\n    \"address\": \"<string>\",\n    \"notes\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "756e862f-473d-43da-99bf-b16e706b8e9b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order_id\": \"string\",\n  \"created_at\": 866.5886059235062,\n  \"status\": \"string\",\n  \"payment_method\": \"<string>\",\n  \"location\": {\n    \"address\": \"<string>\",\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\",\n    \"postal_code\": \"752340, 750313, 757046\"\n  },\n  \"description\": \"string\",\n  \"amount\": 123.45,\n  \"delivery_fee\": 123.45\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9badedb5-da17-4583-842f-4b071eab0293",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"invalid update request payload\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c53c9656-e739-44e7-acbd-a61251d509d8",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Order not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d60dd1b8-f7ea-4501-b2b2-5022149f617f",
+              "name": "Method not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"order update is not allowed for this country\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "842224cd-5b07-4373-9fbc-078f1d8d58b5",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"order can not be updated\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c47ef5a-d2c0-4817-838d-74a4aaa8f127",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payment_method\": \"PAID\",\n  \"amount\": 0,\n  \"location\": {\n    \"address\": \"1 2nd Street #08-01\",\n    \"latitude\": 1.2923742,\n    \"longitude\": 103.8486029,\n    \"notes\": \"right at the street crossing\"\n  },\n  \"description\": \"drinks and meals\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f74af1ad-1406-4d49-9054-2ff9da19c02d",
+    "name": "On Demand Rider Authentication OrdersManagement API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# About\nThe On Demand Rider (ODR) API provides system-to-system integration to facilitate on-demand courier delivery service requests.\nEach integration is scoped as a specific Brand using a ClientID.\nEach delivery request will be called an Order.\nThe ODR API is supporting the following products:\n\n<div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;\">\n  <img src=\"https://ondemand-am.glovoapp.com/static/media/glovo.17586205.svg\" alt=\"Glovo On-Demand\" title=\"Glovo On-Demand\" width=\"69\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://gostation-hs.com/static/media/hunger_station.f449899a.svg\" alt=\"Gostation\" title=\"Gostation\" width=\"53\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://bh.talabatodr.com/static/media/talabat.f5d13720.svg\" alt=\"Talabat Express\" title=\"Talabat Express\" width=\"253\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://foodylastmile.com.cy/static/media/foody.7248ff46.png\" alt=\"Foody\" title=\"Foody\" width=\"71\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://efoodlastmile.gr/static/media/efood.133fbc82.png\" alt=\"efood\" title=\"efood\" width=\"100\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://pandago-bd.com/static/media/pandago_logo_pink.b4f1964c.svg\" alt=\"pandago\" title=\"pandago\" width=\"131\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://go.foodora.cz/static/media/foodorago.6c1c557d.png\" alt=\"foodora GO\" title=\"foodora GO\" width=\"60\" height=\"32\" style=\"display:block;\"/>\n</div>\n\n\n## On Demand Concepts\n\n### Client\nA Client represents a **single integration for a specific Brand** and acts as the **\"parent vendor\"**. It contains high-level information such as:\n* Customer's known name of the Brand/Branch\n* General Address of the Brand/Branch that includes Latitude and Longitude.\n\n### Outlets\nOutlets are **the individual branches or vendor locations tied to the Client**. Each outlet represents the specific pickup location for deliveries. In ODR, if a client has **multiple locations**, they **can all be configured under the same parent vendor**.\nOutlet details include:\n* Branch vendor name\n* Address of outlet with latitude and longitude.\n&nbsp;\n\n**Note**: In ODR, **all orders should be sent from an Outlet**. Even if the client has only one location, the order should still originate from the Outlet and not the parent vendor.\n\n## Ordering Steps\n1. The Sender address must be specified when submitting an Order.\n2. The Sender latitude and longitude will be used to find the matching Branch/Outlet.\n\n### Supported Payment Methods\n| Payment Method | Description |\n| - | - |\n| PAID | Order has been fully paid already and courier will not collect any amount from the end customer |\n| CASH_ON_DELIVERY | Courier will collect payment (order amount) from the end customer upon delivery |\n| CARD_ON_DELIVERY | Payment by credit card upon receipt of the order |\n\n## API Endpoints and URLs\n\nBelow are the API endpoints for each brand and country:\n\n- Production URLs use DH-friendly domains when available.\n- Staging URLs always use raw infra domains.\n\n### Talabat\n| Country | Prod API | Stage API |\n| - | - | - |\n| United Arab Emirates | https://talabat-api-euw2.deliveryhero.io/ae | https://api-infra-eu-west-2.stg.ondemandrider.net/ae |\n| Bahrain | https://talabat-api-euw2.deliveryhero.io/bh | https://api-infra-eu-west-2.stg.ondemandrider.net/bh |\n| Egypt | https://talabat-api-euw2.deliveryhero.io/eg | https://api-infra-eu-west-2.stg.ondemandrider.net/eg |\n| Jordan | https://talabat-api-euw2.deliveryhero.io/jo | https://api-infra-eu-west-2.stg.ondemandrider.net/jo |\n| Kuwait | https://talabat-api-euw2.deliveryhero.io/kw | https://api-infra-eu-west-2.stg.ondemandrider.net/kw |\n| Oman | https://talabat-api-euw2.deliveryhero.io/om | https://api-infra-eu-west-2.stg.ondemandrider.net/om |\n| Qatar | https://talabat-api-euw2.deliveryhero.io/qa | https://api-infra-eu-west-2.stg.ondemandrider.net/qa |\n\n---\n\n### Hungerstation\n| Country | Prod API | Stage API |\n| - | - | - |\n| Saudi Arabia | https://talabat-api-euw2.deliveryhero.io/sa | https://api-infra-eu-west-2.stg.ondemandrider.net/sa |\n\n---\n\n### Pandago\n| Country | Prod API | Stage API |\n| - | - | - |\n| Bangladesh | https://pandago-api-apse.deliveryhero.io/bd | https://api-infra-ap-southeast-1.stg.ondemandrider.net/bd |\n| Hong Kong | https://pandago-api-apse.deliveryhero.io/hk | https://api-infra-ap-southeast-1.stg.ondemandrider.net/hk |\n| Cambodia | https://pandago-api-apse.deliveryhero.io/kh | https://api-infra-ap-southeast-1.stg.ondemandrider.net/kh |\n| Laos | https://pandago-api-apse.deliveryhero.io/la | https://api-infra-ap-southeast-1.stg.ondemandrider.net/la |\n| Myanmar | https://pandago-api-apse.deliveryhero.io/mm | https://api-infra-ap-southeast-1.stg.ondemandrider.net/mm |\n| Malaysia | https://pandago-api-apse.deliveryhero.io/my | https://api-infra-ap-southeast-1.stg.ondemandrider.net/my |\n| Philippines | https://pandago-api-apse.deliveryhero.io/ph | https://api-infra-ap-southeast-1.stg.ondemandrider.net/ph |\n| Pakistan (APSO) | https://pandago-api-apso.deliveryhero.io/pk | https://api-infra-ap-south-1.stg.ondemandrider.net/pk |\n| Singapore | https://pandago-api-apse.deliveryhero.io/sg | https://api-infra-ap-southeast-1.stg.ondemandrider.net/sg |\n| Thailand | https://pandago-api-apse.deliveryhero.io/th | https://api-infra-ap-southeast-1.stg.ondemandrider.net/th |\n| Taiwan | https://pandago-api-apse.deliveryhero.io/tw | https://api-infra-ap-southeast-1.stg.ondemandrider.net/tw |\n\n---\n\n### Foodora Go\n| Country | Prod API | Stage API |\n| - | - | - |\n| Czech Republic | https://talabat-api-euw2.deliveryhero.io/cz | https://api-infra-eu-west-2.stg.ondemandrider.net/cz |\n| Finland | https://foodorago-api-eun1.deliveryhero.io/fi | https://api-infra-eu-north-1.stg.ondemandrider.net/fi |\n| Hungary | https://talabat-api-euw2.deliveryhero.io/hu | https://api-infra-eu-west-2.stg.ondemandrider.net/hu |\n| Norway | https://foodorago-api-eun1.deliveryhero.io/no | https://api-infra-eu-north-1.stg.ondemandrider.net/no |\n| Sweden | https://foodorago-api-eun1.deliveryhero.io/se | https://api-infra-eu-north-1.stg.ondemandrider.net/se |\n| Austria | https://api-infra-eu-west-2.ondemandrider.net/at | https://api-infra-eu-west-2.stg.ondemandrider.net/at |\n\n---\n\n### Efood\n| Country | Prod API | Stage API |\n| - | - | - |\n| Greece | https://api-infra-eu-west-2.ondemandrider.net/gr | https://api-infra-eu-west-2.stg.ondemandrider.net/gr |\n\n---\n\n### Foody\n| Country | Prod API | Stage API |\n| - | - | - |\n| Cyprus | https://api-infra-eu-west-2.ondemandrider.net/cy | https://api-infra-eu-west-2.stg.ondemandrider.net/cy |\n\n---\n\n### Glovo\n| Country | Prod API | Stage API |\n| - | - | - |\n| Armenia | https://ondemand-api-glovoapp.deliveryhero.io/am | https://api-infra-eu-central-1.stg.ondemandrider.net/am |\n| Bosnia & Herzegovina | https://ondemand-api-glovoapp.deliveryhero.io/ba | https://api-infra-eu-central-1.stg.ondemandrider.net/ba |\n| Bulgaria | https://ondemand-api-glovoapp.deliveryhero.io/bg | https://api-infra-eu-central-1.stg.ondemandrider.net/bg |\n| Ivory Coast | https://ondemand-api-glovoapp.deliveryhero.io/ci | https://api-infra-eu-central-1.stg.ondemandrider.net/ci |\n| Spain | https://ondemand-api-glovoapp.deliveryhero.io/es | https://api-infra-eu-central-1.stg.ondemandrider.net/es |\n| Georgia | https://ondemand-api-glovoapp.deliveryhero.io/ge | https://api-infra-eu-central-1.stg.ondemandrider.net/ge |\n| Croatia | https://ondemand-api-glovoapp.deliveryhero.io/hr | https://api-infra-eu-central-1.stg.ondemandrider.net/hr |\n| Italy | https://ondemand-api-glovoapp.deliveryhero.io/it | https://api-infra-eu-central-1.stg.ondemandrider.net/it |\n| Kenya | https://ondemand-api-glovoapp.deliveryhero.io/ke | https://api-infra-eu-central-1.stg.ondemandrider.net/ke |\n| Kyrgyzstan | https://ondemand-api-glovoapp.deliveryhero.io/kg | https://api-infra-eu-central-1.stg.ondemandrider.net/kg |\n| Kazakhstan | https://ondemand-api-glovoapp.deliveryhero.io/kz | https://api-infra-eu-central-1.stg.ondemandrider.net/kz |\n| Morocco | https://ondemand-api-glovoapp.deliveryhero.io/ma | https://api-infra-eu-central-1.stg.ondemandrider.net/ma |\n| Moldova | https://ondemand-api-glovoapp.deliveryhero.io/md | https://api-infra-eu-central-1.stg.ondemandrider.net/md |\n| Montenegro | https://ondemand-api-glovoapp.deliveryhero.io/me | https://api-infra-eu-central-1.stg.ondemandrider.net/me |\n| Nigeria | https://ondemand-api-glovoapp.deliveryhero.io/ng | https://api-infra-eu-central-1.stg.ondemandrider.net/ng |\n| Poland | https://ondemand-api-glovoapp.deliveryhero.io/pl | https://api-infra-eu-central-1.stg.ondemandrider.net/pl |\n| Portugal | https://ondemand-api-glovoapp.deliveryhero.io/pt | https://api-infra-eu-central-1.stg.ondemandrider.net/pt |\n| Romania | https://ondemand-api-glovoapp.deliveryhero.io/ro | https://api-infra-eu-central-1.stg.ondemandrider.net/ro |\n| Serbia | https://ondemand-api-glovoapp.deliveryhero.io/rs | https://api-infra-eu-central-1.stg.ondemandrider.net/rs |\n| Tunisia | https://ondemand-api-glovoapp.deliveryhero.io/tn | https://api-infra-eu-central-1.stg.ondemandrider.net/tn |\n| Ukraine | https://ondemand-api-glovoapp.deliveryhero.io/ua | https://api-infra-eu-central-1.stg.ondemandrider.net/ua |\n| Uganda | https://ondemand-api-glovoapp.deliveryhero.io/ug | https://api-infra-eu-central-1.stg.ondemandrider.net/ug |\n\n---\n\n# Getting Started\n\n## 1. Provide a public key\nThese are the steps to start using the ODR API:\n1. Generate Key Pair (Private Key and Public Key) to support secure communication with the ODR API.\n\n   Follow these commands on a terminal:\n   ```bash\n   # Generate private key\n   # output: client.pem file\n   openssl genrsa -out client.pem 2048\n\n   # Generate public key from the generated private one\n   # input: client.pem file\n   # output: client.pub file\n   openssl rsa -in client.pem -pubout > client.pub\n   ```\n   Or, follow these steps:\n   1. Open a browser and access [this Online RSA Generator](https://emn178.github.io/online-tools/rsa/key-generator/)\n   2. Select key length to 2048 bit, and click the Generate Key Pair button.\n   3. Copy and save the Private Key to a file with .pem extension (e.g. client.pem).\n   4. Copy and save the Public Key to a file with .pub extension (e.g. client.pub).\n2. The ODR representative will provide you with `ClientID`, `KeyID` and `Scope` that your service will need to generate an Access Token for the ODR API.\n   | Attribute | Description | Example |\n   | - | - | - |\n   | ClientID | Your service identifier| pandago:sg:00000000-0000-0000-0000-000000000000 |\n   | KeyID | Your public key identifier| 00000000-0000-0000-0000-000000000001 |\n   | Scope | Access scope of your service| `pandago.api.{country code}.*` (ex: `pandago.api.pt.*`) |\n\n\n## 2. Generate signed JWT\nGenerate assertion as a signed token in Javascript Web Token (JWT) format.\n\nThis is the payload structure of the token:\n```\n{\n  \"alg\":\"RS256\",\n  \"typ\":\"JWT\",\n  \"kid\": \"{{KeyID}}\"\n}\n.\n{\n  \"iss\":\"{{ClientID}}\",\n  \"sub\":\"{{ClientID}}\",\n  \"jti\":\"{{random uuid (e.g. caa56777-4e88-4c59-be70-3ae513fd2e00)}}\",\n  \"exp\":{{unix timestamp in the future (e.g. 1894712882)}},\n  \"aud\":\"https://sts.deliveryhero.io\"\n}\n```\nAnd use your Private Key to sign the token.\n\n💡 **Tips** 💡\n* Always use `https://sts.deliveryhero.io` for `aud` key, in both testing and prod environments\n* For the `exp` key, just get a future timestamp (ex in 1 year) with [unixtimestamp.com](https://www.unixtimestamp.com/index.php)\n\n## 3. Get a JWT access token\n\nFollow the instructions to call [the auth endpont](#tag/Authentication)\n",
+      "type": "text/plain"
+    }
+  }
+}

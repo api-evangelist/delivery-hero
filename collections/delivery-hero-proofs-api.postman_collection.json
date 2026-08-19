@@ -1,0 +1,715 @@
+{
+  "item": [
+    {
+      "id": "23163427-31ef-499c-b6c8-77640b2da0b9",
+      "name": "Proofs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "18d0ef38-5d82-4f7a-96c9-e1566df5aa6a",
+          "name": "Get Proof of Pickup for Order",
+          "request": {
+            "name": "Get Proof of Pickup for Order",
+            "description": {
+              "content": "Use this endpoint to get proof of pickup for existing and picked up orders.\n\n__NOTE:__ Proof of pickup will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n\n*NOTE: Not yet rolled out.*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "proof_of_pickup",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to get its proof of pickup"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9fd96183-b860-43d5-a968-fbecc0ff9d9b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_pickup",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of pickup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"base64EncodedFileResponse as file\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb05c44-a484-4744-857e-6552f4c3f651",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_pickup",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of pickup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Proof of pickup for this order was not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40b66871-c77d-4e47-9006-fffcd10d7ebd",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_pickup",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of pickup"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "437e80a2-0d98-4cc4-8e46-20b12cc1885e",
+          "name": "Get Proof of Delivery for Order",
+          "request": {
+            "name": "Get Proof of Delivery for Order",
+            "description": {
+              "content": "Use this endpoint to get proof of delivery for existing and delivered orders.\n\n__NOTE:__ Proof of delivery will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "proof_of_delivery",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to get its proof of delivery"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf26e1f8-d2ae-4942-9305-4c732fbc5424",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_delivery",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of delivery"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"base64EncodedFileResponse as file\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e5f4666-6ae1-49cf-9442-10202202b2f4",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_delivery",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of delivery"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Proof of delivery for this order was not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7e9b74f-db4b-4f49-8317-96f449caf3d5",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_delivery",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of delivery"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "436b3dcc-6a98-4547-be70-36053f746692",
+          "name": "Get Proof of Return for Order",
+          "request": {
+            "name": "Get Proof of Return for Order",
+            "description": {
+              "content": "Use this endpoint to get proof of return for existing and returned orders.\n\n__NOTE:__ Proof of return will be deleted after 1 week because of security and privacy concerns\n\n__NOTE:__ API returns encoded base64 file, so if you want to show that response in your html page, you should follow this element using `<img src='data:image/jpeg;base64,<!-- Base64 data -->' />`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "proof_of_return",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "order_id",
+                  "description": "(Required) ID of the order to get its proof of return"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a98bdfa0-952d-4101-8f30-3a83a6f2e450",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_return",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"base64EncodedFileResponse as file\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08558930-53fd-4f3d-beba-b2987906d52d",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_return",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Proof of return for this order was not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdecf66c-0d8e-49c2-8fb9-f16ff2e505eb",
+              "name": "Server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "proof_of_return",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "order_id",
+                      "description": "(Required) ID of the order to get its proof of return"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Authorization",
+                    "value": "Bearer {access-token}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unable to proceed, something went wrong\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "11251475-3ad8-4438-adbb-40a327911c5c",
+    "name": "On Demand Rider Authentication Proofs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# About\nThe On Demand Rider (ODR) API provides system-to-system integration to facilitate on-demand courier delivery service requests.\nEach integration is scoped as a specific Brand using a ClientID.\nEach delivery request will be called an Order.\nThe ODR API is supporting the following products:\n\n<div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;\">\n  <img src=\"https://ondemand-am.glovoapp.com/static/media/glovo.17586205.svg\" alt=\"Glovo On-Demand\" title=\"Glovo On-Demand\" width=\"69\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://gostation-hs.com/static/media/hunger_station.f449899a.svg\" alt=\"Gostation\" title=\"Gostation\" width=\"53\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://bh.talabatodr.com/static/media/talabat.f5d13720.svg\" alt=\"Talabat Express\" title=\"Talabat Express\" width=\"253\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://foodylastmile.com.cy/static/media/foody.7248ff46.png\" alt=\"Foody\" title=\"Foody\" width=\"71\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://efoodlastmile.gr/static/media/efood.133fbc82.png\" alt=\"efood\" title=\"efood\" width=\"100\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://pandago-bd.com/static/media/pandago_logo_pink.b4f1964c.svg\" alt=\"pandago\" title=\"pandago\" width=\"131\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://go.foodora.cz/static/media/foodorago.6c1c557d.png\" alt=\"foodora GO\" title=\"foodora GO\" width=\"60\" height=\"32\" style=\"display:block;\"/>\n</div>\n\n\n## On Demand Concepts\n\n### Client\nA Client represents a **single integration for a specific Brand** and acts as the **\"parent vendor\"**. It contains high-level information such as:\n* Customer's known name of the Brand/Branch\n* General Address of the Brand/Branch that includes Latitude and Longitude.\n\n### Outlets\nOutlets are **the individual branches or vendor locations tied to the Client**. Each outlet represents the specific pickup location for deliveries. In ODR, if a client has **multiple locations**, they **can all be configured under the same parent vendor**.\nOutlet details include:\n* Branch vendor name\n* Address of outlet with latitude and longitude.\n&nbsp;\n\n**Note**: In ODR, **all orders should be sent from an Outlet**. Even if the client has only one location, the order should still originate from the Outlet and not the parent vendor.\n\n## Ordering Steps\n1. The Sender address must be specified when submitting an Order.\n2. The Sender latitude and longitude will be used to find the matching Branch/Outlet.\n\n### Supported Payment Methods\n| Payment Method | Description |\n| - | - |\n| PAID | Order has been fully paid already and courier will not collect any amount from the end customer |\n| CASH_ON_DELIVERY | Courier will collect payment (order amount) from the end customer upon delivery |\n| CARD_ON_DELIVERY | Payment by credit card upon receipt of the order |\n\n## API Endpoints and URLs\n\nBelow are the API endpoints for each brand and country:\n\n- Production URLs use DH-friendly domains when available.\n- Staging URLs always use raw infra domains.\n\n### Talabat\n| Country | Prod API | Stage API |\n| - | - | - |\n| United Arab Emirates | https://talabat-api-euw2.deliveryhero.io/ae | https://api-infra-eu-west-2.stg.ondemandrider.net/ae |\n| Bahrain | https://talabat-api-euw2.deliveryhero.io/bh | https://api-infra-eu-west-2.stg.ondemandrider.net/bh |\n| Egypt | https://talabat-api-euw2.deliveryhero.io/eg | https://api-infra-eu-west-2.stg.ondemandrider.net/eg |\n| Jordan | https://talabat-api-euw2.deliveryhero.io/jo | https://api-infra-eu-west-2.stg.ondemandrider.net/jo |\n| Kuwait | https://talabat-api-euw2.deliveryhero.io/kw | https://api-infra-eu-west-2.stg.ondemandrider.net/kw |\n| Oman | https://talabat-api-euw2.deliveryhero.io/om | https://api-infra-eu-west-2.stg.ondemandrider.net/om |\n| Qatar | https://talabat-api-euw2.deliveryhero.io/qa | https://api-infra-eu-west-2.stg.ondemandrider.net/qa |\n\n---\n\n### Hungerstation\n| Country | Prod API | Stage API |\n| - | - | - |\n| Saudi Arabia | https://talabat-api-euw2.deliveryhero.io/sa | https://api-infra-eu-west-2.stg.ondemandrider.net/sa |\n\n---\n\n### Pandago\n| Country | Prod API | Stage API |\n| - | - | - |\n| Bangladesh | https://pandago-api-apse.deliveryhero.io/bd | https://api-infra-ap-southeast-1.stg.ondemandrider.net/bd |\n| Hong Kong | https://pandago-api-apse.deliveryhero.io/hk | https://api-infra-ap-southeast-1.stg.ondemandrider.net/hk |\n| Cambodia | https://pandago-api-apse.deliveryhero.io/kh | https://api-infra-ap-southeast-1.stg.ondemandrider.net/kh |\n| Laos | https://pandago-api-apse.deliveryhero.io/la | https://api-infra-ap-southeast-1.stg.ondemandrider.net/la |\n| Myanmar | https://pandago-api-apse.deliveryhero.io/mm | https://api-infra-ap-southeast-1.stg.ondemandrider.net/mm |\n| Malaysia | https://pandago-api-apse.deliveryhero.io/my | https://api-infra-ap-southeast-1.stg.ondemandrider.net/my |\n| Philippines | https://pandago-api-apse.deliveryhero.io/ph | https://api-infra-ap-southeast-1.stg.ondemandrider.net/ph |\n| Pakistan (APSO) | https://pandago-api-apso.deliveryhero.io/pk | https://api-infra-ap-south-1.stg.ondemandrider.net/pk |\n| Singapore | https://pandago-api-apse.deliveryhero.io/sg | https://api-infra-ap-southeast-1.stg.ondemandrider.net/sg |\n| Thailand | https://pandago-api-apse.deliveryhero.io/th | https://api-infra-ap-southeast-1.stg.ondemandrider.net/th |\n| Taiwan | https://pandago-api-apse.deliveryhero.io/tw | https://api-infra-ap-southeast-1.stg.ondemandrider.net/tw |\n\n---\n\n### Foodora Go\n| Country | Prod API | Stage API |\n| - | - | - |\n| Czech Republic | https://talabat-api-euw2.deliveryhero.io/cz | https://api-infra-eu-west-2.stg.ondemandrider.net/cz |\n| Finland | https://foodorago-api-eun1.deliveryhero.io/fi | https://api-infra-eu-north-1.stg.ondemandrider.net/fi |\n| Hungary | https://talabat-api-euw2.deliveryhero.io/hu | https://api-infra-eu-west-2.stg.ondemandrider.net/hu |\n| Norway | https://foodorago-api-eun1.deliveryhero.io/no | https://api-infra-eu-north-1.stg.ondemandrider.net/no |\n| Sweden | https://foodorago-api-eun1.deliveryhero.io/se | https://api-infra-eu-north-1.stg.ondemandrider.net/se |\n| Austria | https://api-infra-eu-west-2.ondemandrider.net/at | https://api-infra-eu-west-2.stg.ondemandrider.net/at |\n\n---\n\n### Efood\n| Country | Prod API | Stage API |\n| - | - | - |\n| Greece | https://api-infra-eu-west-2.ondemandrider.net/gr | https://api-infra-eu-west-2.stg.ondemandrider.net/gr |\n\n---\n\n### Foody\n| Country | Prod API | Stage API |\n| - | - | - |\n| Cyprus | https://api-infra-eu-west-2.ondemandrider.net/cy | https://api-infra-eu-west-2.stg.ondemandrider.net/cy |\n\n---\n\n### Glovo\n| Country | Prod API | Stage API |\n| - | - | - |\n| Armenia | https://ondemand-api-glovoapp.deliveryhero.io/am | https://api-infra-eu-central-1.stg.ondemandrider.net/am |\n| Bosnia & Herzegovina | https://ondemand-api-glovoapp.deliveryhero.io/ba | https://api-infra-eu-central-1.stg.ondemandrider.net/ba |\n| Bulgaria | https://ondemand-api-glovoapp.deliveryhero.io/bg | https://api-infra-eu-central-1.stg.ondemandrider.net/bg |\n| Ivory Coast | https://ondemand-api-glovoapp.deliveryhero.io/ci | https://api-infra-eu-central-1.stg.ondemandrider.net/ci |\n| Spain | https://ondemand-api-glovoapp.deliveryhero.io/es | https://api-infra-eu-central-1.stg.ondemandrider.net/es |\n| Georgia | https://ondemand-api-glovoapp.deliveryhero.io/ge | https://api-infra-eu-central-1.stg.ondemandrider.net/ge |\n| Croatia | https://ondemand-api-glovoapp.deliveryhero.io/hr | https://api-infra-eu-central-1.stg.ondemandrider.net/hr |\n| Italy | https://ondemand-api-glovoapp.deliveryhero.io/it | https://api-infra-eu-central-1.stg.ondemandrider.net/it |\n| Kenya | https://ondemand-api-glovoapp.deliveryhero.io/ke | https://api-infra-eu-central-1.stg.ondemandrider.net/ke |\n| Kyrgyzstan | https://ondemand-api-glovoapp.deliveryhero.io/kg | https://api-infra-eu-central-1.stg.ondemandrider.net/kg |\n| Kazakhstan | https://ondemand-api-glovoapp.deliveryhero.io/kz | https://api-infra-eu-central-1.stg.ondemandrider.net/kz |\n| Morocco | https://ondemand-api-glovoapp.deliveryhero.io/ma | https://api-infra-eu-central-1.stg.ondemandrider.net/ma |\n| Moldova | https://ondemand-api-glovoapp.deliveryhero.io/md | https://api-infra-eu-central-1.stg.ondemandrider.net/md |\n| Montenegro | https://ondemand-api-glovoapp.deliveryhero.io/me | https://api-infra-eu-central-1.stg.ondemandrider.net/me |\n| Nigeria | https://ondemand-api-glovoapp.deliveryhero.io/ng | https://api-infra-eu-central-1.stg.ondemandrider.net/ng |\n| Poland | https://ondemand-api-glovoapp.deliveryhero.io/pl | https://api-infra-eu-central-1.stg.ondemandrider.net/pl |\n| Portugal | https://ondemand-api-glovoapp.deliveryhero.io/pt | https://api-infra-eu-central-1.stg.ondemandrider.net/pt |\n| Romania | https://ondemand-api-glovoapp.deliveryhero.io/ro | https://api-infra-eu-central-1.stg.ondemandrider.net/ro |\n| Serbia | https://ondemand-api-glovoapp.deliveryhero.io/rs | https://api-infra-eu-central-1.stg.ondemandrider.net/rs |\n| Tunisia | https://ondemand-api-glovoapp.deliveryhero.io/tn | https://api-infra-eu-central-1.stg.ondemandrider.net/tn |\n| Ukraine | https://ondemand-api-glovoapp.deliveryhero.io/ua | https://api-infra-eu-central-1.stg.ondemandrider.net/ua |\n| Uganda | https://ondemand-api-glovoapp.deliveryhero.io/ug | https://api-infra-eu-central-1.stg.ondemandrider.net/ug |\n\n---\n\n# Getting Started\n\n## 1. Provide a public key\nThese are the steps to start using the ODR API:\n1. Generate Key Pair (Private Key and Public Key) to support secure communication with the ODR API.\n\n   Follow these commands on a terminal:\n   ```bash\n   # Generate private key\n   # output: client.pem file\n   openssl genrsa -out client.pem 2048\n\n   # Generate public key from the generated private one\n   # input: client.pem file\n   # output: client.pub file\n   openssl rsa -in client.pem -pubout > client.pub\n   ```\n   Or, follow these steps:\n   1. Open a browser and access [this Online RSA Generator](https://emn178.github.io/online-tools/rsa/key-generator/)\n   2. Select key length to 2048 bit, and click the Generate Key Pair button.\n   3. Copy and save the Private Key to a file with .pem extension (e.g. client.pem).\n   4. Copy and save the Public Key to a file with .pub extension (e.g. client.pub).\n2. The ODR representative will provide you with `ClientID`, `KeyID` and `Scope` that your service will need to generate an Access Token for the ODR API.\n   | Attribute | Description | Example |\n   | - | - | - |\n   | ClientID | Your service identifier| pandago:sg:00000000-0000-0000-0000-000000000000 |\n   | KeyID | Your public key identifier| 00000000-0000-0000-0000-000000000001 |\n   | Scope | Access scope of your service| `pandago.api.{country code}.*` (ex: `pandago.api.pt.*`) |\n\n\n## 2. Generate signed JWT\nGenerate assertion as a signed token in Javascript Web Token (JWT) format.\n\nThis is the payload structure of the token:\n```\n{\n  \"alg\":\"RS256\",\n  \"typ\":\"JWT\",\n  \"kid\": \"{{KeyID}}\"\n}\n.\n{\n  \"iss\":\"{{ClientID}}\",\n  \"sub\":\"{{ClientID}}\",\n  \"jti\":\"{{random uuid (e.g. caa56777-4e88-4c59-be70-3ae513fd2e00)}}\",\n  \"exp\":{{unix timestamp in the future (e.g. 1894712882)}},\n  \"aud\":\"https://sts.deliveryhero.io\"\n}\n```\nAnd use your Private Key to sign the token.\n\n💡 **Tips** 💡\n* Always use `https://sts.deliveryhero.io` for `aud` key, in both testing and prod environments\n* For the `exp` key, just get a future timestamp (ex in 1 year) with [unixtimestamp.com](https://www.unixtimestamp.com/index.php)\n\n## 3. Get a JWT access token\n\nFollow the instructions to call [the auth endpont](#tag/Authentication)\n",
+      "type": "text/plain"
+    }
+  }
+}

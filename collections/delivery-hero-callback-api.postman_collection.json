@@ -1,0 +1,346 @@
+{
+  "item": [
+    {
+      "id": "edca1b4f-9dbb-4536-a9cf-d0f9864c5eb9",
+      "name": "Callback",
+      "description": {
+        "content": "**▶️ READ THIS FIRST ◀️**\n\n* Those are NOT actual endpoints. They are callback from ODR to your endpoint\n* This is used to represent the payload ODR will sent\n* This is an optional feature and it requires your callback URL to be registered with your ClientID\n---\n\n**Description**\n* The Callback URL will need to be HTTPS with a valid SSL certificate.\n* Body posted by this feature is stripped of any Personally Identifiable Information (PII).\n* Full Order body can be fetched using the Get Specific Order feature.\n* If there is an error, we retry sending the request three times. If the response status code is 2xx, it means that there was no error and the callback was successful in sending order status.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12208481-872b-454f-b6eb-c4827fd2b9cd",
+          "name": "Order Status callback",
+          "request": {
+            "name": "Order Status callback",
+            "description": {
+              "content": "**Order Cancellation Callback**\n* When you cancel an order, if you provided a callback url, ODR will send request to that url.\n* In the payload, there will be Cancellation object which contains reason and source of cancellation\n* __NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled.\n\n\n---\n**Verification of Callback**\n  Signature-based verification can be used to secure callback messages to the API vendors.\n  To enable signature verification, please contact with regional/local ops team and provide your secret key.\n\n  * The payload will be signed by the platform, and the `hex-encoded` signature will be added to the header as `X-Signature-SHA256`.\n  * Verification can be done using the provided secret on the client side.\n\n  Example verification codes:\n\n  Golang:\n\n  ```golang\n  const (\n    SignatureHeader string = \"X-Signature-SHA256\"\n    Secret string = \"supersecret\"\n  )\n\n  func handler(w http.ResponseWriter, r *http.Request) {\n    body, err := io.ReadAll(r.Body)\n    if err != nil {\n      // can't read body\n    }\n    defer r.Body.Close()\n\n    ok, err := verify(body, r.Header.Get(SignatureHeader))\n    if err != nil {\n      // can't verify signature\n    } else if !ok {\n      // signature does not match\n    }\n\n    // signature is verified\n  }\n\n  func verify(body []byte, signature string) (bool, error) {\n    sig, err := hex.DecodeString(signature)\n    if err != nil {\n      return false, err\n    }\n\n    mac := hmac.New(sha256.New, []byte(Secret))\n    mac.Write(body)\n\n    return hmac.Equal(sig, mac.Sum(nil)), nil\n  }\n  ```\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"timeline\": {\n    \"estimated_pickup_time\": \"<string>\",\n    \"estimated_delivery_time\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<number>\",\n    \"name\": \"<number>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<integer>\",\n  \"updated_at\": \"<integer>\",\n  \"client_order_id\": \"<string>\",\n  \"tracking_link\": \"<string>\",\n  \"proof_of_delivery_url\": \"<string>\",\n  \"proof_of_pickup_url\": \"<string>\",\n  \"proof_of_return_url\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"cancellation\": {\n    \"source\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"delivery_tasks\": {\n    \"age_validation_required\": false\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31f06e3a-5bb4-4f46-a18e-3c160b0626e7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"timeline\": {\n    \"estimated_pickup_time\": \"<string>\",\n    \"estimated_delivery_time\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<number>\",\n    \"name\": \"<number>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<integer>\",\n  \"updated_at\": \"<integer>\",\n  \"client_order_id\": \"<string>\",\n  \"tracking_link\": \"<string>\",\n  \"proof_of_delivery_url\": \"<string>\",\n  \"proof_of_pickup_url\": \"<string>\",\n  \"proof_of_return_url\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"cancellation\": {\n    \"source\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"delivery_tasks\": {\n    \"age_validation_required\": false\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d350b2f-ea67-4063-9188-01e38866b426",
+          "name": "Courier location update",
+          "request": {
+            "name": "Courier location update",
+            "description": {
+              "content": "If you provide us a `location_update_callback` then we will call the callback URL *every 15s* for any ongoing orders with the live location of the courier.\n\nIt works exactly like above callback endpint and the body is the same, signature is also supported.\nYou can chose to use the same callback URL or have a different one.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "callback-location"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"timeline\": {\n    \"estimated_pickup_time\": \"<string>\",\n    \"estimated_delivery_time\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<number>\",\n    \"name\": \"<number>\",\n    \"phone_number\": \"<e164>\",\n    \"location\": {\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<integer>\",\n  \"updated_at\": \"<integer>\",\n  \"client_order_id\": \"<string>\",\n  \"tracking_link\": \"<string>\",\n  \"proof_of_delivery_url\": \"<string>\",\n  \"proof_of_pickup_url\": \"<string>\",\n  \"proof_of_return_url\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"cancellation\": {\n    \"source\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"delivery_tasks\": {\n    \"age_validation_required\": false\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "492a87b0-da42-4418-90b8-b3f1f61424fe",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback-location"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"timeline\": {\n    \"estimated_pickup_time\": \"<string>\",\n    \"estimated_delivery_time\": \"<string>\"\n  },\n  \"driver\": {\n    \"id\": \"<number>\",\n    \"name\": \"<number>\",\n    \"phone_number\": \"+6588888888\",\n    \"location\": {\n      \"latitude\": \"<string>\",\n      \"longitude\": \"<string>\"\n    }\n  },\n  \"created_at\": \"<integer>\",\n  \"updated_at\": \"<integer>\",\n  \"client_order_id\": \"<string>\",\n  \"tracking_link\": \"<string>\",\n  \"proof_of_delivery_url\": \"<string>\",\n  \"proof_of_pickup_url\": \"<string>\",\n  \"proof_of_return_url\": \"<string>\",\n  \"distance\": \"<number>\",\n  \"cancellation\": {\n    \"source\": \"<string>\",\n    \"reason\": \"<string>\"\n  },\n  \"delivery_tasks\": {\n    \"age_validation_required\": false\n  },\n  \"pickup_tasks\": {\n    \"pickup_code\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52f8ce92-f564-4deb-b5f4-c1822f4b6fff",
+          "name": "Refund callback",
+          "request": {
+            "name": "Refund callback",
+            "description": {
+              "content": "Whenever a refund or compensation is issued for one of your orders, ODR will POST a refund event to your registered refund callback URL. To enable this callback, please contact your local ops team and provide the URL.\n\nThe payload describes the refund amount, the reason and owner of the refund, and — when the refund targets specific items — the list of affected products with the percentage of each product being refunded.\n\n---\n\n**Refund types**\n\n| Type | Description |\n| - | - |\n| `FULL_REFUND` | The whole order is being refunded. |\n| `PARTIAL_REFUND` | Only part of the order is being refunded (e.g. specific products or the delivery fee). |\n| `COMPENSATION` | A compensation for which the value is independent of the product amount of the order. |\n\n**Refund owners**\n\n| Owner | Description |\n| - | - |\n| `RESTAURANT` | The vendor (restaurant) bears the refund cost. |\n| `DELIVERY_PLATFORM` | The delivery platform bears the refund cost. |\n\n**Refund reasons**\n\n| Reason | Description |\n| - | - |\n| `ORDER_MISSING_ITEMS` | The order was delivered but some items were missing. |\n| `ORDER_ITEM_ERROR` | One or more items were incorrect. |\n| `ORDER_DAMAGE_ITEMS` | One or more items were damaged on delivery. |\n| `ORDER_LATE_DELIVERY` | The order was delivered after the promised time. |\n| `ORDER_NEVER_DELIVERED` | The order was never delivered to the customer. |\n| `WRONG_ORDER_DELIVERED_DELIVERY_PLATFORM` | A wrong order was delivered (platform fault). |\n| `WRONG_ORDER_DELIVERED_PARTNER` | A wrong order was delivered (vendor fault). |\n| `BAD_QUALITY` | Items had quality issues. |\n| `AUTOMATIC_CANCELLATION` | Refund issued automatically following an order cancellation. |\n| `OTHER` | Other reason not covered above. |\n\n---\n\n**Notes**\n\n* Monetary fields (`total_amount.value`, `delivery_fee_details.amount`, `products[].amount`) are integers expressed in the smallest unit of the order's currency (e.g. cents for `EUR`/`USD`).\n* `delivery_fee_details` is only present when the refund includes a delivery fee component.\n* `products` is only present for refunds that target specific products. The `external_id` matches the `external_id` you supplied for the product when creating the order.\n* Signature verification (`X-Signature-SHA256`) works the same way as for the order status callback — see the [Order Status callback](#operation/Order-Status-callback) section.\n* If the response status code is 2xx, the callback is considered delivered. Otherwise ODR retries the request up to three times.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "callback-refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<string>\",\n  \"refund_id\": \"<string>\",\n  \"type\": \"<string>\",\n  \"total_amount\": {\n    \"value\": \"<long>\",\n    \"currency_code\": \"<string>\"\n  },\n  \"reason\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"delivery_fee_details\": {\n    \"amount\": \"<long>\",\n    \"currency_code\": \"<string>\"\n  },\n  \"products\": [\n    {\n      \"id\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"percentage\": \"<integer>\",\n      \"amount\": \"<long>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"external_id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"percentage\": \"<integer>\",\n      \"amount\": \"<long>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b33d7cf-8a3c-417e-ac6a-dca852fcf77d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "callback-refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"y0ud-000001\",\n  \"refund_id\": \"rfd-000001\",\n  \"type\": \"<string>\",\n  \"total_amount\": {\n    \"value\": 1500,\n    \"currency_code\": \"EUR\"\n  },\n  \"reason\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"delivery_fee_details\": {\n    \"amount\": 250,\n    \"currency_code\": \"EUR\"\n  },\n  \"products\": [\n    {\n      \"id\": \"prod-1\",\n      \"external_id\": \"324\",\n      \"name\": \"Burger\",\n      \"percentage\": 100,\n      \"amount\": 1000\n    },\n    {\n      \"id\": \"prod-1\",\n      \"external_id\": \"324\",\n      \"name\": \"Burger\",\n      \"percentage\": 100,\n      \"amount\": 1000\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0fccef9b-d7ce-479d-a32e-02d53b1e1f8b",
+    "name": "On Demand Rider Authentication Callback API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# About\nThe On Demand Rider (ODR) API provides system-to-system integration to facilitate on-demand courier delivery service requests.\nEach integration is scoped as a specific Brand using a ClientID.\nEach delivery request will be called an Order.\nThe ODR API is supporting the following products:\n\n<div style=\"display:flex;flex-wrap:wrap;gap:24px;margin-top:16px;align-items:center;\">\n  <img src=\"https://ondemand-am.glovoapp.com/static/media/glovo.17586205.svg\" alt=\"Glovo On-Demand\" title=\"Glovo On-Demand\" width=\"69\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://gostation-hs.com/static/media/hunger_station.f449899a.svg\" alt=\"Gostation\" title=\"Gostation\" width=\"53\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://bh.talabatodr.com/static/media/talabat.f5d13720.svg\" alt=\"Talabat Express\" title=\"Talabat Express\" width=\"253\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://foodylastmile.com.cy/static/media/foody.7248ff46.png\" alt=\"Foody\" title=\"Foody\" width=\"71\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://efoodlastmile.gr/static/media/efood.133fbc82.png\" alt=\"efood\" title=\"efood\" width=\"100\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://pandago-bd.com/static/media/pandago_logo_pink.b4f1964c.svg\" alt=\"pandago\" title=\"pandago\" width=\"131\" height=\"32\" style=\"display:block;\"/>\n  <img src=\"https://go.foodora.cz/static/media/foodorago.6c1c557d.png\" alt=\"foodora GO\" title=\"foodora GO\" width=\"60\" height=\"32\" style=\"display:block;\"/>\n</div>\n\n\n## On Demand Concepts\n\n### Client\nA Client represents a **single integration for a specific Brand** and acts as the **\"parent vendor\"**. It contains high-level information such as:\n* Customer's known name of the Brand/Branch\n* General Address of the Brand/Branch that includes Latitude and Longitude.\n\n### Outlets\nOutlets are **the individual branches or vendor locations tied to the Client**. Each outlet represents the specific pickup location for deliveries. In ODR, if a client has **multiple locations**, they **can all be configured under the same parent vendor**.\nOutlet details include:\n* Branch vendor name\n* Address of outlet with latitude and longitude.\n&nbsp;\n\n**Note**: In ODR, **all orders should be sent from an Outlet**. Even if the client has only one location, the order should still originate from the Outlet and not the parent vendor.\n\n## Ordering Steps\n1. The Sender address must be specified when submitting an Order.\n2. The Sender latitude and longitude will be used to find the matching Branch/Outlet.\n\n### Supported Payment Methods\n| Payment Method | Description |\n| - | - |\n| PAID | Order has been fully paid already and courier will not collect any amount from the end customer |\n| CASH_ON_DELIVERY | Courier will collect payment (order amount) from the end customer upon delivery |\n| CARD_ON_DELIVERY | Payment by credit card upon receipt of the order |\n\n## API Endpoints and URLs\n\nBelow are the API endpoints for each brand and country:\n\n- Production URLs use DH-friendly domains when available.\n- Staging URLs always use raw infra domains.\n\n### Talabat\n| Country | Prod API | Stage API |\n| - | - | - |\n| United Arab Emirates | https://talabat-api-euw2.deliveryhero.io/ae | https://api-infra-eu-west-2.stg.ondemandrider.net/ae |\n| Bahrain | https://talabat-api-euw2.deliveryhero.io/bh | https://api-infra-eu-west-2.stg.ondemandrider.net/bh |\n| Egypt | https://talabat-api-euw2.deliveryhero.io/eg | https://api-infra-eu-west-2.stg.ondemandrider.net/eg |\n| Jordan | https://talabat-api-euw2.deliveryhero.io/jo | https://api-infra-eu-west-2.stg.ondemandrider.net/jo |\n| Kuwait | https://talabat-api-euw2.deliveryhero.io/kw | https://api-infra-eu-west-2.stg.ondemandrider.net/kw |\n| Oman | https://talabat-api-euw2.deliveryhero.io/om | https://api-infra-eu-west-2.stg.ondemandrider.net/om |\n| Qatar | https://talabat-api-euw2.deliveryhero.io/qa | https://api-infra-eu-west-2.stg.ondemandrider.net/qa |\n\n---\n\n### Hungerstation\n| Country | Prod API | Stage API |\n| - | - | - |\n| Saudi Arabia | https://talabat-api-euw2.deliveryhero.io/sa | https://api-infra-eu-west-2.stg.ondemandrider.net/sa |\n\n---\n\n### Pandago\n| Country | Prod API | Stage API |\n| - | - | - |\n| Bangladesh | https://pandago-api-apse.deliveryhero.io/bd | https://api-infra-ap-southeast-1.stg.ondemandrider.net/bd |\n| Hong Kong | https://pandago-api-apse.deliveryhero.io/hk | https://api-infra-ap-southeast-1.stg.ondemandrider.net/hk |\n| Cambodia | https://pandago-api-apse.deliveryhero.io/kh | https://api-infra-ap-southeast-1.stg.ondemandrider.net/kh |\n| Laos | https://pandago-api-apse.deliveryhero.io/la | https://api-infra-ap-southeast-1.stg.ondemandrider.net/la |\n| Myanmar | https://pandago-api-apse.deliveryhero.io/mm | https://api-infra-ap-southeast-1.stg.ondemandrider.net/mm |\n| Malaysia | https://pandago-api-apse.deliveryhero.io/my | https://api-infra-ap-southeast-1.stg.ondemandrider.net/my |\n| Philippines | https://pandago-api-apse.deliveryhero.io/ph | https://api-infra-ap-southeast-1.stg.ondemandrider.net/ph |\n| Pakistan (APSO) | https://pandago-api-apso.deliveryhero.io/pk | https://api-infra-ap-south-1.stg.ondemandrider.net/pk |\n| Singapore | https://pandago-api-apse.deliveryhero.io/sg | https://api-infra-ap-southeast-1.stg.ondemandrider.net/sg |\n| Thailand | https://pandago-api-apse.deliveryhero.io/th | https://api-infra-ap-southeast-1.stg.ondemandrider.net/th |\n| Taiwan | https://pandago-api-apse.deliveryhero.io/tw | https://api-infra-ap-southeast-1.stg.ondemandrider.net/tw |\n\n---\n\n### Foodora Go\n| Country | Prod API | Stage API |\n| - | - | - |\n| Czech Republic | https://talabat-api-euw2.deliveryhero.io/cz | https://api-infra-eu-west-2.stg.ondemandrider.net/cz |\n| Finland | https://foodorago-api-eun1.deliveryhero.io/fi | https://api-infra-eu-north-1.stg.ondemandrider.net/fi |\n| Hungary | https://talabat-api-euw2.deliveryhero.io/hu | https://api-infra-eu-west-2.stg.ondemandrider.net/hu |\n| Norway | https://foodorago-api-eun1.deliveryhero.io/no | https://api-infra-eu-north-1.stg.ondemandrider.net/no |\n| Sweden | https://foodorago-api-eun1.deliveryhero.io/se | https://api-infra-eu-north-1.stg.ondemandrider.net/se |\n| Austria | https://api-infra-eu-west-2.ondemandrider.net/at | https://api-infra-eu-west-2.stg.ondemandrider.net/at |\n\n---\n\n### Efood\n| Country | Prod API | Stage API |\n| - | - | - |\n| Greece | https://api-infra-eu-west-2.ondemandrider.net/gr | https://api-infra-eu-west-2.stg.ondemandrider.net/gr |\n\n---\n\n### Foody\n| Country | Prod API | Stage API |\n| - | - | - |\n| Cyprus | https://api-infra-eu-west-2.ondemandrider.net/cy | https://api-infra-eu-west-2.stg.ondemandrider.net/cy |\n\n---\n\n### Glovo\n| Country | Prod API | Stage API |\n| - | - | - |\n| Armenia | https://ondemand-api-glovoapp.deliveryhero.io/am | https://api-infra-eu-central-1.stg.ondemandrider.net/am |\n| Bosnia & Herzegovina | https://ondemand-api-glovoapp.deliveryhero.io/ba | https://api-infra-eu-central-1.stg.ondemandrider.net/ba |\n| Bulgaria | https://ondemand-api-glovoapp.deliveryhero.io/bg | https://api-infra-eu-central-1.stg.ondemandrider.net/bg |\n| Ivory Coast | https://ondemand-api-glovoapp.deliveryhero.io/ci | https://api-infra-eu-central-1.stg.ondemandrider.net/ci |\n| Spain | https://ondemand-api-glovoapp.deliveryhero.io/es | https://api-infra-eu-central-1.stg.ondemandrider.net/es |\n| Georgia | https://ondemand-api-glovoapp.deliveryhero.io/ge | https://api-infra-eu-central-1.stg.ondemandrider.net/ge |\n| Croatia | https://ondemand-api-glovoapp.deliveryhero.io/hr | https://api-infra-eu-central-1.stg.ondemandrider.net/hr |\n| Italy | https://ondemand-api-glovoapp.deliveryhero.io/it | https://api-infra-eu-central-1.stg.ondemandrider.net/it |\n| Kenya | https://ondemand-api-glovoapp.deliveryhero.io/ke | https://api-infra-eu-central-1.stg.ondemandrider.net/ke |\n| Kyrgyzstan | https://ondemand-api-glovoapp.deliveryhero.io/kg | https://api-infra-eu-central-1.stg.ondemandrider.net/kg |\n| Kazakhstan | https://ondemand-api-glovoapp.deliveryhero.io/kz | https://api-infra-eu-central-1.stg.ondemandrider.net/kz |\n| Morocco | https://ondemand-api-glovoapp.deliveryhero.io/ma | https://api-infra-eu-central-1.stg.ondemandrider.net/ma |\n| Moldova | https://ondemand-api-glovoapp.deliveryhero.io/md | https://api-infra-eu-central-1.stg.ondemandrider.net/md |\n| Montenegro | https://ondemand-api-glovoapp.deliveryhero.io/me | https://api-infra-eu-central-1.stg.ondemandrider.net/me |\n| Nigeria | https://ondemand-api-glovoapp.deliveryhero.io/ng | https://api-infra-eu-central-1.stg.ondemandrider.net/ng |\n| Poland | https://ondemand-api-glovoapp.deliveryhero.io/pl | https://api-infra-eu-central-1.stg.ondemandrider.net/pl |\n| Portugal | https://ondemand-api-glovoapp.deliveryhero.io/pt | https://api-infra-eu-central-1.stg.ondemandrider.net/pt |\n| Romania | https://ondemand-api-glovoapp.deliveryhero.io/ro | https://api-infra-eu-central-1.stg.ondemandrider.net/ro |\n| Serbia | https://ondemand-api-glovoapp.deliveryhero.io/rs | https://api-infra-eu-central-1.stg.ondemandrider.net/rs |\n| Tunisia | https://ondemand-api-glovoapp.deliveryhero.io/tn | https://api-infra-eu-central-1.stg.ondemandrider.net/tn |\n| Ukraine | https://ondemand-api-glovoapp.deliveryhero.io/ua | https://api-infra-eu-central-1.stg.ondemandrider.net/ua |\n| Uganda | https://ondemand-api-glovoapp.deliveryhero.io/ug | https://api-infra-eu-central-1.stg.ondemandrider.net/ug |\n\n---\n\n# Getting Started\n\n## 1. Provide a public key\nThese are the steps to start using the ODR API:\n1. Generate Key Pair (Private Key and Public Key) to support secure communication with the ODR API.\n\n   Follow these commands on a terminal:\n   ```bash\n   # Generate private key\n   # output: client.pem file\n   openssl genrsa -out client.pem 2048\n\n   # Generate public key from the generated private one\n   # input: client.pem file\n   # output: client.pub file\n   openssl rsa -in client.pem -pubout > client.pub\n   ```\n   Or, follow these steps:\n   1. Open a browser and access [this Online RSA Generator](https://emn178.github.io/online-tools/rsa/key-generator/)\n   2. Select key length to 2048 bit, and click the Generate Key Pair button.\n   3. Copy and save the Private Key to a file with .pem extension (e.g. client.pem).\n   4. Copy and save the Public Key to a file with .pub extension (e.g. client.pub).\n2. The ODR representative will provide you with `ClientID`, `KeyID` and `Scope` that your service will need to generate an Access Token for the ODR API.\n   | Attribute | Description | Example |\n   | - | - | - |\n   | ClientID | Your service identifier| pandago:sg:00000000-0000-0000-0000-000000000000 |\n   | KeyID | Your public key identifier| 00000000-0000-0000-0000-000000000001 |\n   | Scope | Access scope of your service| `pandago.api.{country code}.*` (ex: `pandago.api.pt.*`) |\n\n\n## 2. Generate signed JWT\nGenerate assertion as a signed token in Javascript Web Token (JWT) format.\n\nThis is the payload structure of the token:\n```\n{\n  \"alg\":\"RS256\",\n  \"typ\":\"JWT\",\n  \"kid\": \"{{KeyID}}\"\n}\n.\n{\n  \"iss\":\"{{ClientID}}\",\n  \"sub\":\"{{ClientID}}\",\n  \"jti\":\"{{random uuid (e.g. caa56777-4e88-4c59-be70-3ae513fd2e00)}}\",\n  \"exp\":{{unix timestamp in the future (e.g. 1894712882)}},\n  \"aud\":\"https://sts.deliveryhero.io\"\n}\n```\nAnd use your Private Key to sign the token.\n\n💡 **Tips** 💡\n* Always use `https://sts.deliveryhero.io` for `aud` key, in both testing and prod environments\n* For the `exp` key, just get a future timestamp (ex in 1 year) with [unixtimestamp.com](https://www.unixtimestamp.com/index.php)\n\n## 3. Get a JWT access token\n\nFollow the instructions to call [the auth endpont](#tag/Authentication)\n",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "On Demand Rider Authentication Outlets API",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Outlets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get an Outlet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/outlets/:client_vendor_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "client_vendor_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the outlet to get"
+              }
+            ]
+          },
+          "docs": "Get an Outlet"
+        },
+        {
+          "info": {
+            "name": "Create or Update an Outlet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/outlets/:client_vendor_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "client_vendor_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the outlet to update or to create.\n💡 When creating an outlet, this will be the `client_vendor_id` of the outlet needed to fetch or update the outlet\n"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "*NOTE for vendors in Finland, Norway, and Sweden:*\n\nVendors in the the named countries have the option to work with coordinates (by providing **`latitude`** and  **`longitude`**) or with addresses by providing **`address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 "
+        },
+        {
+          "info": {
+            "name": "Partially Update an Outlet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/outlets/:client_vendor_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "client_vendor_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the outlet to partially update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to partially update an existing outlet. Only the fields provided in the request body will be updated; all other fields will remain unchanged.\n\nThis is useful when you need to update specific outlet attributes without having to provide all required fields as in the PUT endpoint.\n\n*NOTE:*\n* At least one field must be provided for the update.\n* If both `latitude` and `longitude` are provided, they must be provided together.\n* The outlet must already exist and be active.\n* The pare"
+        },
+        {
+          "info": {
+            "name": "Get All Outlets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/outletList",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Kindly use this endpoint to get all outlets created under a single parent vendor. This end point will work only with Brand Vendors. When any Outlet vendor sends this request, they will see an error message saying \"This vendor is not a parent\".\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

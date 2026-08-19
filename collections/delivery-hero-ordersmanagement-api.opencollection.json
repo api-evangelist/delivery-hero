@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "On Demand Rider Authentication OrdersManagement API",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrdersManagement",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a New Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to create a new order. It takes a JSON object containing an order."
+        },
+        {
+          "info": {
+            "name": "Get Specific Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to get"
+              }
+            ]
+          },
+          "docs": "Use this endpoint to get an existing order. It takes a JSON object containing an order.\n__NOTE: Cancellation object__ (seen at the end of the payload below) will be provided __only__ when the order is cancelled. It will not be available if the order is not cancelled."
+        },
+        {
+          "info": {
+            "name": "Update Specific Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to update an existing order.\nIt takes a JSON object containing an order.\n\n1. An order can only be modified when it has not been picked up by a courier.\n2. Changing payment type:\n   1. CASH_ON_DELIVERY to PAID: Set amount to \"0\" if the payment type is changed to \"PAID\".\n   2. PAID to CASH_ON_DELIVERY: Changing the payment type from PAID to CASH_ON_DELIVERY is not supported.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel Specific Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/:order_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the order to get"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to cancel an existing order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*An order is only cancellable when it has not been accepted by a courier*\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

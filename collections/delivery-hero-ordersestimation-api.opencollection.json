@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "On Demand Rider Authentication OrdersEstimation API",
+    "version": "1.1.1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "OrdersEstimation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Estimate Fee for an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/fee",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n"
+        },
+        {
+          "info": {
+            "name": "Estimate Time for an Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pandago-api-sandbox.deliveryhero.io/sg/api/v1/orders/time",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to estimate time of an order.\nIt takes a JSON object containing an order.\n\n*NOTE:*\n\n*Time is estimated based on historical data and it does not consider live condition (e.g. traffic, weather, etc.)*\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
