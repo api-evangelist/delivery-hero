@@ -209,6 +209,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/delivery-hero-capability-edges.yml
+  name: Delivery Hero Business Capability Map
 - type: Overlay
   url: overlays/delivery-hero-on-demand-rider-overlay.yaml
 - type: Website
