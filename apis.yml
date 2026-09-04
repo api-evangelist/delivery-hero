@@ -246,8 +246,9 @@ common:
   url: data-model/delivery-hero-data-model.yml
 - type: Sandbox
   url: sandbox/delivery-hero-sandbox.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/delivery-hero-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: Webhooks
   url: asyncapi/delivery-hero-on-demand-rider-webhooks.yml
 - type: DomainSecurity
