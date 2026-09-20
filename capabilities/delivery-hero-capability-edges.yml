@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 1
+edge_count: 3
 edges:
 - tag: Proofs
   spec_file: delivery-hero-proofs-api-openapi.yml
@@ -24,3 +24,26 @@ edges:
   reason: Retrieval of proof of pickup, delivery and return is explicitly the proof-of-delivery element
     of last-mile delivery operations; the proof-of-pickup variant slightly broadens it towards first-mile
     pickup.
+- tag: OrdersManagement
+  spec_file: delivery-hero-ordersmanagement-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.75
+  evidence: POST /orders "Create a New Order", DELETE /orders/{order_id} "Cancel Specific Order"; schemas
+    DeliveryTasks, PickupTasks, OrderStatusHistory
+  reason: Creating, updating, cancelling and tracking on-demand courier delivery jobs with pickup and
+    delivery tasks — this is last-mile transport execution, i.e. logistics operations, not sales order
+    capture.
+  recovered_from: vertical-agriculture-food-production-edges.json
+- tag: RiderPosition
+  spec_file: delivery-hero-riderposition-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.72
+  evidence: GET /orders/{order_id}/coordinates "Get Rider Position for Specific Order"; schemas Latitude,
+    Longitude, GetOrderCoordinateResponse
+  reason: Live courier location tracking against a delivery order is shipment visibility within transport
+    execution — logistics operations.
+  recovered_from: vertical-agriculture-food-production-edges.json
