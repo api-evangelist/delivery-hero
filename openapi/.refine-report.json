@@ -1,13 +1,7 @@
 {
   "provider": "delivery-hero",
   "sources": [
-    "delivery-hero-authentication-api-openapi.yml",
-    "delivery-hero-callback-api-openapi.yml",
-    "delivery-hero-ordersestimation-api-openapi.yml",
-    "delivery-hero-ordersmanagement-api-openapi.yml",
-    "delivery-hero-outlets-api-openapi.yml",
-    "delivery-hero-proofs-api-openapi.yml",
-    "delivery-hero-riderposition-api-openapi.yml"
+    "_original/delivery-hero-on-demand-rider-openapi.json"
   ],
   "outputs": [
     "delivery-hero-authentication-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "delivery-hero-on-demand-rider-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "delivery-hero-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-callback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-ordersestimation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-ordersmanagement-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-outlets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-proofs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "delivery-hero-riderposition-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
