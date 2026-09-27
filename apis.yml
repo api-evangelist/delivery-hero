@@ -47,6 +47,9 @@ specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-18'
 image: images/delivery-hero-on-demand-rider-logo.svg
+x-docs-platform: swagger-ui
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-25
 tags:
 - Company
 - Technology
@@ -56,6 +59,8 @@ tags:
 - Last Mile Delivery
 - On-Demand
 - Order
+- Restaurant
+- Delivery
 tags_raw:
 - Company
 - Technology
@@ -65,6 +70,8 @@ tags_raw:
 - Last Mile Delivery
 - On Demand
 - Orders
+- Restaurant
+- Delivery
 apis:
 - aid: delivery-hero:delivery-hero-authentication-api
   name: Delivery Hero Authentication API

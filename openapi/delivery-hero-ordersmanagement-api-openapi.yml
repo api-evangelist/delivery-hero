@@ -419,57 +419,94 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Latitude:
-      title: Latitude
-      type: number
-      format: double
-      minimum: -90
-      maximum: 90
-    PaymentMethod:
+    Street:
       type: string
-      enum:
-      - PAID
-      - CASH_ON_DELIVERY
-      - CARD_ON_DELIVERY
-      description: "Supported Payment Methods:\n * `PAID` - Order has been fully paid already and courier will not collect any amount from the end customer\n * `CASH_ON_DELIVERY` - Courier will collect payment (order amount) from the end customer upon delivery\n * `CARD_ON_DELIVERY` - Payment by credit card upon receipt of the order"
-    CreateOrder404ErrorResponse:
-      title: Error Response
+      maxLength: 300
+    Timestamp:
+      title: Timestamp
+      type: integer
+    Email:
+      type: string
+      format: email
+      description: Recipient email address (optional)
+      example: john.doe@example.com
+    Product:
+      title: Product
+      description: A product included in the order. Products can be nested via the `attributes` field to represent modifiers, toppings, or other customizations attached to a parent product.
       type: object
       required:
-      - message
+      - name
+      - external_id
+      - price_amount
       properties:
-        message:
+        name:
           type: string
-          description: 'Possible error messages:
-
-            - `Outlet not found` — ClientVendorID does not exist or the outlet could not be resolved from the provided sender coordinates.'
-    CreateOrder422ErrorResponse:
-      title: 422 Unprocessable Entity Errors
-      type: object
-      required:
-      - message
-      properties:
-        message:
+          description: Name of the product as displayed to the customer.
+          example: Burger
+        external_id:
           type: string
-          description: '| Error Message | Reason |
-
-            |---|---|
-
-            | `Unable to process order\n- No outlet found within {MAX_RADIUS}m of the pickup location. Please update the pickup location coordinates to make it more accurate.` | No branch found near sender coordinates within max radius tolerance |
-
-            | `Unable to process order\n- Multiple Branches found that are close enough to the given sender coordinates` | Ambiguous: multiple branches found at same distance |
-
-            | `Unable to process order\n- More than 1 outlet found close to the pickup location — {OUTLETS_DETAILS}. Please update the pickup location coordinates to make it more accurate.` | Multiple outlets found, user must clarify which one |
-
-            | `Unable to process order\n- order is outside deliverable range` | Order location outside delivery zone |
-
-            | `Unable to process order\n- unable to accept order outside operating hours` | Order created outside vendor''s operating hours |
-
-            '
+          description: Identifier of the product in the vendor's external system. Used to reconcile products between ODR and the vendor's catalog (e.g. when processing refunds against specific products).
+          example: '324'
+        price_amount:
+          type: integer
+          format: int64
+          description: Price of the product expressed in the smallest unit of the order's currency (e.g. cents for EUR/USD). For example `1000` represents `10.00 EUR` when `currency_code` is `EUR`.
+          example: 1000
+        attributes:
+          type: array
+          description: Nested products attached to this product (e.g. toppings, modifiers, add-ons). Each attribute follows the same `Product` schema and can itself contain further attributes.
+          items:
+            $ref: '#/components/schemas/Product'
       example:
-        message: 'Unable to process order
+        name: Burger
+        external_id: '324'
+        price_amount: 1000
+        attributes:
+        - name: ketchup
+          external_id: '234234'
+          price_amount: 200
+    DeliveryTasks:
+      title: Delivery Tasks
+      description: The tasks that you expect the rider to perform at the Delivery Point are located under this heading.
+      type: object
+      properties:
+        age_validation_required:
+          $ref: '#/components/schemas/AgeValidationRequired'
+        handover_confirmation:
+          type: object
+          properties:
+            drop_off:
+              description: '<mark>Beta:</mark> Only available in some countries. Please contact your local ops team for more details.
 
-          - No outlet found within 500m of the pickup location. Please update the pickup location coordinates to make it more accurate.'
+                drop_off types:
+
+                * `PIN` - a PIN will be asked by the rider to the customer to confirm order''s delivery
+
+                * `NONE` - no PIN will be required
+
+                '
+              type: string
+              enum:
+              - PIN
+              - NONE
+    AgeValidationRequired:
+      type: boolean
+      default: false
+      description: 'Setting this attribute to `true` requests age verification of the customer by the rider at the point of delivery.
+
+
+        Before enabling this feature, please confirm with your account manager that age verification has been activated for your account.
+
+
+        This feature is currently available in the following countries:
+
+        - **pandago**: Philippines
+
+        - **foodora GO**: Sweden, Norway and Czech Republic
+
+        - **Glovo On-Demand**: All countries'
+    GetOrderResponse:
+      $ref: '#/components/schemas/OrderResponse'
     Contact:
       title: Contact
       type: object
@@ -496,22 +533,104 @@ components:
       - name
       - phone_number
       - location
-    AgeValidationRequired:
-      type: boolean
-      default: false
-      description: 'Setting this attribute to `true` requests age verification of the customer by the rider at the point of delivery.
+    UpdateOrder:
+      title: Order
+      type: object
+      properties:
+        order_id:
+          type: string
+        created_at:
+          type: number
+        status:
+          type: string
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+        location:
+          $ref: '#/components/schemas/Location'
+        description:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Price'
+        delivery_fee:
+          $ref: '#/components/schemas/Price'
+    Driver:
+      title: Driver
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+    ClientVendorID:
+      title: Client Outlet ID
+      type: string
+      maxLength: 255
+    CancelOrderRequest:
+      title: Cancel Order Request
+      type: object
+      properties:
+        reason:
+          type: string
+          enum:
+          - DELIVERY_ETA_TOO_LONG
+          - MISTAKE_ERROR
+          - REASON_UNKNOWN
+          description: "Acceptable Reasons:\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated."
+      required:
+      - reason
+      example:
+        reason: MISTAKE_ERROR
+    HandoverConfirmationResponse:
+      title: Handover Confirmation response
+      type: object
+      properties:
+        type:
+          type: string
+        code:
+          description: the code that the rider will ask the customer to confirm the delivery.
+          type: string
+    Sender:
+      title: Sender
+      type: object
+      description: "There are two type of payloads accepted:\n  * **[PREFERRED]** Outlet reference\n\n    * Please provide **`client_vendor_id`** attribute\n\n    * Unique ID for the Outlet, retrieved from the Outlets API. This is the preferred way to identify the order's origin.\n\n  * Sender details\n\n    * Please provide **`name`**, **`phone_number`** and **`location`** attributes\n\n  *In the case where all attributes are provided, Outlet reference will be used and Sender details will be ignored.*\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, Sweden, Tawian and Kuwait:*\n\n&nbsp;\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n * 5 Lane 80 Taiyuen Road, Datong District, Taipei City 10349\n * Al-Sabbahiya, B.P. 48001, 54551 KUWAIT\n\n&nbsp;\n\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n"
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        location:
+          $ref: '#/components/schemas/Location'
+        notes:
+          type: string
+          maxLength: 2048
+          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
 
 
-        Before enabling this feature, please confirm with your account manager that age verification has been activated for your account.
+            TIP:
 
 
-        This feature is currently available in the following countries:
-
-        - **pandago**: Philippines
-
-        - **foodora GO**: Sweden, Norway and Czech Republic
-
-        - **Glovo On-Demand**: All countries'
+            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
+        client_vendor_id:
+          $ref: '#/components/schemas/ClientVendorID'
+    PackagingResponse:
+      title: Packaging Response
+      type: object
+      properties:
+        weight:
+          type: number
+          format: double
+        volume:
+          type: number
+          format: double
+    PostalCode:
+      title: PostalCode **(can be used only for Singapore)**
+      type: string
+      maxLength: 120
+      description: Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.
+      example: 752340, 750313, 757046
     UpdateOrderRequest:
       title: Update Order Request
       type: object
@@ -552,14 +671,9 @@ components:
           longitude: 103.8486029
           notes: right at the street crossing
         description: drinks and meals
-    ErrorResponse:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
+    Address:
+      type: string
+      maxLength: 255
     CreateOrder400ErrorResponse:
       title: 4xx Client Errors
       type: object
@@ -597,145 +711,6 @@ components:
             | `Invalid createRequest payload\ncollect_from_customer cannot exceed {amount} more than the original amount` | Collect amount exceeds maximum allowed surplus |
 
             '
-    CreateOrderResponse:
-      $ref: '#/components/schemas/CreateOrder'
-    CreateOrder:
-      title: Order
-      type: object
-      properties:
-        order_id:
-          type: string
-        client_order_id:
-          type: string
-        sender:
-          $ref: '#/components/schemas/Sender'
-        recipient:
-          $ref: '#/components/schemas/Contact'
-        distance:
-          type: number
-          description: Distance of the trip in meters, calculated using the Haversine formula.
-        payment_method:
-          $ref: '#/components/schemas/PaymentMethod'
-        coldbag_needed:
-          $ref: '#/components/schemas/Boolean'
-        amount:
-          $ref: '#/components/schemas/Price'
-        description:
-          $ref: '#/components/schemas/Description'
-        status:
-          $ref: '#/components/schemas/Status'
-        delivery_fee:
-          $ref: '#/components/schemas/Price'
-        timeline:
-          $ref: '#/components/schemas/Timeline'
-        driver:
-          $ref: '#/components/schemas/Driver'
-        created_at:
-          $ref: '#/components/schemas/Timestamp'
-        updated_at:
-          $ref: '#/components/schemas/Timestamp'
-        delivery_tasks:
-          $ref: '#/components/schemas/DeliveryTasks'
-        pickup_tasks:
-          $ref: '#/components/schemas/PickupTasks'
-        packaging:
-          $ref: '#/components/schemas/Packaging'
-    PickupTasks:
-      title: Pickup Tasks
-      description: The tasks that you expect the rider to perform at the Pickup Point are located under this heading.
-      type: object
-      properties:
-        pickup_code:
-          type: string
-          maxLength: 30
-          description: The code that you expect the rider to mention in order to validate before giving them the order
-    Source:
-      type: string
-      enum:
-      - AUTO_CANCEL
-      - CLIENT
-      - HELPCENTER
-      - INTERNAL_UNKNOWN
-      - LOGISTICS
-      - ONEVIEW
-      description: "Acceptable Sources:\n * `AUTO_CANCEL` - Cancellation was triggered automatically.\n * `CLIENT` - Cancellation was requested by the client (vendor).\n * `HELPCENTER` - Cancellation was triggered by the Help Center.\n * `INTERNAL_UNKNOWN` - Cancellation source is unknown or unrecognized.\n * `LOGISTICS` - Cancellation was requested by Logistics.\n * `ONEVIEW` - Cancellation was triggered by OneView."
-    ClientVendorID:
-      title: Client Outlet ID
-      type: string
-      maxLength: 255
-    DeliveryTasks:
-      title: Delivery Tasks
-      description: The tasks that you expect the rider to perform at the Delivery Point are located under this heading.
-      type: object
-      properties:
-        age_validation_required:
-          $ref: '#/components/schemas/AgeValidationRequired'
-        handover_confirmation:
-          type: object
-          properties:
-            drop_off:
-              description: '<mark>Beta:</mark> Only available in some countries. Please contact your local ops team for more details.
-
-                drop_off types:
-
-                * `PIN` - a PIN will be asked by the rider to the customer to confirm order''s delivery
-
-                * `NONE` - no PIN will be required
-
-                '
-              type: string
-              enum:
-              - PIN
-              - NONE
-    Sender:
-      title: Sender
-      type: object
-      description: "There are two type of payloads accepted:\n  * **[PREFERRED]** Outlet reference\n\n    * Please provide **`client_vendor_id`** attribute\n\n    * Unique ID for the Outlet, retrieved from the Outlets API. This is the preferred way to identify the order's origin.\n\n  * Sender details\n\n    * Please provide **`name`**, **`phone_number`** and **`location`** attributes\n\n  *In the case where all attributes are provided, Outlet reference will be used and Sender details will be ignored.*\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, Sweden, Tawian and Kuwait:*\n\n&nbsp;\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n * 5 Lane 80 Taiyuen Road, Datong District, Taipei City 10349\n * Al-Sabbahiya, B.P. 48001, 54551 KUWAIT\n\n&nbsp;\n\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n"
-      properties:
-        name:
-          type: string
-          maxLength: 255
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        location:
-          $ref: '#/components/schemas/Location'
-        notes:
-          type: string
-          maxLength: 2048
-          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
-
-
-            TIP:
-
-
-            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
-        client_vendor_id:
-          $ref: '#/components/schemas/ClientVendorID'
-    Cancellation:
-      title: Cancellation
-      type: object
-      properties:
-        source:
-          $ref: '#/components/schemas/Source'
-        reason:
-          $ref: '#/components/schemas/Reason'
-    OrderStatusHistory:
-      title: Order Status History
-      type: object
-      properties:
-        status:
-          $ref: '#/components/schemas/Status'
-        created_at:
-          $ref: '#/components/schemas/Timestamp'
-    HandoverConfirmationResponse:
-      title: Handover Confirmation response
-      type: object
-      properties:
-        type:
-          type: string
-        code:
-          description: the code that the rider will ask the customer to confirm the delivery.
-          type: string
     CreateOrder500ErrorResponse:
       title: 5xx Server Errors
       type: object
@@ -761,59 +736,6 @@ components:
             '
       example:
         message: Unable to proceed, something went wrong
-    CreateOrder401ErrorResponse:
-      title: Error Response
-      type: object
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: 'Possible error messages:
-
-            - `The authorizer should provide its name in the context` — the JWT token is missing, expired, or malformed.'
-    Boolean:
-      title: Boolean
-      type: boolean
-      default: false
-    Description:
-      title: Description
-      type: string
-      maxLength: 1000
-    Longitude:
-      title: Longitude
-      type: number
-      format: double
-      minimum: -180
-      maximum: 180
-    Driver:
-      title: Driver
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-    PostalCode:
-      title: PostalCode **(can be used only for Singapore)**
-      type: string
-      maxLength: 120
-      description: Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.
-      example: 752340, 750313, 757046
-    GetOrderResponse:
-      $ref: '#/components/schemas/OrderResponse'
-    PackagingResponse:
-      title: Packaging Response
-      type: object
-      properties:
-        weight:
-          type: number
-          format: double
-        volume:
-          type: number
-          format: double
     OrderResponse:
       title: Order
       type: object
@@ -918,66 +840,76 @@ components:
       - UNREACHABLE
       - WRONG_ORDER_ITEMS_DELIVERED
       description: "Acceptable Reasons:\n  * `ADDRESS_INCOMPLETE_MISSTATED` - Customer's address is incomplete OR customer enters incorrect address on purpose in order to be able to proceed with the order with the vendor, with the actual customer address outside the vendor's delivery area.\n  * `BAD_WEATHER` - Vendor/Logistics cannot deliver because of weather conditions.\n  * `CLOSED` - Vendor is closed.\n  * `COURIER_ACCIDENT` - Courier has been involved in an accident and cannot fulfill the order.\n  * `COURIER_UNREACHABLE` - Courier is unreachable/unresponsive and/or uncontactable.\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `DUPLICATE_ORDER` - Duplicate order.\n  * `FOOD_QUALITY_SPILLAGE` - Customer has an issue with the food quality (cold, inedible, etc.) OR order spillage occurred during transport (VD/OD).\n  * `ITEM_UNAVAILABLE` - The product is not available or another rider has already picked up the order.\n  * `LATE_DELIVERY` - Customer has received delivery but (excessively) passed promised delivery time.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `NO_COURIER` - Vendor: Vendor has no courier (drivers/riders/walkers/etc.) available to fulfill the order. Logistics: Order is pending in Logistics/Hurrier without assigned courier and customer no longer wishes to wait.\n  * `OUTSIDE_DELIVERY_AREA` - Vendor: Vendor does not deliver to the customer's address/area. Logistics: Logistics does not deliver to the customer's address/area.\n  * `OUTSIDE_SERVICE_HOURS` - Order has been placed outside of our Logistic service hours.\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated.\n  * `TECHNICAL_PROBLEM` - Vendor: Vendor cannot fulfill an order due to technical issues, e.g. order can not be printed, etc. Where a vendor cannot be contacted and order could not be delivered to their transmission/reception device or order was delivered to the device and it timed-out/expired, reasons UNREACHABLE and NO_RESPONSE should be used respectively rather than TECHNICAL_PROBLEM. Logistics: Logistics is having general technical issues (i.e. Hurrier is down, etc.). Platform: Platform is experiencing some technical issue whereby orders cannot be placed with the Logistics/Vendor and/or have been pending too long. As a result, orders have been failed by the platform.\n  * `TOO_BUSY` - Vendor is too busy to fulfill the order.\n  * `UNABLE_TO_FIND` - Customer cannot be located to complete pick-up/delivery or order items.\n  * `UNABLE_TO_PAY` - Customer cannot pay for the order, e.g. insufficient cash (COD) or card doesn't work for card on delivery, etc.\n  * `UNREACHABLE` - Technical issues on the partner's side.\n  * `WRONG_ORDER_ITEMS_DELIVERED` - Customer has received wrong order items or is missing significant item(s)."
-    CancelOrderRequest:
-      title: Cancel Order Request
+    Boolean:
+      title: Boolean
+      type: boolean
+      default: false
+    Location:
+      title: Location
       type: object
       properties:
-        reason:
+        address:
+          $ref: '#/components/schemas/Address'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        postal_code:
+          $ref: '#/components/schemas/PostalCode'
+      required:
+      - address
+      - latitude
+      - longitude
+    OrderStatusHistory:
+      title: Order Status History
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        created_at:
+          $ref: '#/components/schemas/Timestamp'
+    CreateOrder404ErrorResponse:
+      title: Error Response
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: 'Possible error messages:
+
+            - `Outlet not found` — ClientVendorID does not exist or the outlet could not be resolved from the provided sender coordinates.'
+    Latitude:
+      title: Latitude
+      type: number
+      format: double
+      minimum: -90
+      maximum: 90
+    DeliveryTasksResponse:
+      title: Delivery Tasks response
+      description: The tasks that you expect the rider to perform at the Delivery Point are located under this heading.
+      type: object
+      properties:
+        age_validation_required:
+          $ref: '#/components/schemas/AgeValidationRequired'
+        handover_confirmation:
+          $ref: '#/components/schemas/HandoverConfirmationResponse'
+    Packaging:
+      title: Packaging
+      description: Package size and weight information used to assign a rider with the appropriate equipment. See the size categories below for a quick rule of thumb to assign vehicles/equipment.
+      type: object
+      properties:
+        size:
           type: string
           enum:
-          - DELIVERY_ETA_TOO_LONG
-          - MISTAKE_ERROR
-          - REASON_UNKNOWN
-          description: "Acceptable Reasons:\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated."
-      required:
-      - reason
-      example:
-        reason: MISTAKE_ERROR
-    Timeline:
-      title: Timeline
-      type: object
-      properties:
-        estimated_pickup_time:
-          type: string
-        estimated_delivery_time:
-          type: string
-    Price:
-      title: Price
-      type: number
-      default: 0
-      minimum: 0
-      example: 123.45
-    UpdateOrderResponse:
-      $ref: '#/components/schemas/UpdateOrder'
-    PhoneNumber:
-      type: string
-      format: e164
-      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
+          - small: fits into a shoe box
+          - medium: fits into a backpack
+          - large: fits in a car
+        weight:
+          type: number
+          description: 'The weight of the package in kilograms, for example `1.5`.
 
-        * libphonenumber is used for phone number validation
-
-        '
-      example: '+6588888888'
-    Status:
-      type: string
-      enum:
-      - NEW
-      - RECEIVED
-      - WAITING_FOR_TRANSPORT
-      - ASSIGNED_TO_TRANSPORT
-      - COURIER_ACCEPTED_DELIVERY
-      - NEAR_VENDOR
-      - PICKED_UP
-      - COURIER_LEFT_VENDOR
-      - NEAR_CUSTOMER
-      - DELIVERED
-      - DELAYED
-      - CANCELLED
-      - RETURNED_TO_VENDOR
-      description: "Available Statuses:\n * `NEW` - Order has been created\n * `RECEIVED` - We've accepted the order and will be assigning it to a courier\n * `WAITING_FOR_TRANSPORT` - Assigning order to a courier\n * `ASSIGNED_TO_TRANSPORT` - Courier has been dispatched to pick up and deliver the order\n * `COURIER_ACCEPTED_DELIVERY` - Courier accepted to pick up and deliver the order\n * `NEAR_VENDOR` - Courier is near the pick-up point\n * `PICKED_UP` - Courier has picked up the order\n * `COURIER_LEFT_VENDOR` - Courier has left from pick-up point\n * `NEAR_CUSTOMER` - Courier is near the drop-off point\n * `DELIVERED` - Courier has delivered the order\n * `DELAYED` - Order delivery has been delayed and estimated delivery time has been updated\n * `CANCELLED` - Order has been cancelled\n * `RETURNED_TO_VENDOR` - Courier has returned the order to the vendor"
-    Street:
-      type: string
-      maxLength: 300
+            '
     CreateOrderRequest:
       title: Create Order Request
       type: object
@@ -1109,46 +1041,23 @@ components:
           device_id: a-demo-test-id
           customer_id: '330099'
           customer_delivery_fee: 3500
-    DeliveryTasksResponse:
-      title: Delivery Tasks response
-      description: The tasks that you expect the rider to perform at the Delivery Point are located under this heading.
+    Cancellation:
+      title: Cancellation
       type: object
       properties:
-        age_validation_required:
-          $ref: '#/components/schemas/AgeValidationRequired'
-        handover_confirmation:
-          $ref: '#/components/schemas/HandoverConfirmationResponse'
-    UpdateOrder:
-      title: Order
-      type: object
-      properties:
-        order_id:
-          type: string
-        created_at:
-          type: number
-        status:
-          type: string
-        payment_method:
-          $ref: '#/components/schemas/PaymentMethod'
-        location:
-          $ref: '#/components/schemas/Location'
-        description:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Price'
-        delivery_fee:
-          $ref: '#/components/schemas/Price'
-    Email:
+        source:
+          $ref: '#/components/schemas/Source'
+        reason:
+          $ref: '#/components/schemas/Reason'
+    PhoneNumber:
       type: string
-      format: email
-      description: Recipient email address (optional)
-      example: john.doe@example.com
-    Address:
-      type: string
-      maxLength: 255
-    Timestamp:
-      title: Timestamp
-      type: integer
+      format: e164
+      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
+
+        * libphonenumber is used for phone number validation
+
+        '
+      example: '+6588888888'
     ExternalDetails:
       title: External Details
       description: References and identifiers from the vendor's own systems. These fields are passed through by ODR and are useful for fraud related computation.
@@ -1167,73 +1076,164 @@ components:
           format: int64
           description: Delivery fee charged by the vendor to the customer, expressed in the smallest unit of the order's currency (e.g. cents for EUR/USD).
           example: 3500
-    Packaging:
-      title: Packaging
-      description: Package size and weight information used to assign a rider with the appropriate equipment. See the size categories below for a quick rule of thumb to assign vehicles/equipment.
+    CreateOrder401ErrorResponse:
+      title: Error Response
       type: object
+      required:
+      - message
       properties:
-        size:
+        message:
           type: string
-          enum:
-          - small: fits into a shoe box
-          - medium: fits into a backpack
-          - large: fits in a car
-        weight:
-          type: number
-          description: 'The weight of the package in kilograms, for example `1.5`.
+          description: 'Possible error messages:
+
+            - `The authorizer should provide its name in the context` — the JWT token is missing, expired, or malformed.'
+    Description:
+      title: Description
+      type: string
+      maxLength: 1000
+    PaymentMethod:
+      type: string
+      enum:
+      - PAID
+      - CASH_ON_DELIVERY
+      - CARD_ON_DELIVERY
+      description: "Supported Payment Methods:\n * `PAID` - Order has been fully paid already and courier will not collect any amount from the end customer\n * `CASH_ON_DELIVERY` - Courier will collect payment (order amount) from the end customer upon delivery\n * `CARD_ON_DELIVERY` - Payment by credit card upon receipt of the order"
+    Status:
+      type: string
+      enum:
+      - NEW
+      - RECEIVED
+      - WAITING_FOR_TRANSPORT
+      - ASSIGNED_TO_TRANSPORT
+      - COURIER_ACCEPTED_DELIVERY
+      - NEAR_VENDOR
+      - PICKED_UP
+      - COURIER_LEFT_VENDOR
+      - NEAR_CUSTOMER
+      - DELIVERED
+      - DELAYED
+      - CANCELLED
+      - RETURNED_TO_VENDOR
+      description: "Available Statuses:\n * `NEW` - Order has been created\n * `RECEIVED` - We've accepted the order and will be assigning it to a courier\n * `WAITING_FOR_TRANSPORT` - Assigning order to a courier\n * `ASSIGNED_TO_TRANSPORT` - Courier has been dispatched to pick up and deliver the order\n * `COURIER_ACCEPTED_DELIVERY` - Courier accepted to pick up and deliver the order\n * `NEAR_VENDOR` - Courier is near the pick-up point\n * `PICKED_UP` - Courier has picked up the order\n * `COURIER_LEFT_VENDOR` - Courier has left from pick-up point\n * `NEAR_CUSTOMER` - Courier is near the drop-off point\n * `DELIVERED` - Courier has delivered the order\n * `DELAYED` - Order delivery has been delayed and estimated delivery time has been updated\n * `CANCELLED` - Order has been cancelled\n * `RETURNED_TO_VENDOR` - Courier has returned the order to the vendor"
+    CreateOrder422ErrorResponse:
+      title: 422 Unprocessable Entity Errors
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: '| Error Message | Reason |
+
+            |---|---|
+
+            | `Unable to process order\n- No outlet found within {MAX_RADIUS}m of the pickup location. Please update the pickup location coordinates to make it more accurate.` | No branch found near sender coordinates within max radius tolerance |
+
+            | `Unable to process order\n- Multiple Branches found that are close enough to the given sender coordinates` | Ambiguous: multiple branches found at same distance |
+
+            | `Unable to process order\n- More than 1 outlet found close to the pickup location — {OUTLETS_DETAILS}. Please update the pickup location coordinates to make it more accurate.` | Multiple outlets found, user must clarify which one |
+
+            | `Unable to process order\n- order is outside deliverable range` | Order location outside delivery zone |
+
+            | `Unable to process order\n- unable to accept order outside operating hours` | Order created outside vendor''s operating hours |
 
             '
-    Location:
-      title: Location
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        postal_code:
-          $ref: '#/components/schemas/PostalCode'
-      required:
-      - address
-      - latitude
-      - longitude
-    Product:
-      title: Product
-      description: A product included in the order. Products can be nested via the `attributes` field to represent modifiers, toppings, or other customizations attached to a parent product.
-      type: object
-      required:
-      - name
-      - external_id
-      - price_amount
-      properties:
-        name:
-          type: string
-          description: Name of the product as displayed to the customer.
-          example: Burger
-        external_id:
-          type: string
-          description: Identifier of the product in the vendor's external system. Used to reconcile products between ODR and the vendor's catalog (e.g. when processing refunds against specific products).
-          example: '324'
-        price_amount:
-          type: integer
-          format: int64
-          description: Price of the product expressed in the smallest unit of the order's currency (e.g. cents for EUR/USD). For example `1000` represents `10.00 EUR` when `currency_code` is `EUR`.
-          example: 1000
-        attributes:
-          type: array
-          description: Nested products attached to this product (e.g. toppings, modifiers, add-ons). Each attribute follows the same `Product` schema and can itself contain further attributes.
-          items:
-            $ref: '#/components/schemas/Product'
       example:
-        name: Burger
-        external_id: '324'
-        price_amount: 1000
-        attributes:
-        - name: ketchup
-          external_id: '234234'
-          price_amount: 200
+        message: 'Unable to process order
+
+          - No outlet found within 500m of the pickup location. Please update the pickup location coordinates to make it more accurate.'
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Timeline:
+      title: Timeline
+      type: object
+      properties:
+        estimated_pickup_time:
+          type: string
+        estimated_delivery_time:
+          type: string
+    PickupTasks:
+      title: Pickup Tasks
+      description: The tasks that you expect the rider to perform at the Pickup Point are located under this heading.
+      type: object
+      properties:
+        pickup_code:
+          type: string
+          maxLength: 30
+          description: The code that you expect the rider to mention in order to validate before giving them the order
+    Price:
+      title: Price
+      type: number
+      default: 0
+      minimum: 0
+      example: 123.45
+    CreateOrderResponse:
+      $ref: '#/components/schemas/CreateOrder'
+    Longitude:
+      title: Longitude
+      type: number
+      format: double
+      minimum: -180
+      maximum: 180
+    Source:
+      type: string
+      enum:
+      - AUTO_CANCEL
+      - CLIENT
+      - HELPCENTER
+      - INTERNAL_UNKNOWN
+      - LOGISTICS
+      - ONEVIEW
+      description: "Acceptable Sources:\n * `AUTO_CANCEL` - Cancellation was triggered automatically.\n * `CLIENT` - Cancellation was requested by the client (vendor).\n * `HELPCENTER` - Cancellation was triggered by the Help Center.\n * `INTERNAL_UNKNOWN` - Cancellation source is unknown or unrecognized.\n * `LOGISTICS` - Cancellation was requested by Logistics.\n * `ONEVIEW` - Cancellation was triggered by OneView."
+    UpdateOrderResponse:
+      $ref: '#/components/schemas/UpdateOrder'
+    CreateOrder:
+      title: Order
+      type: object
+      properties:
+        order_id:
+          type: string
+        client_order_id:
+          type: string
+        sender:
+          $ref: '#/components/schemas/Sender'
+        recipient:
+          $ref: '#/components/schemas/Contact'
+        distance:
+          type: number
+          description: Distance of the trip in meters, calculated using the Haversine formula.
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+        coldbag_needed:
+          $ref: '#/components/schemas/Boolean'
+        amount:
+          $ref: '#/components/schemas/Price'
+        description:
+          $ref: '#/components/schemas/Description'
+        status:
+          $ref: '#/components/schemas/Status'
+        delivery_fee:
+          $ref: '#/components/schemas/Price'
+        timeline:
+          $ref: '#/components/schemas/Timeline'
+        driver:
+          $ref: '#/components/schemas/Driver'
+        created_at:
+          $ref: '#/components/schemas/Timestamp'
+        updated_at:
+          $ref: '#/components/schemas/Timestamp'
+        delivery_tasks:
+          $ref: '#/components/schemas/DeliveryTasks'
+        pickup_tasks:
+          $ref: '#/components/schemas/PickupTasks'
+        packaging:
+          $ref: '#/components/schemas/Packaging'
   securitySchemes:
     Bearer_Token:
       type: apiKey

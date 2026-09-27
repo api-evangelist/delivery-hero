@@ -168,18 +168,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PhoneNumber:
+      type: string
+      format: e164
+      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
+
+        * libphonenumber is used for phone number validation
+
+        '
+      example: '+6588888888'
     Longitude:
       title: Longitude
       type: number
       format: double
       minimum: -180
       maximum: 180
-    Latitude:
-      title: Latitude
-      type: number
-      format: double
-      minimum: -90
-      maximum: 90
     EstimateOrderFeeResponse:
       title: Estimate Order Fee Response
       type: object
@@ -192,12 +195,144 @@ components:
           description: The resolved pickup details. The `location` (and `phone_number`, when available) are populated from the pickup outlet's information. When the request was submitted using `sender.client_vendor_id`, that value is echoed back here as well.
         estimated_delivery_fee:
           $ref: '#/components/schemas/Price'
+    Description:
+      title: Description
+      type: string
+      maxLength: 1000
+    ContactWithOptionalFields:
+      title: Contact
+      type: object
+      description: "Please provide **`location`** attribute\nThe **`name`** and **`phone_number`** attributes are optional.\n*NOTE for vendors in Finland, Norway, and Sweden:*\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n\n\n&nbsp;\n\n*NOTE for vendors in Singapore:*\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location. Postal code should be specified as a 6 digit number. For example: 752340."
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        location:
+          $ref: '#/components/schemas/Location'
+        notes:
+          type: string
+          maxLength: 2048
+          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
+
+            TIP:
+
+            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
+      required:
+      - location
+    Boolean:
+      title: Boolean
+      type: boolean
+      default: false
+    Location:
+      title: Location
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        postal_code:
+          $ref: '#/components/schemas/PostalCode'
+      required:
+      - address
+      - latitude
+      - longitude
+    EstimateOrderTimeResponse:
+      title: Estimate Order Time Response
+      type: object
+      properties:
+        client_order_id:
+          type: string
+        estimated_pickup_time:
+          type: string
+          description: Estimated pickup time in RFC 3339 format.
+        estimated_delivery_time:
+          type: string
+          description: Estimated delivery time in RFC 3339 format.
+        delivery_duration:
+          type: string
+          description: 'Estimated delivery duration as an ISO 8601 duration (e.g. `PT20M`).
+
+            '
+        lower_bound:
+          type: string
+          description: 'Lower bound of the customer-facing delivery time window as an ISO 8601
+
+            duration (e.g. `PT15M`).
+
+            '
+        upper_bound:
+          type: string
+          description: 'Upper bound of the customer-facing delivery time window as an ISO 8601
+
+            duration (e.g. `PT25M`).
+
+            '
+    PaymentMethod:
+      type: string
+      enum:
+      - PAID
+      - CASH_ON_DELIVERY
+      - CARD_ON_DELIVERY
+      description: "Supported Payment Methods:\n * `PAID` - Order has been fully paid already and courier will not collect any amount from the end customer\n * `CASH_ON_DELIVERY` - Courier will collect payment (order amount) from the end customer upon delivery\n * `CARD_ON_DELIVERY` - Payment by credit card upon receipt of the order"
+    ClientVendorID:
+      title: Client Outlet ID
+      type: string
+      maxLength: 255
+    Latitude:
+      title: Latitude
+      type: number
+      format: double
+      minimum: -90
+      maximum: 90
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Sender:
+      title: Sender
+      type: object
+      description: "There are two type of payloads accepted:\n  * **[PREFERRED]** Outlet reference\n\n    * Please provide **`client_vendor_id`** attribute\n\n    * Unique ID for the Outlet, retrieved from the Outlets API. This is the preferred way to identify the order's origin.\n\n  * Sender details\n\n    * Please provide **`name`**, **`phone_number`** and **`location`** attributes\n\n  *In the case where all attributes are provided, Outlet reference will be used and Sender details will be ignored.*\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, Sweden, Tawian and Kuwait:*\n\n&nbsp;\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n * 5 Lane 80 Taiyuen Road, Datong District, Taipei City 10349\n * Al-Sabbahiya, B.P. 48001, 54551 KUWAIT\n\n&nbsp;\n\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n"
+      properties:
+        name:
+          type: string
+          maxLength: 255
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        location:
+          $ref: '#/components/schemas/Location'
+        notes:
+          type: string
+          maxLength: 2048
+          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
+
+
+            TIP:
+
+
+            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
+        client_vendor_id:
+          $ref: '#/components/schemas/ClientVendorID'
     PostalCode:
       title: PostalCode **(can be used only for Singapore)**
       type: string
       maxLength: 120
       description: Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.
       example: 752340, 750313, 757046
+    Price:
+      title: Price
+      type: number
+      default: 0
+      minimum: 0
+      example: 123.45
     EstimateOrderRequest:
       title: Estimate Order Request
       type: object
@@ -240,144 +375,9 @@ components:
         amount: 23.5
         payment_method: PAID
         description: Refreshing drink
-    PaymentMethod:
-      type: string
-      enum:
-      - PAID
-      - CASH_ON_DELIVERY
-      - CARD_ON_DELIVERY
-      description: "Supported Payment Methods:\n * `PAID` - Order has been fully paid already and courier will not collect any amount from the end customer\n * `CASH_ON_DELIVERY` - Courier will collect payment (order amount) from the end customer upon delivery\n * `CARD_ON_DELIVERY` - Payment by credit card upon receipt of the order"
-    ClientVendorID:
-      title: Client Outlet ID
-      type: string
-      maxLength: 255
-    Boolean:
-      title: Boolean
-      type: boolean
-      default: false
-    ContactWithOptionalFields:
-      title: Contact
-      type: object
-      description: "Please provide **`location`** attribute\nThe **`name`** and **`phone_number`** attributes are optional.\n*NOTE for vendors in Finland, Norway, and Sweden:*\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n\n\n&nbsp;\n\n*NOTE for vendors in Singapore:*\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location. Postal code should be specified as a 6 digit number. For example: 752340."
-      properties:
-        name:
-          type: string
-          maxLength: 255
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        location:
-          $ref: '#/components/schemas/Location'
-        notes:
-          type: string
-          maxLength: 2048
-          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
-
-            TIP:
-
-            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
-      required:
-      - location
     Address:
       type: string
       maxLength: 255
-    Sender:
-      title: Sender
-      type: object
-      description: "There are two type of payloads accepted:\n  * **[PREFERRED]** Outlet reference\n\n    * Please provide **`client_vendor_id`** attribute\n\n    * Unique ID for the Outlet, retrieved from the Outlets API. This is the preferred way to identify the order's origin.\n\n  * Sender details\n\n    * Please provide **`name`**, **`phone_number`** and **`location`** attributes\n\n  *In the case where all attributes are provided, Outlet reference will be used and Sender details will be ignored.*\n\n&nbsp;\n\n*NOTE for vendors in Finland, Norway, Sweden, Tawian and Kuwait:*\n\n&nbsp;\n\nVendors in the the named countries have the option to work with coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with addresses by providing **`location.address`**. Addresses should be specified in accordance with the format used by the national postal service of the specific country. Do not include additional address elements, like business names, floor numbers, etc. Delimit address elements by spaces. Examples:\n * Jakobsbergsgatan 24 111 44 Stockholm\n * Pasilankatu 10 00240 Helsinki\n * Waldemar Thranes gate 98 0175 Oslo\n * 5 Lane 80 Taiyuen Road, Datong District, Taipei City 10349\n * Al-Sabbahiya, B.P. 48001, 54551 KUWAIT\n\n&nbsp;\n\n\n*NOTE for vendors in Singapore:*\n\nVendors in Singapore have the option to work with location coordinates (by providing **`location.latitude`** and  **`location.longitude`**) or with postal codes (by providing **`location.postal_code`**). If both location coordinates and postal codes are provided, only the coordinates will be used for finding the exact location.\nPostal code should be specified as a 6 digit number. For example: 752340.\n"
-      properties:
-        name:
-          type: string
-          maxLength: 255
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        location:
-          $ref: '#/components/schemas/Location'
-        notes:
-          type: string
-          maxLength: 2048
-          description: 'Include instructions for our couriers regarding Pick-Up (in Sender) or Drop-Off (in Recipient).
-
-
-            TIP:
-
-
-            You can include your OrderID as part of Pick-Up instruction and our couriers will be able to see it in their app.'
-        client_vendor_id:
-          $ref: '#/components/schemas/ClientVendorID'
-    ErrorResponse:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    Price:
-      title: Price
-      type: number
-      default: 0
-      minimum: 0
-      example: 123.45
-    EstimateOrderTimeResponse:
-      title: Estimate Order Time Response
-      type: object
-      properties:
-        client_order_id:
-          type: string
-        estimated_pickup_time:
-          type: string
-          description: Estimated pickup time in RFC 3339 format.
-        estimated_delivery_time:
-          type: string
-          description: Estimated delivery time in RFC 3339 format.
-        delivery_duration:
-          type: string
-          description: 'Estimated delivery duration as an ISO 8601 duration (e.g. `PT20M`).
-
-            '
-        lower_bound:
-          type: string
-          description: 'Lower bound of the customer-facing delivery time window as an ISO 8601
-
-            duration (e.g. `PT15M`).
-
-            '
-        upper_bound:
-          type: string
-          description: 'Upper bound of the customer-facing delivery time window as an ISO 8601
-
-            duration (e.g. `PT25M`).
-
-            '
-    Description:
-      title: Description
-      type: string
-      maxLength: 1000
-    Location:
-      title: Location
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        postal_code:
-          $ref: '#/components/schemas/PostalCode'
-      required:
-      - address
-      - latitude
-      - longitude
-    PhoneNumber:
-      type: string
-      format: e164
-      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
-
-        * libphonenumber is used for phone number validation
-
-        '
-      example: '+6588888888'
   requestBodies:
     EstimateOrderRequest:
       content:

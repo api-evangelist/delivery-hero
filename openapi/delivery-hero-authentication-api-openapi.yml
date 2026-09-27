@@ -109,20 +109,6 @@ paths:
                 $ref: '#/components/schemas/ErrorStsResponse'
 components:
   schemas:
-    TokenStsResponse:
-      type: object
-      required:
-      - access_token
-      - expires_in
-      properties:
-        access_token:
-          type: string
-          description: Access token to be used as an authorization header in subsequent requests.
-          example: '{{AccessToken}}'
-        expires_in:
-          type: string
-          description: Length of token validity in seconds.
-          example: '3600'
     ErrorStsResponse:
       type: object
       properties:
@@ -141,6 +127,20 @@ components:
           type: integer
           description: The HTTP status code.
           example: 400
+    TokenStsResponse:
+      type: object
+      required:
+      - access_token
+      - expires_in
+      properties:
+        access_token:
+          type: string
+          description: Access token to be used as an authorization header in subsequent requests.
+          example: '{{AccessToken}}'
+        expires_in:
+          type: string
+          description: Length of token validity in seconds.
+          example: '3600'
   securitySchemes:
     Bearer_Token:
       type: apiKey
