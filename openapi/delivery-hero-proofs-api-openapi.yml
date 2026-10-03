@@ -199,8 +199,8 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ProofOfDelivery:
-      title: ProofOfDelivery
+    ProofOfReturn:
+      title: ProofOfReturn
       type: string
       format: binary
     ErrorResponseForProofOfReturn:
@@ -211,10 +211,6 @@ components:
           type: string
       required:
       - message
-    ProofOfReturn:
-      title: ProofOfReturn
-      type: string
-      format: binary
     GetProofOfDeliveryResponse:
       $ref: '#/components/schemas/ProofOfDelivery'
     ErrorResponseForProofOfDelivery:
@@ -227,14 +223,6 @@ components:
       - message
     GetProofOfReturnResponse:
       $ref: '#/components/schemas/ProofOfReturn'
-    ErrorResponseForProofOfPickup:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
     ErrorResponse:
       title: Error Response
       type: object
@@ -243,12 +231,24 @@ components:
           type: string
       required:
       - message
-    GetProofOfPickupResponse:
-      $ref: '#/components/schemas/ProofOfPickup'
     ProofOfPickup:
       title: ProofOfPickup
       type: string
       format: binary
+    ProofOfDelivery:
+      title: ProofOfDelivery
+      type: string
+      format: binary
+    GetProofOfPickupResponse:
+      $ref: '#/components/schemas/ProofOfPickup'
+    ErrorResponseForProofOfPickup:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
   securitySchemes:
     Bearer_Token:
       type: apiKey

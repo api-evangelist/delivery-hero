@@ -81,15 +81,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Timestamp:
-      title: Timestamp
-      type: integer
-    Longitude:
-      title: Longitude
+    Latitude:
+      title: Latitude
       type: number
       format: double
-      minimum: -180
-      maximum: 180
+      minimum: -90
+      maximum: 90
     GetOrderCoordinateResponse:
       title: Get Order Coordinate Response
       type: object
@@ -105,12 +102,6 @@ components:
       required:
       - latitude
       - longitude
-    Latitude:
-      title: Latitude
-      type: number
-      format: double
-      minimum: -90
-      maximum: 90
     ErrorResponse:
       title: Error Response
       type: object
@@ -119,6 +110,15 @@ components:
           type: string
       required:
       - message
+    Longitude:
+      title: Longitude
+      type: number
+      format: double
+      minimum: -180
+      maximum: 180
+    Timestamp:
+      title: Timestamp
+      type: integer
   securitySchemes:
     Bearer_Token:
       type: apiKey
