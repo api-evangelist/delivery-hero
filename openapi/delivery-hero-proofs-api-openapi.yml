@@ -199,20 +199,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ProofOfReturn:
-      title: ProofOfReturn
-      type: string
-      format: binary
-    ErrorResponseForProofOfReturn:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    GetProofOfDeliveryResponse:
-      $ref: '#/components/schemas/ProofOfDelivery'
+    GetProofOfReturnResponse:
+      $ref: '#/components/schemas/ProofOfReturn'
+    GetProofOfPickupResponse:
+      $ref: '#/components/schemas/ProofOfPickup'
     ErrorResponseForProofOfDelivery:
       title: Error Response
       type: object
@@ -221,26 +211,16 @@ components:
           type: string
       required:
       - message
-    GetProofOfReturnResponse:
-      $ref: '#/components/schemas/ProofOfReturn'
-    ErrorResponse:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    ProofOfPickup:
-      title: ProofOfPickup
-      type: string
-      format: binary
     ProofOfDelivery:
       title: ProofOfDelivery
       type: string
       format: binary
-    GetProofOfPickupResponse:
-      $ref: '#/components/schemas/ProofOfPickup'
+    GetProofOfDeliveryResponse:
+      $ref: '#/components/schemas/ProofOfDelivery'
+    ProofOfPickup:
+      title: ProofOfPickup
+      type: string
+      format: binary
     ErrorResponseForProofOfPickup:
       title: Error Response
       type: object
@@ -249,6 +229,26 @@ components:
           type: string
       required:
       - message
+    ErrorResponseForProofOfReturn:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    ProofOfReturn:
+      title: ProofOfReturn
+      type: string
+      format: binary
   securitySchemes:
     Bearer_Token:
       type: apiKey

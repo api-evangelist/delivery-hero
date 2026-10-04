@@ -275,24 +275,40 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CallbackDriverLocation:
-      title: Location
-      type: object
-      description: Location information is added only to the statuses where the order has an active driver.
-      properties:
-        latitude:
-          type: string
-        longitude:
-          type: string
-    PickupTasks:
-      title: Pickup Tasks
-      description: The tasks that you expect the rider to perform at the Pickup Point are located under this heading.
-      type: object
-      properties:
-        pickup_code:
-          type: string
-          maxLength: 30
-          description: The code that you expect the rider to mention in order to validate before giving them the order
+    PhoneNumber:
+      type: string
+      format: e164
+      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
+
+        * libphonenumber is used for phone number validation
+
+        '
+      example: '+6588888888'
+    Reason:
+      type: string
+      enum:
+      - ADDRESS_INCOMPLETE_MISSTATED
+      - BAD_WEATHER
+      - CLOSED
+      - COURIER_ACCIDENT
+      - COURIER_UNREACHABLE
+      - DELIVERY_ETA_TOO_LONG
+      - DUPLICATE_ORDER
+      - FOOD_QUALITY_SPILLAGE
+      - ITEM_UNAVAILABLE
+      - LATE_DELIVERY
+      - MISTAKE_ERROR
+      - NO_COURIER
+      - OUTSIDE_DELIVERY_AREA
+      - OUTSIDE_SERVICE_HOURS
+      - REASON_UNKNOWN
+      - TECHNICAL_PROBLEM
+      - TOO_BUSY
+      - UNABLE_TO_FIND
+      - UNABLE_TO_PAY
+      - UNREACHABLE
+      - WRONG_ORDER_ITEMS_DELIVERED
+      description: "Acceptable Reasons:\n  * `ADDRESS_INCOMPLETE_MISSTATED` - Customer's address is incomplete OR customer enters incorrect address on purpose in order to be able to proceed with the order with the vendor, with the actual customer address outside the vendor's delivery area.\n  * `BAD_WEATHER` - Vendor/Logistics cannot deliver because of weather conditions.\n  * `CLOSED` - Vendor is closed.\n  * `COURIER_ACCIDENT` - Courier has been involved in an accident and cannot fulfill the order.\n  * `COURIER_UNREACHABLE` - Courier is unreachable/unresponsive and/or uncontactable.\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `DUPLICATE_ORDER` - Duplicate order.\n  * `FOOD_QUALITY_SPILLAGE` - Customer has an issue with the food quality (cold, inedible, etc.) OR order spillage occurred during transport (VD/OD).\n  * `ITEM_UNAVAILABLE` - The product is not available or another rider has already picked up the order.\n  * `LATE_DELIVERY` - Customer has received delivery but (excessively) passed promised delivery time.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `NO_COURIER` - Vendor: Vendor has no courier (drivers/riders/walkers/etc.) available to fulfill the order. Logistics: Order is pending in Logistics/Hurrier without assigned courier and customer no longer wishes to wait.\n  * `OUTSIDE_DELIVERY_AREA` - Vendor: Vendor does not deliver to the customer's address/area. Logistics: Logistics does not deliver to the customer's address/area.\n  * `OUTSIDE_SERVICE_HOURS` - Order has been placed outside of our Logistic service hours.\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated.\n  * `TECHNICAL_PROBLEM` - Vendor: Vendor cannot fulfill an order due to technical issues, e.g. order can not be printed, etc. Where a vendor cannot be contacted and order could not be delivered to their transmission/reception device or order was delivered to the device and it timed-out/expired, reasons UNREACHABLE and NO_RESPONSE should be used respectively rather than TECHNICAL_PROBLEM. Logistics: Logistics is having general technical issues (i.e. Hurrier is down, etc.). Platform: Platform is experiencing some technical issue whereby orders cannot be placed with the Logistics/Vendor and/or have been pending too long. As a result, orders have been failed by the platform.\n  * `TOO_BUSY` - Vendor is too busy to fulfill the order.\n  * `UNABLE_TO_FIND` - Customer cannot be located to complete pick-up/delivery or order items.\n  * `UNABLE_TO_PAY` - Customer cannot pay for the order, e.g. insufficient cash (COD) or card doesn't work for card on delivery, etc.\n  * `UNREACHABLE` - Technical issues on the partner's side.\n  * `WRONG_ORDER_ITEMS_DELIVERED` - Customer has received wrong order items or is missing significant item(s)."
     Source:
       type: string
       enum:
@@ -303,6 +319,105 @@ components:
       - LOGISTICS
       - ONEVIEW
       description: "Acceptable Sources:\n * `AUTO_CANCEL` - Cancellation was triggered automatically.\n * `CLIENT` - Cancellation was requested by the client (vendor).\n * `HELPCENTER` - Cancellation was triggered by the Help Center.\n * `INTERNAL_UNKNOWN` - Cancellation source is unknown or unrecognized.\n * `LOGISTICS` - Cancellation was requested by Logistics.\n * `ONEVIEW` - Cancellation was triggered by OneView."
+    CallbackDriver:
+      title: Driver
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: number
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        location:
+          $ref: '#/components/schemas/CallbackDriverLocation'
+    Timestamp:
+      title: Timestamp
+      type: integer
+    CallbackDriverLocation:
+      title: Location
+      type: object
+      description: Location information is added only to the statuses where the order has an active driver.
+      properties:
+        latitude:
+          type: string
+        longitude:
+          type: string
+    RefundCallbackProduct:
+      title: Refund Callback Product
+      description: A product affected by a refund.
+      type: object
+      required:
+      - id
+      - external_id
+      - name
+      - percentage
+      - amount
+      properties:
+        id:
+          type: string
+          description: ODR-side identifier of the product within the order.
+          example: prod-1
+        external_id:
+          type: string
+          description: Identifier of the product in the vendor's external system, as provided when creating the order.
+          example: '324'
+        name:
+          type: string
+          description: Name of the product.
+          example: Burger
+        percentage:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Percentage of this product being refunded (1-100).
+          example: 100
+        amount:
+          type: integer
+          format: int64
+          description: Refund amount attributed to this product, in the smallest unit of the parent `total_amount.currency_code`.
+          example: 1000
+    Timeline:
+      title: Timeline
+      type: object
+      properties:
+        estimated_pickup_time:
+          type: string
+        estimated_delivery_time:
+          type: string
+    AgeValidationRequired:
+      type: boolean
+      default: false
+      description: 'Setting this attribute to `true` requests age verification of the customer by the rider at the point of delivery.
+
+
+        Before enabling this feature, please confirm with your account manager that age verification has been activated for your account.
+
+
+        This feature is currently available in the following countries:
+
+        - **pandago**: Philippines
+
+        - **foodora GO**: Sweden, Norway and Czech Republic
+
+        - **Glovo On-Demand**: All countries'
+    PickupTasks:
+      title: Pickup Tasks
+      description: The tasks that you expect the rider to perform at the Pickup Point are located under this heading.
+      type: object
+      properties:
+        pickup_code:
+          type: string
+          maxLength: 30
+          description: The code that you expect the rider to mention in order to validate before giving them the order
+    Cancellation:
+      title: Cancellation
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/Source'
+        reason:
+          $ref: '#/components/schemas/Reason'
     RefundCallbackRequest:
       title: Refund Callback Request
       description: Payload sent to the registered refund callback URL when a refund or compensation is issued for an order.
@@ -412,76 +527,6 @@ components:
           name: Coca-Cola
           percentage: 50
           amount: 250
-    AgeValidationRequired:
-      type: boolean
-      default: false
-      description: 'Setting this attribute to `true` requests age verification of the customer by the rider at the point of delivery.
-
-
-        Before enabling this feature, please confirm with your account manager that age verification has been activated for your account.
-
-
-        This feature is currently available in the following countries:
-
-        - **pandago**: Philippines
-
-        - **foodora GO**: Sweden, Norway and Czech Republic
-
-        - **Glovo On-Demand**: All countries'
-    RefundCallbackProduct:
-      title: Refund Callback Product
-      description: A product affected by a refund.
-      type: object
-      required:
-      - id
-      - external_id
-      - name
-      - percentage
-      - amount
-      properties:
-        id:
-          type: string
-          description: ODR-side identifier of the product within the order.
-          example: prod-1
-        external_id:
-          type: string
-          description: Identifier of the product in the vendor's external system, as provided when creating the order.
-          example: '324'
-        name:
-          type: string
-          description: Name of the product.
-          example: Burger
-        percentage:
-          type: integer
-          minimum: 1
-          maximum: 100
-          description: Percentage of this product being refunded (1-100).
-          example: 100
-        amount:
-          type: integer
-          format: int64
-          description: Refund amount attributed to this product, in the smallest unit of the parent `total_amount.currency_code`.
-          example: 1000
-    CallbackDriver:
-      title: Driver
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: number
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        location:
-          $ref: '#/components/schemas/CallbackDriverLocation'
-    Cancellation:
-      title: Cancellation
-      type: object
-      properties:
-        source:
-          $ref: '#/components/schemas/Source'
-        reason:
-          $ref: '#/components/schemas/Reason'
     CallbackRequest:
       title: Callback Request
       type: object
@@ -558,23 +603,6 @@ components:
         packaging:
           size: small
           weight: 1.2
-    Timeline:
-      title: Timeline
-      type: object
-      properties:
-        estimated_pickup_time:
-          type: string
-        estimated_delivery_time:
-          type: string
-    PhoneNumber:
-      type: string
-      format: e164
-      description: '* Phone number in E.164 standard (https://en.wikipedia.org/wiki/E.164)
-
-        * libphonenumber is used for phone number validation
-
-        '
-      example: '+6588888888'
     Status:
       type: string
       enum:
@@ -592,34 +620,6 @@ components:
       - CANCELLED
       - RETURNED_TO_VENDOR
       description: "Available Statuses:\n * `NEW` - Order has been created\n * `RECEIVED` - We've accepted the order and will be assigning it to a courier\n * `WAITING_FOR_TRANSPORT` - Assigning order to a courier\n * `ASSIGNED_TO_TRANSPORT` - Courier has been dispatched to pick up and deliver the order\n * `COURIER_ACCEPTED_DELIVERY` - Courier accepted to pick up and deliver the order\n * `NEAR_VENDOR` - Courier is near the pick-up point\n * `PICKED_UP` - Courier has picked up the order\n * `COURIER_LEFT_VENDOR` - Courier has left from pick-up point\n * `NEAR_CUSTOMER` - Courier is near the drop-off point\n * `DELIVERED` - Courier has delivered the order\n * `DELAYED` - Order delivery has been delayed and estimated delivery time has been updated\n * `CANCELLED` - Order has been cancelled\n * `RETURNED_TO_VENDOR` - Courier has returned the order to the vendor"
-    Reason:
-      type: string
-      enum:
-      - ADDRESS_INCOMPLETE_MISSTATED
-      - BAD_WEATHER
-      - CLOSED
-      - COURIER_ACCIDENT
-      - COURIER_UNREACHABLE
-      - DELIVERY_ETA_TOO_LONG
-      - DUPLICATE_ORDER
-      - FOOD_QUALITY_SPILLAGE
-      - ITEM_UNAVAILABLE
-      - LATE_DELIVERY
-      - MISTAKE_ERROR
-      - NO_COURIER
-      - OUTSIDE_DELIVERY_AREA
-      - OUTSIDE_SERVICE_HOURS
-      - REASON_UNKNOWN
-      - TECHNICAL_PROBLEM
-      - TOO_BUSY
-      - UNABLE_TO_FIND
-      - UNABLE_TO_PAY
-      - UNREACHABLE
-      - WRONG_ORDER_ITEMS_DELIVERED
-      description: "Acceptable Reasons:\n  * `ADDRESS_INCOMPLETE_MISSTATED` - Customer's address is incomplete OR customer enters incorrect address on purpose in order to be able to proceed with the order with the vendor, with the actual customer address outside the vendor's delivery area.\n  * `BAD_WEATHER` - Vendor/Logistics cannot deliver because of weather conditions.\n  * `CLOSED` - Vendor is closed.\n  * `COURIER_ACCIDENT` - Courier has been involved in an accident and cannot fulfill the order.\n  * `COURIER_UNREACHABLE` - Courier is unreachable/unresponsive and/or uncontactable.\n  * `DELIVERY_ETA_TOO_LONG` - Before promised delivery time, customer believes that the ETA is too long.\n  * `DUPLICATE_ORDER` - Duplicate order.\n  * `FOOD_QUALITY_SPILLAGE` - Customer has an issue with the food quality (cold, inedible, etc.) OR order spillage occurred during transport (VD/OD).\n  * `ITEM_UNAVAILABLE` - The product is not available or another rider has already picked up the order.\n  * `LATE_DELIVERY` - Customer has received delivery but (excessively) passed promised delivery time.\n  * `MISTAKE_ERROR` - Customer placed order in error/accidentally or with incorrect specifications (i.e. preorder, incorrect payment type).\n  * `NO_COURIER` - Vendor: Vendor has no courier (drivers/riders/walkers/etc.) available to fulfill the order. Logistics: Order is pending in Logistics/Hurrier without assigned courier and customer no longer wishes to wait.\n  * `OUTSIDE_DELIVERY_AREA` - Vendor: Vendor does not deliver to the customer's address/area. Logistics: Logistics does not deliver to the customer's address/area.\n  * `OUTSIDE_SERVICE_HOURS` - Order has been placed outside of our Logistic service hours.\n  * `REASON_UNKNOWN` - Reason for failure is not available. VENDOR: Vendor initiated, CUSTOMER: Customer initiated, PLATFORM: Unknown who initiated.\n  * `TECHNICAL_PROBLEM` - Vendor: Vendor cannot fulfill an order due to technical issues, e.g. order can not be printed, etc. Where a vendor cannot be contacted and order could not be delivered to their transmission/reception device or order was delivered to the device and it timed-out/expired, reasons UNREACHABLE and NO_RESPONSE should be used respectively rather than TECHNICAL_PROBLEM. Logistics: Logistics is having general technical issues (i.e. Hurrier is down, etc.). Platform: Platform is experiencing some technical issue whereby orders cannot be placed with the Logistics/Vendor and/or have been pending too long. As a result, orders have been failed by the platform.\n  * `TOO_BUSY` - Vendor is too busy to fulfill the order.\n  * `UNABLE_TO_FIND` - Customer cannot be located to complete pick-up/delivery or order items.\n  * `UNABLE_TO_PAY` - Customer cannot pay for the order, e.g. insufficient cash (COD) or card doesn't work for card on delivery, etc.\n  * `UNREACHABLE` - Technical issues on the partner's side.\n  * `WRONG_ORDER_ITEMS_DELIVERED` - Customer has received wrong order items or is missing significant item(s)."
-    Timestamp:
-      title: Timestamp
-      type: integer
   securitySchemes:
     Bearer_Token:
       type: apiKey
