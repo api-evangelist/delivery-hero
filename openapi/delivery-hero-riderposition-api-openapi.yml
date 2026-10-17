@@ -81,21 +81,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GetOrderCoordinateResponse:
-      title: Get Order Coordinate Response
+    ErrorResponse:
+      title: Error Response
       type: object
       properties:
-        client_order_id:
+        message:
           type: string
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        updated_at:
-          $ref: '#/components/schemas/Timestamp'
       required:
-      - latitude
-      - longitude
+      - message
     Timestamp:
       title: Timestamp
       type: integer
@@ -111,14 +104,21 @@ components:
       format: double
       minimum: -90
       maximum: 90
-    ErrorResponse:
-      title: Error Response
+    GetOrderCoordinateResponse:
+      title: Get Order Coordinate Response
       type: object
       properties:
-        message:
+        client_order_id:
           type: string
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        updated_at:
+          $ref: '#/components/schemas/Timestamp'
       required:
-      - message
+      - latitude
+      - longitude
   securitySchemes:
     Bearer_Token:
       type: apiKey

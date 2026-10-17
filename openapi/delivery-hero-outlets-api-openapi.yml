@@ -285,11 +285,121 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Currency:
-      title: Currency
+    VendorResponse:
+      title: VendorResponse
+      type: object
+      properties:
+        client_vendor_id:
+          $ref: '#/components/schemas/ClientVendorID'
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        street:
+          $ref: '#/components/schemas/Street'
+        street_number:
+          $ref: '#/components/schemas/StreetNumber'
+        building:
+          $ref: '#/components/schemas/Building'
+        district:
+          $ref: '#/components/schemas/District'
+        postal_code:
+          $ref: '#/components/schemas/PostalCode'
+        rider_instructions:
+          $ref: '#/components/schemas/RiderInstructions'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        city:
+          $ref: '#/components/schemas/City'
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        description:
+          type: string
+        locale:
+          $ref: '#/components/schemas/Locale'
+        halal:
+          $ref: '#/components/schemas/Halal'
+      example:
+        client_vendor_id: outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f
+        name: Order Anytime Delivery Anywhere
+        address: '1 2nd Street #08-01'
+        latitude: 1.2923742
+        longitude: 103.8486029
+        city: Singapore
+        phone_number: '+6587654321'
+        currency: SGD
+        locale: en-SG
+        description: any items are for sale
+      required:
+      - name
+      - address
+      - latitude
+      - city
+      - currency
+      - description
+      - locale
+      - phone_number
+    PostalCode:
+      title: PostalCode **(can be used only for Singapore)**
       type: string
-      format: ISO4217
-      example: SGD
+      maxLength: 120
+      description: Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.
+      example: 752340, 750313, 757046
+    Longitude:
+      title: Longitude
+      type: number
+      format: double
+      minimum: -180
+      maximum: 180
+    PatchOutletRequest:
+      title: Partial Update Outlet Request
+      description: 'Request body for partially updating an outlet. All fields are optional - only the fields provided will be updated.
+
+        If updating coordinates, both latitude and longitude must be provided together.
+
+        '
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        street:
+          $ref: '#/components/schemas/Street'
+        street_number:
+          $ref: '#/components/schemas/StreetNumber'
+        building:
+          $ref: '#/components/schemas/Building'
+        district:
+          $ref: '#/components/schemas/District'
+        postal_code:
+          $ref: '#/components/schemas/PostalCode'
+        rider_instructions:
+          $ref: '#/components/schemas/RiderInstructions'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        city:
+          $ref: '#/components/schemas/City'
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        description:
+          type: string
+        halal:
+          $ref: '#/components/schemas/Halal'
+      example:
+        name: Updated Outlet Name
+        address: 123 New Street
+        phone_number: '+6512345678'
+    Name:
+      title: Name
+      type: string
+      maxLength: 300
     PhoneNumber:
       type: string
       format: e164
@@ -299,16 +409,147 @@ components:
 
         '
       example: '+6588888888'
-    Description:
-      title: Description
+    Timestamp:
+      title: Timestamp
+      type: integer
+    Locale:
+      title: Locale
       type: string
-      maxLength: 1000
-    Longitude:
-      title: Longitude
+      format: ISO639-1
+      example: en-SG
+    StreetNumber:
+      type: string
+      maxLength: 120
+    Latitude:
+      title: Latitude
       type: number
       format: double
-      minimum: -180
-      maximum: 180
+      minimum: -90
+      maximum: 90
+    ClientVendorID:
+      title: Client Outlet ID
+      type: string
+      maxLength: 255
+    Halal:
+      title: Halal
+      type: boolean
+      description: Boolean flag to determine that the Outlet has a valid Halal certification
+    District:
+      type: string
+      maxLength: 300
+    ErrorResponse:
+      title: Error Response
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    Building:
+      type: string
+      maxLength: 120
+    RiderInstructions:
+      type: string
+      maxLength: 500
+    OutletList:
+      title: OutletList
+      type: object
+      properties:
+        client_vendor_id:
+          $ref: '#/components/schemas/ClientVendorID'
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        description:
+          $ref: '#/components/schemas/Description'
+        created_at:
+          $ref: '#/components/schemas/Timestamp'
+      required:
+      - name
+      - address
+      - latitude
+      - longitude
+      - phone_number
+    CreateOrUpdateOutletRequest:
+      title: Create or Update an Outlet Response
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/Name'
+        address:
+          $ref: '#/components/schemas/Address'
+        street:
+          $ref: '#/components/schemas/Street'
+        street_number:
+          $ref: '#/components/schemas/StreetNumber'
+        building:
+          $ref: '#/components/schemas/Building'
+        district:
+          $ref: '#/components/schemas/District'
+        postal_code:
+          $ref: '#/components/schemas/PostalCode'
+        rider_instructions:
+          $ref: '#/components/schemas/RiderInstructions'
+        latitude:
+          $ref: '#/components/schemas/Latitude'
+        longitude:
+          $ref: '#/components/schemas/Longitude'
+        city:
+          $ref: '#/components/schemas/City'
+        phone_number:
+          $ref: '#/components/schemas/PhoneNumber'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        locale:
+          $ref: '#/components/schemas/Locale'
+        description:
+          type: string
+        halal:
+          $ref: '#/components/schemas/Halal'
+        add_user:
+          type: array
+          items:
+            type: string
+            format: email
+        delete_user:
+          type: array
+          items:
+            type: string
+            format: email
+      required:
+      - name
+      - address
+      - latitude
+      - longitude
+      - city
+      - phone_number
+      - currency
+      - locale
+      example:
+        name: Order Anytime Delivery Anywhere
+        address: '1 2nd Street #08-01'
+        latitude: 1.2923742
+        longitude: 103.8486029
+        city: Singapore
+        phone_number: '+6587654321'
+        currency: SGD
+        locale: en-SG
+        description: any items are for sale
+        add_user:
+        - example@email.com
+        - example2@email.com
+    Currency:
+      title: Currency
+      type: string
+      format: ISO4217
+      example: SGD
     OutletListResponse:
       title: OutletListResponse
       type: array
@@ -339,32 +580,21 @@ components:
         phone_number: '+6587654321'
         description: Some Outlet details
         created_at: 1636804000
-    OutletList:
-      title: OutletList
-      type: object
-      properties:
-        client_vendor_id:
-          $ref: '#/components/schemas/ClientVendorID'
-        name:
-          $ref: '#/components/schemas/Name'
-        address:
-          $ref: '#/components/schemas/Address'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        description:
-          $ref: '#/components/schemas/Description'
-        created_at:
-          $ref: '#/components/schemas/Timestamp'
-      required:
-      - name
-      - address
-      - latitude
-      - longitude
-      - phone_number
+    City:
+      title: City
+      type: string
+      maxLength: 300
+      example: Singapore
+    Street:
+      type: string
+      maxLength: 300
+    Address:
+      type: string
+      maxLength: 255
+    Description:
+      title: Description
+      type: string
+      maxLength: 1000
     Outlet:
       title: Outlet
       type: object
@@ -434,236 +664,6 @@ components:
       - description
       - locale
       - phone_number
-    PatchOutletRequest:
-      title: Partial Update Outlet Request
-      description: 'Request body for partially updating an outlet. All fields are optional - only the fields provided will be updated.
-
-        If updating coordinates, both latitude and longitude must be provided together.
-
-        '
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/Name'
-        address:
-          $ref: '#/components/schemas/Address'
-        street:
-          $ref: '#/components/schemas/Street'
-        street_number:
-          $ref: '#/components/schemas/StreetNumber'
-        building:
-          $ref: '#/components/schemas/Building'
-        district:
-          $ref: '#/components/schemas/District'
-        postal_code:
-          $ref: '#/components/schemas/PostalCode'
-        rider_instructions:
-          $ref: '#/components/schemas/RiderInstructions'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        city:
-          $ref: '#/components/schemas/City'
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        description:
-          type: string
-        halal:
-          $ref: '#/components/schemas/Halal'
-      example:
-        name: Updated Outlet Name
-        address: 123 New Street
-        phone_number: '+6512345678'
-    ErrorResponse:
-      title: Error Response
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    RiderInstructions:
-      type: string
-      maxLength: 500
-    ClientVendorID:
-      title: Client Outlet ID
-      type: string
-      maxLength: 255
-    Halal:
-      title: Halal
-      type: boolean
-      description: Boolean flag to determine that the Outlet has a valid Halal certification
-    Building:
-      type: string
-      maxLength: 120
-    VendorResponse:
-      title: VendorResponse
-      type: object
-      properties:
-        client_vendor_id:
-          $ref: '#/components/schemas/ClientVendorID'
-        name:
-          $ref: '#/components/schemas/Name'
-        address:
-          $ref: '#/components/schemas/Address'
-        street:
-          $ref: '#/components/schemas/Street'
-        street_number:
-          $ref: '#/components/schemas/StreetNumber'
-        building:
-          $ref: '#/components/schemas/Building'
-        district:
-          $ref: '#/components/schemas/District'
-        postal_code:
-          $ref: '#/components/schemas/PostalCode'
-        rider_instructions:
-          $ref: '#/components/schemas/RiderInstructions'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        city:
-          $ref: '#/components/schemas/City'
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        description:
-          type: string
-        locale:
-          $ref: '#/components/schemas/Locale'
-        halal:
-          $ref: '#/components/schemas/Halal'
-      example:
-        client_vendor_id: outlet-987b61a1-7ccf-4447-82e0-6b9c1ab35a4f
-        name: Order Anytime Delivery Anywhere
-        address: '1 2nd Street #08-01'
-        latitude: 1.2923742
-        longitude: 103.8486029
-        city: Singapore
-        phone_number: '+6587654321'
-        currency: SGD
-        locale: en-SG
-        description: any items are for sale
-      required:
-      - name
-      - address
-      - latitude
-      - city
-      - currency
-      - description
-      - locale
-      - phone_number
-    Address:
-      type: string
-      maxLength: 255
-    Street:
-      type: string
-      maxLength: 300
-    District:
-      type: string
-      maxLength: 300
-    Name:
-      title: Name
-      type: string
-      maxLength: 300
-    StreetNumber:
-      type: string
-      maxLength: 120
-    Locale:
-      title: Locale
-      type: string
-      format: ISO639-1
-      example: en-SG
-    CreateOrUpdateOutletRequest:
-      title: Create or Update an Outlet Response
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/Name'
-        address:
-          $ref: '#/components/schemas/Address'
-        street:
-          $ref: '#/components/schemas/Street'
-        street_number:
-          $ref: '#/components/schemas/StreetNumber'
-        building:
-          $ref: '#/components/schemas/Building'
-        district:
-          $ref: '#/components/schemas/District'
-        postal_code:
-          $ref: '#/components/schemas/PostalCode'
-        rider_instructions:
-          $ref: '#/components/schemas/RiderInstructions'
-        latitude:
-          $ref: '#/components/schemas/Latitude'
-        longitude:
-          $ref: '#/components/schemas/Longitude'
-        city:
-          $ref: '#/components/schemas/City'
-        phone_number:
-          $ref: '#/components/schemas/PhoneNumber'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        locale:
-          $ref: '#/components/schemas/Locale'
-        description:
-          type: string
-        halal:
-          $ref: '#/components/schemas/Halal'
-        add_user:
-          type: array
-          items:
-            type: string
-            format: email
-        delete_user:
-          type: array
-          items:
-            type: string
-            format: email
-      required:
-      - name
-      - address
-      - latitude
-      - longitude
-      - city
-      - phone_number
-      - currency
-      - locale
-      example:
-        name: Order Anytime Delivery Anywhere
-        address: '1 2nd Street #08-01'
-        latitude: 1.2923742
-        longitude: 103.8486029
-        city: Singapore
-        phone_number: '+6587654321'
-        currency: SGD
-        locale: en-SG
-        description: any items are for sale
-        add_user:
-        - example@email.com
-        - example2@email.com
-    PostalCode:
-      title: PostalCode **(can be used only for Singapore)**
-      type: string
-      maxLength: 120
-      description: Vendors in Singapore alone should use this attribute. If an accurate postal code is provided for Singapore orders, vendor does not need to provide address or lat/long information.
-      example: 752340, 750313, 757046
-    Timestamp:
-      title: Timestamp
-      type: integer
-    City:
-      title: City
-      type: string
-      maxLength: 300
-      example: Singapore
-    Latitude:
-      title: Latitude
-      type: number
-      format: double
-      minimum: -90
-      maximum: 90
   securitySchemes:
     Bearer_Token:
       type: apiKey
